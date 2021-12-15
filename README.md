@@ -23,3 +23,5 @@
 1. 确保 `bangumi/dev-env` 中已有相关的表和数据。如果不存在对应的表则需要联系 sai 进行导出，并提交到 `dev-env` 仓库中。
 2. [Fork server](https://github.com/bangumi/server/fork) 仓库并提交 PR。
 3. 本仓库中添加对应表的说明。
+
+有部分字段（比如人物表的`prsn_position`）在数据库中保存为了 int，对应旧代码库中的一个 enum，请联系 @Trim21 进行导出。
