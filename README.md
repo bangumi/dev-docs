@@ -18,9 +18,8 @@
 
 ## 贡献代码
 
-在 [roadmap](https://github.com/bangumi/dev-docs/issues/1) 中选择当前阶段你感兴趣的的任务。Fork [server](https://github.com/bangumi/server) 仓库并提交 PR。
+在 [roadmap](https://github.com/bangumi/dev-docs/issues/1) 中选择当前阶段你感兴趣的的任务。
 
-目前所有已导出的数据表和数据均在 `bangumi/dev-env` 仓库中。
-如果对应的数据表没有导出，请联系 sai，并将 sai 导出的 sql 文件添加到 `dev-env` 仓库中。
-
-PR 提交后请在本仓库中添加对应表的说明。
+1. 确保 `bangumi/dev-env` 中已有相关的表和数据。如果不存在对应的表则需要联系 sai 进行导出。
+2. [Fork server](https://github.com/bangumi/server/fork) 仓库并提交 PR。
+3. 本仓库中添加对应表的说明。
