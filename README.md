@@ -5,7 +5,9 @@
 本仓库包含开发文档和 meta issue (如 roadmap)。
 
 [`bangumi/server`](https://github.com/bangumi/server) 仓库为新 api 后端。
+
 [`bangumi/dev-env`](https://github.com/bangumi/dev-env) 仓库包含导出的部分数据库。
+
 [`bangumi/wiki-syntax-spec`](https://github.com/bangumi/dev-env) 为 wiki 语法的定义，用于未来扩展 wiki 功能。
 
 ## 问题反馈
