@@ -8,7 +8,7 @@
 
 [`bangumi/dev-env`](https://github.com/bangumi/dev-env) 仓库包含当前 bangumi 的 MySQL 数据表。
 
-[`bangumi/wiki-syntax-spec`](https://github.com/bangumi/dev-env) 为 wiki 语法的定义，用于未来扩展 wiki 功能。
+[`bangumi/wiki-syntax-spec`](https://github.com/bangumi/wiki-syntax-spec) 为 wiki 语法的定义，用于未来扩展 wiki 功能。
 
 ## 问题反馈
 
