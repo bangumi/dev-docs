@@ -10,12 +10,6 @@
 
 [`bangumi/wiki-syntax-spec`](https://github.com/bangumi/wiki-syntax-spec) 为 wiki 语法的定义，用于未来扩展 wiki 功能。
 
-## 问题反馈
-
-新 API 请在 [server](https://github.com/bangumi/server) 仓库进行反馈。
-
-旧 API 在 [api](https://github.com/bangumi/api) 仓库进行反馈。
-
 ## 贡献代码
 
 在 [roadmap](https://github.com/bangumi/dev-docs/issues/1) 中选择当前阶段你感兴趣的的任务。
