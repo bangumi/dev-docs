@@ -6,7 +6,7 @@
 
 [`bangumi/server`](https://github.com/bangumi/server) 仓库为新 api 后端。
 
-[`bangumi/dev-env`](https://github.com/bangumi/dev-env) 仓库包含当前 bangumi 的 MySQL 数据表。
+[`bangumi/dev-env`](https://github.com/bangumi/dev-env) 仓库包含配置文件(docker-compose)用于运行开发用的后端服务。
 
 [`bangumi/wiki-syntax-spec`](https://github.com/bangumi/wiki-syntax-spec) 为 wiki 语法的定义，用于未来扩展 wiki 功能。
 
