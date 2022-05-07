@@ -1,16 +1,18 @@
 openapi: 3.0.2
 info:
-  title: "Bangumi Private API"
-  version: ""
+  title: Bangumi Private API
+  version: ''
 paths:
-  "/p/login":
+  /p/login:
     post:
       tags:
         - Auth
       summary: 登录
       operationId: login
-      description: |
-        `h-captcha-response` 是 [hCaptcha 的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)
+      description: >
+        `h-captcha-response` 是 [hCaptcha
+        的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)
+
 
         site key 是 `4874acee-9c6e-4e47-99ad-e2ea1606961f`
       requestBody:
@@ -29,8 +31,8 @@ paths:
                 h-captcha-response:
                   type: string
       responses:
-        "200":
-          description: "账号密码正确，设置 Cookies"
+        '200':
+          description: 账号密码正确，设置 Cookies
           headers:
             Set-Cookie:
               description: 设置 cookies session
@@ -40,39 +42,53 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/User"
-
-        "401":
+                $ref: '#/components/schemas/User'
+        '401':
           description: 账号或密码错误
           content:
             application/json:
               example:
                 title: 账号错误
-                description:
+                description: null
               schema:
-                "$ref": "#/components/schemas/ErrorDetail"
-
+                title: ErrorDetail
+                required:
+                  - title
+                  - description
+                  - detail
+                type: object
+                properties:
+                  title:
+                    title: Title
+                    type: string
+                  description:
+                    title: Description
+                    type: string
+                  detail:
+                    title: Detail
+                    type: object
+                    properties:
+                      remain:
+                        type: integer
+                        description: 剩余可用登录次数。
+        '422':
+          description: '`content-type` 只能为 `application/json`.'
       security:
         - CookiesSession: []
-
 components:
   schemas:
     User:
       example:
-        {
-          "avatar":
-            {
-              "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg?r=1391790456",
-              "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg?r=1391790456",
-              "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg?r=1391790456",
-            },
-          "sign": "Awesome!",
-          "url": "https://bgm.tv/user/sai",
-          "username": "sai",
-          "nickname": "Sai🖖",
-          "id": 1,
-          "user_group": 1,
-        }
+        avatar:
+          large: https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg?r=1391790456
+          medium: https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg?r=1391790456
+          small: https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg?r=1391790456
+        sign: Awesome!
+        url: https://bgm.tv/user/sai
+        username: sai
+        nickname: Sai🖖
+        id: 1
+        user_group: 1
       title: User
       required:
         - id
@@ -97,8 +113,47 @@ components:
         nickname:
           title: Nickname
           type: string
+        user_group:
+          title: UserGroup
+          enum:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 8
+            - 9
+            - 10
+            - 11
+          type: integer
+          description: >-
+            用户组 - 1 = 管理员 - 2 = Bangumi 管理猿 - 3 = 天窗管理猿 - 4 = 禁言用户 - 5 = 禁止访问用户
+            - 8 = 人物管理猿 - 9 = 维基条目管理猿 - 10 = 用户 - 11 = 维基人
+          x-ms-enum:
+            name: UserGroup
+            modelAsString: false
+            values:
+              - Admin
+              - BangumiAdmin
+              - DoujinAdmin
+              - MutedUser
+              - BlockedUser
+              - PersonAdmin
+              - WikiAdmin
+              - User
+              - WikiUser
+          x-enum-varnames:
+            - Admin
+            - BangumiAdmin
+            - DoujinAdmin
+            - MutedUser
+            - BlockedUser
+            - PersonAdmin
+            - WikiAdmin
+            - User
+            - WikiUser
         avatar:
-          "$ref": "#/components/schemas/Avatar"
+          $ref: '#/components/schemas/Avatar'
         sign:
           title: Sign
           description: 个人签名
@@ -128,7 +183,6 @@ components:
       required:
         - title
         - description
-        - detail
       type: object
       properties:
         title:
@@ -139,14 +193,16 @@ components:
           type: string
         detail:
           title: Detail
-          type: object
-          properties:
-            "error":
-              type: string
-              description: error message
-            "path":
-              type: string
-              description: request path
+          oneOf:
+            - type: string
+            - type: object
+              properties:
+                error:
+                  type: string
+                  description: error message
+                path:
+                  type: string
+                  description: request path
   securitySchemes:
     CookiesSession:
       name: sessionID
