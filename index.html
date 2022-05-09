@@ -19,6 +19,18 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@4/swagger-ui-bundle.js"></script>
     <script>
+      const DisableTryItOutPlugin = function () {
+        return {
+          statePlugins: {
+            spec: {
+              wrapSelectors: {
+                allowTryItOutFor: () => () => false,
+              },
+            },
+          },
+        };
+      };
+
       window.onload = function () {
         window.ui = SwaggerUIBundle({
           url: "./api.yaml",
@@ -29,6 +41,7 @@
             SwaggerUIBundle.presets.apis,
             SwaggerUIBundle.SwaggerUIStandalonePreset,
           ],
+          plugins: [DisableTryItOutPlugin],
         });
       };
     </script>
