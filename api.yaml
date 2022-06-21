@@ -6,6 +6,8 @@ info:
 servers:
   - url: https://next.bgm.tv
     description: Production server
+tags:
+  - name: Auth
 paths:
   /p/login:
     post:
@@ -23,6 +25,7 @@ paths:
         content:
           application/json:
             schema:
+              type: object
               required:
                 - email
                 - password
@@ -121,7 +124,9 @@ paths:
           description: 用户未登录或者 session 已失效
   /p/me:
     get:
-      summary: 登出
+      tags:
+        - Auth
+      summary: 获取当前用户
       operationId: getCurrentUser
       security:
         - CookiesSession: []
