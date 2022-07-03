@@ -10,6 +10,16 @@
 
 [`bangumi/wiki-syntax-spec`](https://github.com/bangumi/wiki-syntax-spec) 为 wiki 语法的定义，用于未来扩展 wiki 功能。
 
+## API
+
+`api.bgm.tv` 或 `next.bgm.tv` 域名下是正式运行的 api 地址，接入真实 bangumi 数据库。
+
+https://dev.bgm38.com/ 是用于开发的 api 地址，后端接入的是 `bangumi/dev-env` 的数据库。
+
+没有 CORS 检查，没有验证码真实验证。
+
+包含树洞账号 `treeholechan@gmail.com` 密码 `lovemeplease`
+
 ## 贡献代码
 
 在 [roadmap](https://github.com/bangumi/dev-docs/issues/1) 中选择当前阶段你感兴趣的的任务。
