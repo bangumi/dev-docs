@@ -16,6 +16,8 @@
 
 不同的仓库拥有更具体的贡献要求，请阅读相关仓库的说明和贡献指南。
 
+用于前端的私有 API 请查看 https://bangumi.github.io/dev-docs/
+
 ## API
 
 `api.bgm.tv` 或 `next.bgm.tv` 域名下是正式运行的 api 地址，接入真实 bangumi 数据库。
