@@ -1,8 +1,8 @@
 # 开发文档
 
-## 仓库说明
-
 本仓库包含开发文档和 meta issue (如 [roadmap](https://github.com/bangumi/dev-docs/issues/1))。
+
+## 仓库说明
 
 [`bangumi/server`](https://github.com/bangumi/server) 仓库为新 api 后端。
 
