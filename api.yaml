@@ -143,12 +143,66 @@ paths:
                 $ref: '#/components/schemas/User'
         '401':
           description: 用户未登录或者 session 已失效
+  /p/groups/{group_id}/topics:
+    get:
+      tags:
+        - 小组
+        - 讨论
+      summary: 分页获取小组讨论列表，按照回复时间倒序分页
+      operationId: getGroupTopicsById
+      parameters:
+        - required: true
+          description: 小组ID
+          schema:
+            title: Group ID
+            minimum: 0
+            type: integer
+          name: group_id
+          in: path
+        - required: true
+          description: 小组 Limit
+          schema:
+            title: Limit
+            maximum: 100
+            minimum: 0
+            type: integer
+            default: 30
+          name: limit
+          in: query
+        - required: true
+          description: 小组 Offset
+          schema:
+            title: Offset
+            minimum: 0
+            type: integer
+            default: 0
+          name: offset
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Paged_Topic'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
   /p/subjects/{subject_id}/topics:
     get:
       tags:
         - 条目
         - 讨论
-      summary: 分页获取条目讨论列表，使用时间更新时间倒序分页
+      summary: 分页获取条目讨论列表，使用最新回复时间倒序分页
       operationId: getSubjectTopicsById
       parameters:
         - required: true
@@ -202,12 +256,12 @@ paths:
       tags:
         - 条目
         - 讨论
-      summary: 分页获取条目讨论回复列表
-      description: 对顶级回复分页，展示所有顶级回复关联的二级回复
+      summary: 条目讨论回复列表
+      description: 没有分页
       operationId: getSubjectTopicById
       parameters:
         - required: true
-          description: 条目ID 可以填`-`
+          description: 条目ID 可以填 `-`
           schema:
             title: Subject ID
             minimum: 0
@@ -222,25 +276,6 @@ paths:
             type: integer
           name: topic_id
           in: path
-        - required: false
-          description: 条目讨论回复 Limit
-          schema:
-            title: Limit
-            maximum: 100
-            minimum: 0
-            type: integer
-            default: 30
-          name: limit
-          in: query
-        - required: false
-          description: 条目讨论回复 Offset
-          schema:
-            title: Offset
-            minimum: 0
-            type: integer
-            default: 0
-          name: offset
-          in: query
       responses:
         '200':
           description: Successful Response
@@ -260,66 +295,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDetail'
-  /p/groups/{group_id}/topics:
-    get:
-      tags:
-        - 小组
-        - 讨论
-      summary: 分页获取小组讨论列表，使用时间更新时间倒序分页
-      operationId: getGroupTopicsById
-      parameters:
-        - required: true
-          description: 小组ID
-          schema:
-            title: Group ID
-            minimum: 0
-            type: integer
-          name: group_id
-          in: path
-        - required: true
-          description: 小组 Limit
-          schema:
-            title: Limit
-            maximum: 100
-            minimum: 0
-            type: integer
-            default: 30
-          name: limit
-          in: query
-        - required: true
-          description: 小组 Offset
-          schema:
-            title: Offset
-            minimum: 0
-            type: integer
-            default: 0
-          name: offset
-          in: query
-      responses:
-        '200':
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Paged_Topic'
-        '400':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorDetail'
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorDetail'
   /p/groups/{group_id}/topics/{topic_id}:
     get:
       tags:
         - 小组
         - 讨论
-      summary: 分页获取小组讨论回复列表，对顶级回复分页，展示所有顶级回复关联的二级回复
+      summary: 获取小组讨论回复列表
+      description: 没有分页
       operationId: getGroupTopicById
       parameters:
         - required: true
@@ -338,25 +320,6 @@ paths:
             type: integer
           name: topic_id
           in: path
-        - required: false
-          description: 小组讨论回复 Limit
-          schema:
-            title: Limit
-            maximum: 100
-            minimum: 0
-            type: integer
-            default: 30
-          name: limit
-          in: query
-        - required: false
-          description: 小组讨论回复 Offset
-          schema:
-            title: Offset
-            minimum: 0
-            type: integer
-            default: 0
-          name: offset
-          in: query
       responses:
         '200':
           description: Successful Response
@@ -381,8 +344,8 @@ paths:
       tags:
         - 目录
         - 讨论
-      summary: 分页获取目录讨论列表，按照时间顺序分页
-      description: 对顶级回复分页，展示所有顶级回复关联的二级回复
+      summary: 获取目录讨论列表
+      description: 没有分页
       operationId: getIndexCommentsById
       parameters:
         - required: true
@@ -393,32 +356,13 @@ paths:
             type: integer
           name: index_id
           in: path
-        - required: false
-          description: 目录 Limit
-          schema:
-            title: Limit
-            maximum: 100
-            minimum: 0
-            type: integer
-            default: 30
-          name: limit
-          in: query
-        - required: false
-          description: 目录 Offset
-          schema:
-            title: Offset
-            minimum: 0
-            type: integer
-            default: 0
-          name: offset
-          in: query
       responses:
         '200':
           description: Successful Response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Paged_Comment'
+                $ref: '#/components/schemas/Comments'
         '400':
           description: Validation Error
           content:
@@ -436,8 +380,8 @@ paths:
       tags:
         - 章节
         - 讨论
-      summary: 分页获取章节讨论列表，按照时间顺序分页
-      description: 对顶级回复分页，展示所有顶级回复关联的二级回复
+      summary: 获取章节讨论列表
+      description: 没有分页
       operationId: getEpisodeCommentsById
       parameters:
         - required: true
@@ -448,32 +392,13 @@ paths:
             type: integer
           name: episode_id
           in: path
-        - required: false
-          description: 章节 Limit
-          schema:
-            title: Limit
-            maximum: 100
-            minimum: 0
-            type: integer
-            default: 30
-          name: limit
-          in: query
-        - required: false
-          description: 章节 Offset
-          schema:
-            title: Offset
-            minimum: 0
-            type: integer
-            default: 0
-          name: offset
-          in: query
       responses:
         '200':
           description: Successful Response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Paged_Comment'
+                $ref: '#/components/schemas/Comments'
         '400':
           description: Validation Error
           content:
@@ -491,8 +416,8 @@ paths:
       tags:
         - 角色
         - 讨论
-      summary: 分页获取角色讨论列表，按照时间顺序分页
-      description: 对顶级回复分页，展示所有顶级回复关联的二级回复
+      summary: 获取角色讨论列表
+      description: 没有分页
       operationId: getCharacterCommentsById
       parameters:
         - required: true
@@ -503,32 +428,13 @@ paths:
             type: integer
           name: character_id
           in: path
-        - required: false
-          description: 角色 Limit
-          schema:
-            title: Limit
-            maximum: 100
-            minimum: 0
-            type: integer
-            default: 30
-          name: limit
-          in: query
-        - required: false
-          description: 角色 Offset
-          schema:
-            title: Offset
-            minimum: 0
-            type: integer
-            default: 0
-          name: offset
-          in: query
       responses:
         '200':
           description: Successful Response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Paged_Comment'
+                $ref: '#/components/schemas/Comments'
         '400':
           description: Validation Error
           content:
@@ -546,8 +452,8 @@ paths:
       tags:
         - 人物
         - 讨论
-      summary: 分页获取人物讨论列表，按照时间顺序分页
-      description: 对顶级回复分页，展示所有顶级回复关联的二级回复
+      summary: 获取人物讨论列表
+      description: 没有分页
       operationId: getPersonCommentsById
       parameters:
         - required: true
@@ -558,32 +464,13 @@ paths:
             type: integer
           name: person_id
           in: path
-        - required: false
-          description: 人物 Limit
-          schema:
-            title: Limit
-            maximum: 100
-            minimum: 0
-            type: integer
-            default: 30
-          name: limit
-          in: query
-        - required: false
-          description: 人物 Offset
-          schema:
-            title: Offset
-            minimum: 0
-            type: integer
-            default: 0
-          name: offset
-          in: query
       responses:
         '200':
           description: Successful Response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Paged_Comment'
+                $ref: '#/components/schemas/Comments'
         '400':
           description: Validation Error
           content:
@@ -857,49 +744,55 @@ components:
                   type: string
                   description: request path
     TopicDetail:
-      type: object
-      required:
-        - creator
-        - id
-        - reply_count
-        - text
-        - title
-        - updated_at
-        - comments
-      properties:
-        comments:
-          allOf:
-            - $ref: '#/components/schemas/Paged'
-            - type: object
-              properties:
-                data:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/Comment'
-        created_at:
-          type: string
-          format: date-time
-          example: 2008-07-14T07:34:07.000Z
-        creator:
-          $ref: '#/components/schemas/User'
-        id:
-          type: integer
-          format: int32
-          example: 1
-        reply_count:
-          type: integer
-          format: int32
-          example: 76
-        text:
-          type: string
-          example: SAi看的也是红皮书吧
-        title:
-          type: string
-          example: 拿这个来测试
-        updated_at:
-          type: string
-          format: date-time
-          example: 2021-12-20T11:18:49.000Z
+      allOf:
+        - type: object
+          required:
+            - comments
+          properties:
+            comments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Comment'
+        - type: object
+          required:
+            - creator
+            - id
+            - reply_count
+            - text
+            - title
+            - state
+            - updated_at
+            - is_friend
+          properties:
+            state:
+              $ref: '#/components/schemas/Comment/properties/state'
+            is_friend:
+              type: boolean
+              description: 发帖人是否好友
+            created_at:
+              type: string
+              format: date-time
+              example: 2008-07-14T07:34:07.000Z
+            creator:
+              $ref: '#/components/schemas/User'
+            id:
+              type: integer
+              format: int32
+              example: 1
+            reply_count:
+              type: integer
+              format: int32
+              example: 76
+            text:
+              type: string
+              example: SAi看的也是红皮书吧
+            title:
+              type: string
+              example: 拿这个来测试
+            updated_at:
+              type: string
+              format: date-time
+              example: 2021-12-20T11:18:49.000Z
     Topic:
       title: Topic
       type: object
@@ -936,7 +829,18 @@ components:
     Comment:
       title: Comment
       type: object
+      required:
+        - created_at
+        - creator
+        - id
+        - replies
+        - text
+        - state
+        - is_friend
       properties:
+        is_friend:
+          type: boolean
+          description: 发帖人是否好友
         created_at:
           type: string
           format: date-time
@@ -954,6 +858,10 @@ components:
             required:
               - created_at
               - creator
+              - is_friend
+              - test
+              - state
+              - id
             properties:
               created_at:
                 type: string
@@ -983,23 +891,36 @@ components:
                 description: 如果 `state` 不为 `0`，内容为空
               state:
                 $ref: '#/components/schemas/Comment/properties/state'
+              is_friend:
+                type: boolean
+                description: 发帖人是否好友
         text:
           type: string
           example: 你是猪 ... 鉴定完毕 ...
           description: 如果 `state` 不为 `0`，内容为空
         state:
           title: CommentState
-          example: 2
+          example: 0
           enum:
             - 0
             - 1
-            - 2
+            - 5
+            - 6
+            - 7
           type: integer
           description: |-
-            评论状态
+            回复和帖子共用的状态
+
+            表示帖子正常/下沉/关闭
+
+            如果是回复，表示管理员的下沉/关闭主题操作
+
+
             - `0` 正常
-            - `1` 被用户删除
-            - `2` 违反社区指导原则，已被删除
+            - `1` 管理员关闭帖子
+            - `5` 管理员下沉帖子
+            - `6` 被用户删除
+            - `7` 违反社区指导原则，已被删除
     GroupMember:
       type: array
       items:
@@ -1071,17 +992,16 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Topic'
-    Paged_Comment:
-      title: Paged[Comment]
-      allOf:
-        - $ref: '#/components/schemas/Paged'
-        - type: object
-          properties:
-            data:
-              title: Comment Array
-              type: array
-              items:
-                $ref: '#/components/schemas/Comment'
+    Comments:
+      title: Comments
+      type: object
+      required:
+        - comments
+      properties:
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
   securitySchemes:
     CookiesSession:
       name: sessionID
