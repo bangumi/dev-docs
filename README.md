@@ -27,3 +27,5 @@ https://dev.bgm38.com/ 是用于开发的 api 地址，后端接入的是 `bangu
 没有 CORS 检查，没有验证码真实验证。
 
 包含树洞账号 `treeholechan@gmail.com` 密码 `lovemeplease`
+
+私有 API 文档 https://bangumi.github.io/dev-docs/
