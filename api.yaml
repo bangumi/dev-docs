@@ -251,7 +251,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDetail'
-  /p/subjects/{subject_id}/topics/{topic_id}:
+  /p/subjects/-/topics/{topic_id}:
     get:
       tags:
         - 条目
@@ -260,14 +260,6 @@ paths:
       description: 没有分页
       operationId: getSubjectTopicById
       parameters:
-        - required: true
-          description: 条目ID 可以填 `-`
-          schema:
-            title: Subject ID
-            minimum: 0
-            type: integer
-          name: subject_id
-          in: path
         - required: true
           description: 条目讨论ID
           schema:
@@ -282,7 +274,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TopicDetail'
+                $ref: '#/components/schemas/PrivateTopicDetail'
         '400':
           description: Validation Error
           content:
@@ -295,7 +287,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDetail'
-  /p/groups/{group_id}/topics/{topic_id}:
+  /p/groups/-/topics/{topic_id}:
     get:
       tags:
         - 小组
@@ -304,14 +296,6 @@ paths:
       description: 没有分页
       operationId: getGroupTopicById
       parameters:
-        - required: true
-          description: 小组ID 可以填`-`
-          schema:
-            title: Group ID
-            minimum: 0
-            type: integer
-          name: group_id
-          in: path
         - required: true
           description: 小组讨论ID
           schema:
@@ -326,7 +310,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TopicDetail'
+                allOf:
+                  - type: object
+                    properties:
+                      group:
+                        $ref: '#/components/schemas/Group'
+                  - $ref: '#/components/schemas/PrivateTopicDetail'
         '400':
           description: Validation Error
           content:
@@ -502,7 +491,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Group'
+                $ref: '#/components/schemas/GroupProfile'
         '404':
           description: 小组不存在
   /p/groups/{name}/members:
@@ -647,7 +636,7 @@ components:
           title: Sign
           description: 个人签名
           type: string
-    Group:
+    GroupProfile:
       additionalProperties: false
       properties:
         id:
@@ -743,7 +732,28 @@ components:
                 path:
                   type: string
                   description: request path
-    TopicDetail:
+    Group:
+      type: object
+      required:
+        - id
+        - name
+        - created_at
+        - title
+        - icon
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        title:
+          type: string
+        icon:
+          type: string
+          format: url
+    PrivateTopicDetail:
       allOf:
         - type: object
           required:
