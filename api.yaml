@@ -3,11 +3,6 @@ info:
   title: Bangumi Private API
   version: ''
   description: '`next.bgm.tv` 域名不支持跨域，'
-servers:
-  - url: https://next.bgm.tv
-    description: Production server
-  - url: https://dev.bgm38.com/
-    description: 开发用服务器
 tags:
   - name: Auth
 paths:
@@ -518,25 +513,8 @@ paths:
               - all
           description: 成员类型，默认为 `all`
           required: true
-        - required: false
-          schema:
-            title: Limit
-            maximum: 50
-            minimum: 1
-            type: integer
-            default: 30
-          name: limit
-          description: 分页参数
-          in: query
-        - required: false
-          schema:
-            title: Offset
-            minimum: 0
-            type: integer
-            default: 0
-          description: 分页参数
-          name: offset
-          in: query
+        - $ref: '#/components/parameters/default_query_limit'
+        - $ref: '#/components/parameters/default_query_offset'
       responses:
         '200':
           description: 列出用户
@@ -556,6 +534,28 @@ paths:
         '404':
           description: 小组不存在
 components:
+  parameters:
+    default_query_limit:
+      required: false
+      schema:
+        title: Limit
+        maximum: 50
+        minimum: 1
+        type: integer
+        default: 30
+      name: limit
+      description: 分页参数
+      in: query
+    default_query_offset:
+      required: false
+      schema:
+        title: Offset
+        minimum: 0
+        type: integer
+        default: 0
+      description: 分页参数
+      name: offset
+      in: query
   schemas:
     User:
       example:
@@ -1017,3 +1017,8 @@ components:
       name: sessionID
       type: apiKey
       in: cookie
+servers:
+  - url: https://next.bgm.tv
+    description: Production server
+  - url: https://dev.bgm38.com/
+    description: 开发用服务器
