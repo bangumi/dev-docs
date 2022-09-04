@@ -740,6 +740,8 @@ components:
         - created_at
         - title
         - icon
+        - total_members
+        - description
       properties:
         id:
           type: integer
@@ -753,6 +755,10 @@ components:
         icon:
           type: string
           format: url
+        total_members:
+          type: integer
+        description:
+          type: string
     PrivateTopicDetail:
       allOf:
         - type: object
