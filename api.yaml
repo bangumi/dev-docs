@@ -663,7 +663,7 @@ components:
           description: 新加入的用户，最多 10 个。
           type: array
           items:
-            $ref: '#/components/schemas/GroupMember/items'
+            $ref: '#/components/schemas/GroupMember'
         title:
           type: string
           example: ～技术宅真可怕～
