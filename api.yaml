@@ -938,32 +938,30 @@ components:
             - `6` 被用户删除
             - `7` 违反社区指导原则，已被删除
     GroupMember:
-      type: array
-      items:
-        additionalProperties: false
-        properties:
-          avatar:
-            $ref: '#/components/schemas/Avatar'
-          id:
-            type: integer
-            example: 1
-          nickname:
-            type: string
-            example: Sai🖖
-          username:
-            type: string
-            example: sai
-          joined_at:
-            type: string
-            format: date-time
-            example: '2022-06-25T21:07:38.466+08:00'
-        required:
-          - id
-          - username
-          - nickname
-          - avatar
-          - joined_at
-        type: object
+      additionalProperties: false
+      properties:
+        avatar:
+          $ref: '#/components/schemas/Avatar'
+        id:
+          type: integer
+          example: 1
+        nickname:
+          type: string
+          example: Sai🖖
+        username:
+          type: string
+          example: sai
+        joined_at:
+          type: string
+          format: date-time
+          example: '2022-06-25T21:07:38.466+08:00'
+      required:
+        - id
+        - username
+        - nickname
+        - avatar
+        - joined_at
+      type: object
     Paged:
       type: object
       required:
@@ -986,17 +984,6 @@ components:
           type: array
           items:
             type: object
-    Paged_GroupMember:
-      title: Paged[GroupMember]
-      allOf:
-        - $ref: '#/components/schemas/Paged'
-        - type: object
-          properties:
-            data:
-              title: Data
-              type: array
-              items:
-                $ref: '#/components/schemas/GroupMember'
     Paged_Topic:
       title: Paged[Topic]
       allOf:
