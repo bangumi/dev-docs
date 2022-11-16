@@ -63,7 +63,7 @@ paths:
                 required:
                   - title
                   - description
-                  - detail
+                  - details
                 type: object
                 properties:
                   title:
@@ -72,7 +72,7 @@ paths:
                   description:
                     title: Description
                     type: string
-                  detail:
+                  details:
                     title: Detail
                     type: array
                     items:
@@ -86,7 +86,7 @@ paths:
                 required:
                   - title
                   - description
-                  - detail
+                  - details
                 type: object
                 properties:
                   title:
@@ -95,9 +95,11 @@ paths:
                   description:
                     title: Description
                     type: string
-                  detail:
+                  details:
                     title: Detail
                     type: object
+                    required:
+                      - remain
                     properties:
                       remain:
                         type: integer
