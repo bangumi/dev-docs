@@ -892,19 +892,7 @@ components:
                 format: date-time
                 example: 2012-12-23T12:46:29.000Z
               creator:
-                title: Creator
-                required:
-                  - username
-                  - nickname
-                type: object
-                properties:
-                  username:
-                    title: Username
-                    type: string
-                  nickname:
-                    title: Nickname
-                    type: string
-                description: 意义同<a href="#model-Me">Me</a>
+                $ref: '#/components/schemas/User'
               id:
                 type: integer
                 format: int32
