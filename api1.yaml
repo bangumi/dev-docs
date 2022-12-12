@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 0.0.39
+  version: 0.0.40
   title: hello
 components:
   securitySchemes:
@@ -83,6 +83,20 @@ components:
           type: integer
       required:
         - code
+        - error
+        - message
+        - statusCode
+    ValidationError:
+      description: request data validation error
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        statusCode:
+          type: integer
+      required:
         - error
         - message
         - statusCode
@@ -405,12 +419,132 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
         '400':
-          description: 缺少字段等
+          description: Default Response
           content:
             application/json:
               schema:
-                description: 缺少字段等
+                $ref: '#/components/schemas/ValidationError'
+        '401':
+          description: 验证码错误/账号密码不匹配
+          headers:
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: remaining rate limit
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: total limit per 10 minutes
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+              description: seconds to reset rate limit
+          content:
+            application/json:
+              schema:
+                description: 验证码错误/账号密码不匹配
                 $ref: '#/components/schemas/Error'
+              examples:
+                CAPTCHA_ERROR:
+                  value:
+                    code: CAPTCHA_ERROR
+                    error: Unauthorized
+                    message: wrong captcha
+                    statusCode: 401
+                EMAIL_PASSWORD_ERROR:
+                  value:
+                    code: EMAIL_PASSWORD_ERROR
+                    error: Unauthorized
+                    message: email does not exists or email and password not match
+                    statusCode: 401
+        '429':
+          description: 失败次数太多，需要过一段时间再重试
+          headers:
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: remaining rate limit
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: limit per 10 minutes
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+              description: seconds to reset rate limit
+          content:
+            application/json:
+              schema:
+                description: 失败次数太多，需要过一段时间再重试
+                $ref: '#/components/schemas/Error'
+              example:
+                code: TOO_MANY_REQUESTS
+                error: Too Many Requests
+                message: too many failed login attempts
+                statusCode: 429
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
+  /p1/login2:
+    post:
+      operationId: login2
+      tags:
+        - auth
+      description: >-
+        需要
+        [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
+
+
+        next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
+
+
+        dev.bgm38.com 域名使用测试用的 site-key `1x00000000000000000000AA`
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  minLength: 1
+                  type: string
+                password:
+                  minLength: 1
+                  type: string
+                cf-turnstile-response:
+                  minLength: 1
+                  type: string
+              required:
+                - email
+                - password
+                - cf-turnstile-response
+            example:
+              email: treeholechan@gmail.com
+              password: lovemeplease
+              cf-turnstile-response: 10000000-aaaa-bbbb-cccc-000000000001
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+              description: 'example: "sessionID=12345abc"'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
         '401':
           description: 验证码错误/账号密码不匹配
           headers:
