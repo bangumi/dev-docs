@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 0.0.36
+  version: 0.0.37
   title: hello
 components:
   securitySchemes:
@@ -209,6 +209,55 @@ components:
         - inGroup
         - group
         - totalTopics
+    SubReply:
+      type: object
+      properties:
+        id:
+          type: integer
+        creator:
+          $ref: '#/components/schemas/User'
+        createdAt:
+          type: integer
+        isFriend:
+          type: boolean
+        text:
+          type: string
+        state:
+          type: integer
+      required:
+        - id
+        - creator
+        - createdAt
+        - isFriend
+        - text
+        - state
+    Reply:
+      type: object
+      properties:
+        id:
+          type: integer
+        isFriend:
+          type: boolean
+        replies:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubReply'
+        creator:
+          $ref: '#/components/schemas/User'
+        createdAt:
+          type: integer
+        text:
+          type: string
+        state:
+          type: integer
+      required:
+        - id
+        - isFriend
+        - replies
+        - creator
+        - createdAt
+        - text
+        - state
     TopicDetail:
       type: object
       properties:
@@ -229,52 +278,7 @@ components:
         replies:
           type: array
           items:
-            type: object
-            properties:
-              id:
-                type: integer
-              isFriend:
-                type: boolean
-              replies:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    creator:
-                      $ref: '#/components/schemas/User'
-                    createdAt:
-                      type: integer
-                    isFriend:
-                      type: boolean
-                    text:
-                      type: string
-                    state:
-                      type: integer
-                  required:
-                    - id
-                    - creator
-                    - createdAt
-                    - isFriend
-                    - text
-                    - state
-              creator:
-                $ref: '#/components/schemas/User'
-              createdAt:
-                type: integer
-              text:
-                type: string
-              state:
-                type: integer
-            required:
-              - id
-              - isFriend
-              - replies
-              - creator
-              - createdAt
-              - text
-              - state
+            $ref: '#/components/schemas/Reply'
       required:
         - id
         - group
@@ -557,7 +561,7 @@ paths:
                 $ref: '#/components/schemas/Error'
   /p1/groups/-/topics/{id}:
     get:
-      operationId: getGroupTopic
+      operationId: getGroupTopicDetail
       tags:
         - topic
       description: 获取帖子列表
