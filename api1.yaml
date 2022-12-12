@@ -1,8 +1,14 @@
 openapi: 3.0.3
 info:
-  version: 0.0.34
+  version: 0.0.36
   title: hello
 components:
+  securitySchemes:
+    CookiesSession:
+      type: apiKey
+      in: cookie
+      name: sessionID
+      description: 使用 [login](#/auth/login) 登录
   schemas:
     User:
       title: User
@@ -422,15 +428,15 @@ paths:
                 description: 验证码错误/账号密码不匹配
                 $ref: '#/components/schemas/Error'
               examples:
-                CaptchaError:
+                CAPTCHA_ERROR:
                   value:
                     code: CAPTCHA_ERROR
                     error: Unauthorized
                     message: wrong captcha
                     statusCode: 401
-                UsernameOrPasswordError:
+                EMAIL_PASSWORD_ERROR:
                   value:
-                    code: USERNAME_PASSWORD_ERROR
+                    code: EMAIL_PASSWORD_ERROR
                     error: Unauthorized
                     message: email does not exists or email and password not match
                     statusCode: 401
@@ -759,6 +765,8 @@ paths:
           in: path
           name: groupName
           required: true
+      security:
+        - CookiesSession: []
       responses:
         '200':
           description: Default Response
