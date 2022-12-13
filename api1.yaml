@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 0.0.41
+  version: 0.0.42
   title: hello
 components:
   securitySchemes:
@@ -982,6 +982,48 @@ paths:
                     error: Not Found
                     message: topic not found
                     statusCode: 404
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
+  /p1/groups/-/topics/{topicID}/replies:
+    post:
+      operationId: createGroupReply
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                relatedID:
+                  examples:
+                    - 0
+                  default: 0
+                  type: integer
+                content:
+                  minLength: 1
+                  type: string
+              required:
+                - relatedID
+                - content
+            example:
+              content: post contents
+        required: true
+      parameters:
+        - schema:
+            type: integer
+          example: 371602
+          in: path
+          name: topicID
+          required: true
+      security:
+        - CookiesSession: []
+      responses:
+        '200':
+          description: Default Response
         '500':
           description: 意料之外的服务器错误
           content:
