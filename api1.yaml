@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 0.0.40
+  version: 0.0.41
   title: hello
 components:
   securitySchemes:
@@ -702,6 +702,7 @@ paths:
       parameters:
         - schema:
             type: integer
+          example: 371602
           in: path
           name: id
           required: true
