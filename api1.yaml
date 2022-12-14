@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 0.0.42
+  version: 0.0.47
   title: hello
 components:
   securitySchemes:
@@ -243,6 +243,25 @@ components:
         - creator
         - createdAt
         - isFriend
+        - text
+        - state
+    BasicReply:
+      type: object
+      properties:
+        id:
+          type: integer
+        creator:
+          $ref: '#/components/schemas/User'
+        createdAt:
+          type: integer
+        text:
+          type: string
+        state:
+          type: integer
+      required:
+        - id
+        - creator
+        - createdAt
         - text
         - state
     Reply:
@@ -1009,8 +1028,14 @@ paths:
               required:
                 - relatedID
                 - content
-            example:
-              content: post contents
+            examples:
+              example1:
+                value:
+                  content: post contents
+              example2:
+                value:
+                  content: post contents
+                  relatedID: 0
         required: true
       parameters:
         - schema:
@@ -1024,6 +1049,10 @@ paths:
       responses:
         '200':
           description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicReply'
         '500':
           description: 意料之外的服务器错误
           content:
