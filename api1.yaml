@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 0.0.47
+  version: 0.0.48
   title: hello
 components:
   securitySchemes:
@@ -1053,6 +1053,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BasicReply'
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
+  /p1/sub/notify:
+    get:
+      operationId: subscribeNotify
+      tags:
+        - user
+      description: |-
+        使用 websocket 订阅通知
+
+        openapi不能很好的描述websocket api，但是这个api只会返回一种数据
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                required:
+                  - count
+        '401':
+          description: 未登录
+          content:
+            application/json:
+              schema:
+                description: 未登录
+                $ref: '#/components/schemas/Error'
+              examples:
+                NeedLoginError:
+                  value:
+                    code: NEED_LOGIN
+                    error: Unauthorized
+                    message: you need to login before logout
+                    statusCode: 401
         '500':
           description: 意料之外的服务器错误
           content:
