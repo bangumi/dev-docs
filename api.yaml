@@ -467,6 +467,12 @@ components:
           type: string
         platform:
           type: integer
+        date:
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          examples:
+            - '0000-00-00'
+            - '2007-01-30'
+          type: string
         summary:
           type: string
       required:
@@ -1331,6 +1337,12 @@ paths:
                       type: string
                     platform:
                       type: integer
+                    date:
+                      pattern: ^\d{4}-\d{2}-\d{2}$
+                      examples:
+                        - '0000-00-00'
+                        - '2007-01-30'
+                      type: string
                     summary:
                       type: string
               required:
