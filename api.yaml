@@ -652,7 +652,7 @@ paths:
               example:
                 code: NEED_LOGIN
                 error: Unauthorized
-                message: you need to login before %s
+                message: you need to login before get current user
                 statusCode: 401
         '500':
           description: 意料之外的服务器错误
