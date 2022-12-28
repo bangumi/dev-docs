@@ -10,7 +10,7 @@ components:
       type: apiKey
       in: cookie
       name: sessionID
-      description: 使用 [login](#/auth/login) 登录
+      description: 使用 [login](#/auth/login2) 调用 API 登录，或者 使用 [demo](/p1/demo/login) 登录
   schemas:
     User:
       title: User
@@ -480,6 +480,46 @@ components:
         - infobox
         - platform
         - summary
+    WikiPlatform:
+      type: object
+      properties:
+        id:
+          type: integer
+        text:
+          type: string
+      required:
+        - id
+        - text
+    SubjectWikiInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        typeID:
+          type: integer
+        infobox:
+          type: string
+        platform:
+          type: integer
+        availablePlatform:
+          type: array
+          items:
+            $ref: '#/components/schemas/WikiPlatform'
+        summary:
+          type: string
+        nsfw:
+          type: boolean
+      required:
+        - id
+        - name
+        - typeID
+        - infobox
+        - platform
+        - availablePlatform
+        - summary
+        - nsfw
 paths:
   /p1/logout:
     post:
@@ -1191,6 +1231,51 @@ paths:
                 description: 意料之外的服务器错误
                 $ref: '#/components/schemas/Error'
   /p1/wiki/subjects/{subjectID}:
+    get:
+      operationId: subjectInfo
+      tags:
+        - wiki
+      description: |-
+        获取当前的 wiki 信息
+
+        暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+      parameters:
+        - schema:
+            minimum: 0
+            type: integer
+          example: 363612
+          in: path
+          name: subjectID
+          required: true
+      security:
+        - CookiesSession: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubjectWikiInfo'
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                INVALID_ERROR_SYNTAX:
+                  value:
+                    code: INVALID_ERROR_SYNTAX
+                    error: Bad Request
+                    message: '%s'
+                    statusCode: 400
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
     put:
       operationId: putSubjectInfo
       tags:
