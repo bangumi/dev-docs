@@ -1286,9 +1286,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
               examples:
-                INVALID_ERROR_SYNTAX:
+                INVALID_SYNTAX_ERROR:
                   value:
-                    code: INVALID_ERROR_SYNTAX
+                    code: INVALID_SYNTAX_ERROR
                     error: Bad Request
                     message: '%s'
                     statusCode: 400
@@ -1373,9 +1373,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
               examples:
-                INVALID_ERROR_SYNTAX:
+                INVALID_SYNTAX_ERROR:
                   value:
-                    code: INVALID_ERROR_SYNTAX
+                    code: INVALID_SYNTAX_ERROR
                     error: Bad Request
                     message: '%s'
                     statusCode: 400
@@ -1503,9 +1503,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
               examples:
-                INVALID_ERROR_SYNTAX:
+                INVALID_SYNTAX_ERROR:
                   value:
-                    code: INVALID_ERROR_SYNTAX
+                    code: INVALID_SYNTAX_ERROR
                     error: Bad Request
                     message: '%s'
                     statusCode: 400
@@ -1551,9 +1551,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
               examples:
-                INVALID_ERROR_SYNTAX:
+                INVALID_SYNTAX_ERROR:
                   value:
-                    code: INVALID_ERROR_SYNTAX
+                    code: INVALID_SYNTAX_ERROR
                     error: Bad Request
                     message: '%s'
                     statusCode: 400
