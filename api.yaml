@@ -520,6 +520,29 @@ components:
         - availablePlatform
         - summary
         - nsfw
+    HistorySummary:
+      type: object
+      properties:
+        creator:
+          type: object
+          properties:
+            username:
+              type: string
+          required:
+            - username
+        type:
+          description: 修改类型。`1` 正常修改， `11` 合并，`103` 锁定/解锁 `104` 未知
+          type: integer
+        commitMessage:
+          type: string
+        createdAt:
+          description: unix timestamp seconds
+          type: integer
+      required:
+        - creator
+        - type
+        - commitMessage
+        - createdAt
 paths:
   /p1/logout:
     post:
@@ -1473,6 +1496,54 @@ paths:
       responses:
         '200':
           description: Default Response
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                INVALID_ERROR_SYNTAX:
+                  value:
+                    code: INVALID_ERROR_SYNTAX
+                    error: Bad Request
+                    message: '%s'
+                    statusCode: 400
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
+  /p1/wiki/subjects/{subjectID}/history-summary:
+    get:
+      operationId: subjectEditHistorySummary
+      tags:
+        - wiki
+      description: |-
+        获取当前的 wiki 信息
+
+        暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+      parameters:
+        - schema:
+            minimum: 0
+            type: integer
+          example: 8
+          in: path
+          name: subjectID
+          required: true
+      security:
+        - CookiesSession: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HistorySummary'
         '401':
           description: Default Response
           content:
