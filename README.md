@@ -26,7 +26,7 @@
 
 https://dev.bgm38.com/ 是用于开发的 api 地址，后端接入的是 `bangumi/dev-env` 的数据库。
 
-没有 CORS 检查，没有验证码真实验证。
+没有 CORS 检查。
 
 包含几个账号
 
