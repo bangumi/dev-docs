@@ -24,7 +24,7 @@
 
 `api.bgm.tv` 或 `next.bgm.tv` 域名下是正式运行的 api 地址，接入真实 bangumi 数据库。
 
-https://dev.bgm38.com/ 是用于开发的 api 地址，后端接入的是 `bangumi/dev-env` 的数据库。
+https://dev.bgm38.com/ 是用于开发的 api 地址，后端接入的是 `bangumi/dev-env` 的数据库，不定时会重置。
 
 没有 CORS 检查。
 
