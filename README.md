@@ -30,10 +30,10 @@ https://dev.bgm38.com/ 是用于开发的 api 地址，后端接入的是 `bangu
 
 包含几个账号
 
-|   uid    |     昵称     |           邮箱            |      密码      |
-| :------: | :----------: | :-----------------------: | :------------: |
-|   `2`    | `nickname 2` |       `2@bgm38.com`       | `lovemeplease` |
-| `382951` |   `树洞1`    | `treeholechan@gmail.com`  | `lovemeplease` |
-| `318250` |   `树洞2`    | `treeholechan2@gmail.com` | `lovemeplease` |
+|   uid    |     昵称     |           邮箱            |      密码      |        备注        |
+| :------: | :----------: | :-----------------------: | :------------: | :----------------: |
+|   `2`    | `nickname 2` |       `2@bgm38.com`       | `lovemeplease` | 拥有 wiki 编辑权限 |
+| `382951` |   `树洞1`    | `treeholechan@gmail.com`  | `lovemeplease` |                    |
+| `318250` |   `树洞2`    | `treeholechan2@gmail.com` | `lovemeplease` |                    |
 
 私有 API 文档 https://bangumi.github.io/dev-docs/
