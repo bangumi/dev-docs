@@ -1,9 +1,7 @@
 openapi: 3.0.3
 info:
   title: hello
-  description: >-
-    关于订阅通知的 socket.io 相关的文档在
-    <https://github.com/bangumi/GraphQL/blob/master/docs/socket.io.md>
+  description: 不支持跨域
 components:
   securitySchemes:
     CookiesSession:
@@ -1316,6 +1314,65 @@ paths:
                     error: Unauthorized
                     message: you need to login before marking notifications as read
                     statusCode: 401
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
+  /p1/notify/sse:
+    get:
+      operationId: sseNotifyChange
+      description: >-
+        ## 本 API 不是普通的 HTTP 请求，不要使用 fetch
+
+
+        订阅 sse 通知
+
+
+        前端需要使用
+        [EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
+        订阅 `notify-change` 事件
+
+
+        example:
+
+
+        ```js
+
+        const evtSource = new EventSource('/p1/notify/sse');
+
+
+        evtSource.addEventListener('notify-change', (e) => {
+          console.log(e);
+          console.log(JSON.parse(e.data));
+        });
+
+        ```
+      responses:
+        '200':
+          description: sse 响应
+          content:
+            application/json:
+              schema:
+                description: sse 响应
+                type: object
+                properties: {}
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  x-examples:
+                    NEED_LOGIN:
+                      value:
+                        code: NEED_LOGIN
+                        error: Unauthorized
+                        message: 'you need to login before '
+                        statusCode: 401
         '500':
           description: 意料之外的服务器错误
           content:
