@@ -1321,7 +1321,7 @@ paths:
               schema:
                 description: 意料之外的服务器错误
                 $ref: '#/components/schemas/Error'
-  /p1/notify/sse:
+  /p1/sse/notify:
     get:
       operationId: sseNotifyChange
       description: >-
@@ -1341,7 +1341,7 @@ paths:
 
         ```js
 
-        const evtSource = new EventSource('/p1/notify/sse');
+        const evtSource = new EventSource('/p1/sse/notify');
 
 
         evtSource.addEventListener('notify-change', (e) => {
