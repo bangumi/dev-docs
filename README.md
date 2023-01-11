@@ -8,7 +8,7 @@
 
 [`bangumi/server`](https://github.com/bangumi/server) 仓库为新 api 后端，基于 Go，实现现有的公开 api。
 
-[`bangumi/GraphQL`](https://github.com/bangumi/graphql) 仓库为新 api 后端，基于 TypeScript，实现现有的私有 API。
+[`bangumi/server-private`](https://github.com/bangumi/server-private) 仓库为新 api 后端，基于 TypeScript，实现现有的私有 API。
 
 [`bangumi/api`](https://github.com/bangumi/api) 仓库包括 API 文档，用于第三方开发者查看。
 
