@@ -1681,6 +1681,13 @@ paths:
           name: subjectID
           required: true
       responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
         '500':
           description: 意料之外的服务器错误
           content:
