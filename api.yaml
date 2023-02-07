@@ -630,7 +630,6 @@ paths:
       operationId: getCurrentUser
       tags:
         - auth
-      description: 需要 `subjectWikiEdit` 权限
       security:
         - CookiesSession: []
       responses:
@@ -1508,6 +1507,7 @@ paths:
       operationId: uploadSubjectCover
       tags:
         - wiki
+      description: 需要 `subjectWikiEdit` 权限
       requestBody:
         content:
           application/json:
@@ -1548,6 +1548,7 @@ paths:
       summary: 为条目封面投票
       tags:
         - wiki
+      description: 需要 `subjectWikiEdit` 权限
       parameters:
         - schema:
             exclusiveMinimum: 0
@@ -1581,6 +1582,7 @@ paths:
       summary: 撤消条目封面投票
       tags:
         - wiki
+      description: 需要 `subjectWikiEdit` 权限
       parameters:
         - schema:
             exclusiveMinimum: 0
@@ -1659,7 +1661,10 @@ paths:
       operationId: putSubjectInfo
       tags:
         - wiki
-      description: 暂时只能修改沙盒条目 184017,309445,354667,354677,363612
+      description: |-
+        暂时只能修改沙盒条目 184017,309445,354667,354677,363612
+
+        需要 `subjectWikiEdit` 权限
       requestBody:
         content:
           application/json:
