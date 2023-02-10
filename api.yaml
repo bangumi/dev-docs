@@ -1803,6 +1803,38 @@ paths:
                 properties: {}
                 type: object
           description: Default Response
+        '400':
+          content:
+            application/json:
+              examples:
+                IMAGE_FILE_TOO_LARGE:
+                  value:
+                    code: IMAGE_FILE_TOO_LARGE
+                    error: Bad Request
+                    message: uploaded image file is too large
+                    statusCode: 400
+                IMAGE_FORMAT_NOT_SUPPORT:
+                  value:
+                    code: IMAGE_FORMAT_NOT_SUPPORT
+                    error: Bad Request
+                    message: not valid image file, only support jpeg, jpg, png, webp
+                    statusCode: 400
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Default Response
+        '401':
+          content:
+            application/json:
+              examples:
+                NOT_ALLOWED:
+                  value:
+                    code: NOT_ALLOWED
+                    error: Unauthorized
+                    message: you don't have permission to non sandbox subject
+                    statusCode: 401
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Default Response
         '500':
           content:
             application/json:
