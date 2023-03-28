@@ -24,13 +24,36 @@
 
 ## API
 
-`api.bgm.tv` 或 `next.bgm.tv` 域名下是正式运行的 api 地址，接入真实 bangumi 数据库。
+目前 bangumi 拥有两种 HTTP API，公开 API 和 私有 API。
 
-https://dev.bgm38.com/ 是用于开发的 api 地址，后端接入的是 `bangumi/dev-env` 的数据库，不定时会重置。
+（下文提到的开发环境使用的是 `bangumi/dev-env` 包含的数据，不定时会进行重置）
 
-没有 CORS 检查。
+### 公开 API
 
-包含几个账号
+openapi 文档：https://bangumi.github.io/api/
+
+使用 access token 进行用户认证，保证兼容性，GET 请求支持跨域。
+
+生产环境域名 `api.bgm.tv`
+
+开发环境域名 `api.bgm38.com` (此域名仅支持路径 `/v0/` 下的路由)
+
+文档位于 https://bangumi.github.io/api/
+
+### 私有 API
+
+由 bangumi 的新前端使用，无兼容性保证，不支持跨域。
+
+使用 cookies session 进行用户认证，无兼容性保证。
+
+生产环境域名 `next.bgm.tv`
+
+开发环境域名 `next.bgm38.com`
+
+文档位于 https://bangumi.github.io/dev-docs/ 或 https://next.bgm38.com/p1/
+
+
+开发环境 `bangumi/dev-env` 所包含的账号：
 
 |   uid    |     昵称     |           邮箱            |      密码      |        备注        |
 | :------: | :----------: | :-----------------------: | :------------: | :----------------: |
@@ -38,4 +61,3 @@ https://dev.bgm38.com/ 是用于开发的 api 地址，后端接入的是 `bangu
 | `382951` |   `树洞1`    | `treeholechan@gmail.com`  | `lovemeplease` |                    |
 | `318250` |   `树洞2`    | `treeholechan2@gmail.com` | `lovemeplease` |                    |
 
-私有 API 文档 https://bangumi.github.io/dev-docs/
