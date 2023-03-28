@@ -36,7 +36,7 @@ openapi 文档：https://bangumi.github.io/api/
 
 生产环境域名 `api.bgm.tv`
 
-开发环境域名 `api.bgm38.com` (此域名仅支持路径 `/v0/` 下的路由)
+开发环境域名 `api.bgm38.com` (仅支持路径 `/v0/` 下的路由)
 
 文档位于 https://bangumi.github.io/api/
 
