@@ -20,8 +20,6 @@
 
 不同的仓库拥有更具体的贡献要求，请阅读相关仓库的说明和贡献指南。
 
-用于前端的私有 API 请查看 https://bangumi.github.io/dev-docs/
-
 ## API
 
 目前 bangumi 拥有两种 HTTP API，公开 API 和 私有 API。
