@@ -36,7 +36,7 @@
 
     为了取代旧的公开 API，目前 bangumi 提供了另一套 API。`https://api.bgm.tv/v0/subject/100` 这种路径以 `/v0/` 开头的即新的公开API。
 
-    此 API 代码开源，由 Go 编写任何人都可参与项目，代码仓库为 [`bangumi/server`](https://github.com/bangumi/server)。在使用 API 时如遇到BUG 或有新需求可提 issue，也欢迎提 PR 贡献代码。但因为新的公开 API 因为已经发布，需要保证兼容性，所以即便有功能变动也不会引入 break change。
+    此 API 代码开源，由 Go 编写任何人都可参与项目，代码仓库为 [`bangumi/server`](https://github.com/bangumi/server)。在使用 API 时如遇到BUG 或有新需求可提 issue，也欢迎提 PR 贡献代码。但因为新的公开 API 已经发布，需要保证兼容性，所以即便有功能变动也不会引入 break change。
     
     新公开 API 使用 access token 进行用户认证，GET 请求支持跨域。
 
@@ -70,3 +70,6 @@
 | `382951` |   `树洞1`    | `treeholechan@gmail.com`  | `lovemeplease` |                    |
 | `318250` |   `树洞2`    | `treeholechan2@gmail.com` | `lovemeplease` |                    |
 
+## 公开 API 和私有 API 的关系
+
+公开 API 主要为 APP 等客户端而开发，今后新网站发布后也依旧会持续维护和使用。 私有 API 专为新网站前端开发，为网站前端专用。今后新网站发布后将会同时存在两套API
