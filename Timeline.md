@@ -19,17 +19,12 @@ CREATE TABLE IF NOT EXISTS `chii_timeline` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ```
 
-`tml_cat` 一级分类
-
-`tml_type` 二级类型
-
-`tml_related` 直接关联 ID
-
-`tml_memo` 关联数据
-
-`tml_img` 关联图片数据（封面、头像、小组图标等，v2 将废弃）
-
-`tml_batch` 是否为批量数据
+- `tml_cat` 一级分类
+- `tml_type` 二级类型
+- `tml_related` 直接关联 ID
+- `tml_memo` 关联数据
+- `tml_img` 关联图片数据（封面、头像、小组图标等，v2 将废弃）
+- `tml_batch` 是否为批量数据
 
 # Constants
 
@@ -143,7 +138,7 @@ v2 起，在 `tml_memo` 与中不再存储关联条目详细数据，展示 Time
 
 **同类收藏合并**
 
-如 10 分钟内有同样的收藏类型（，则 `tml_batch` 标记为 1，将 `tml_memo` 合并存储为 {
+如用户 10 分钟内有同样的收藏类型与动作，则相同类型与动作的 Timeline `tml_batch` 标记为 1，将 `tml_memo` 合并存储
 
 `{ #subject_id: {}, #subject_id: {} }` 结构。
 
