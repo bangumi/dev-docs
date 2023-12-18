@@ -122,7 +122,7 @@ v2 起，在 `tml_memo` 与中不再存储关联条目详细数据，展示 Time
 
 - `subject_id` 条目 ID
 - `collect_id` 收藏 ID
-- `collect_comment` 收藏时的吐槽
+- `collect_comment` 收藏时的吐槽，需要进行 html 转义
 - `collect_rate` 收藏时的评分
 
 如：
