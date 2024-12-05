@@ -16,6 +16,7 @@
   - [`bangumi/img-proxy`](https://github.com/bangumi/img-proxy) 切图服务器。
 - 其他
   - [`bangumi/wiki-syntax-spec`](https://github.com/bangumi/wiki-syntax-spec) 为 wiki 语法的定义，用于未来扩展 wiki 功能。
+  - [`bangumi/common`](https://github.com/bangumi/common) 仓库包括 relation, platform, staff 等常量对应关系的 yaml 文件。
 
 不同的仓库拥有更具体的贡献要求，请阅读相关仓库的说明和贡献指南。
 
