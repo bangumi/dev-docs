@@ -60,7 +60,7 @@
 
 |                | 信息                                                                    |
 | -------------- | ----------------------------------------------------------------------- |
-| OpenAPI 文档   | https://bangumi.github.io/dev-docs/`` https://next.bgm38.com/p1/ |
+| OpenAPI 文档   | https://bangumi.github.io/dev-docs/ https://next.bgm38.com/p1/ |
 | 生产环境Domain | `next.bgm.tv`                                                         |
 | 开发环境Domain | `next.bgm38.com`                                                      |
 
