@@ -46,7 +46,7 @@
    | OpenAPI 文档                                     | https://bangumi.github.io/api/                 |
    | OpenAPI 文档仓库                                 | [`bangumi/api`](https://github.com/bangumi/api) |
    | 生产环境Domain                                   | `api.bgm.tv`                                 |
-   | 开发环境Domain``（仅支持路径 `/v0/` 下的路由） | `api.bgm38.com`                              |
+   | 开发环境Domain``（仅支持路径 `/v0/` 下的路由） | `api.bgm38.tv`                              |
 
 
    > 开发环境使用仓库 [`bangumi/dev-env`](https://github.com/bangumi/dev-env) 中包含的数据，不定时会进行重置
@@ -62,7 +62,7 @@
 | -------------- | ----------------------------------------------------------------------- |
 | OpenAPI 文档   | https://bangumi.github.io/dev-docs/ https://next.bgm38.com/p1/ |
 | 生产环境Domain | `next.bgm.tv`                                                         |
-| 开发环境Domain | `next.bgm38.com`                                                      |
+| 开发环境Domain | `next.bgm38.tv`                                                      |
 
 开发环境使用仓库 [`bangumi/dev-env`](https://github.com/bangumi/dev-env) 中包含的数据，不定时会进行重置。开发环境 `bangumi/dev-env` 所包含的账号如下：
 
