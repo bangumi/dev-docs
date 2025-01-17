@@ -64,6 +64,26 @@ components:
         - public
       title: BlogEntry
       type: object
+    BlogPhoto:
+      properties:
+        createdAt:
+          type: integer
+        icon:
+          type: string
+        id:
+          type: integer
+        target:
+          type: string
+        vote:
+          type: integer
+      required:
+        - id
+        - target
+        - icon
+        - vote
+        - createdAt
+      title: BlogPhoto
+      type: object
     Calendar:
       additionalProperties:
         items:
@@ -197,7 +217,7 @@ components:
 
             next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
 
-            dev.bgm38.com 域名使用测试用的 site-key `1x00000000000000000000AA`
+            dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
           minLength: 1
           type: string
         content:
@@ -224,7 +244,7 @@ components:
 
             next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
 
-            dev.bgm38.com 域名使用测试用的 site-key `1x00000000000000000000AA`
+            dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
           type: string
         text:
           description: bbcode
@@ -531,12 +551,20 @@ components:
       type: object
     Group:
       properties:
+        accessible:
+          type: boolean
+        cat:
+          type: integer
         createdAt:
+          type: integer
+        creator:
+          $ref: '#/components/schemas/SlimUser'
+        creatorID:
           type: integer
         description:
           type: string
         icon:
-          type: string
+          $ref: '#/components/schemas/Avatar'
         id:
           type: integer
         name:
@@ -547,14 +575,24 @@ components:
           type: string
         totalMembers:
           type: integer
+        totalPosts:
+          type: integer
+        totalTopics:
+          type: integer
       required:
         - id
+        - cat
         - name
         - nsfw
         - title
         - icon
+        - creatorID
+        - creator
         - description
+        - totalTopics
+        - totalPosts
         - totalMembers
+        - accessible
         - createdAt
       title: Group
       type: object
@@ -581,7 +619,33 @@ components:
     GroupProfile:
       properties:
         group:
-          $ref: '#/components/schemas/Group'
+          properties:
+            createdAt:
+              type: number
+            description:
+              type: string
+            icon:
+              type: string
+            id:
+              type: integer
+            name:
+              type: string
+            nsfw:
+              type: boolean
+            title:
+              type: string
+            totalMembers:
+              type: integer
+          required:
+            - id
+            - name
+            - nsfw
+            - description
+            - title
+            - createdAt
+            - totalMembers
+            - icon
+          type: object
         inGroup:
           description: 是否已经加入小组
           type: boolean
@@ -1012,8 +1076,12 @@ components:
       properties:
         createdAt:
           type: integer
+        icon:
+          type: string
         id:
           type: integer
+        public:
+          type: boolean
         replies:
           type: integer
         summary:
@@ -1022,14 +1090,19 @@ components:
           type: string
         type:
           type: integer
+        uid:
+          type: integer
         updatedAt:
           type: integer
       required:
         - id
+        - uid
         - type
         - title
+        - icon
         - summary
         - replies
+        - public
         - createdAt
         - updatedAt
       title: SlimBlogEntry
@@ -1064,6 +1137,10 @@ components:
       type: object
     SlimGroup:
       properties:
+        createdAt:
+          type: integer
+        creatorID:
+          type: integer
         icon:
           $ref: '#/components/schemas/Avatar'
         id:
@@ -1074,12 +1151,17 @@ components:
           type: boolean
         title:
           type: string
+        totalMembers:
+          type: integer
       required:
         - id
         - name
         - nsfw
         - title
         - icon
+        - creatorID
+        - totalMembers
+        - createdAt
       title: SlimGroup
       type: object
     SlimIndex:
@@ -1886,7 +1968,7 @@ components:
         - Mono
         - Doujin
       x-ms-enum:
-        modelAsString: true
+        modelAsString: false
         name: TimelineCat
     TimelineMemo:
       properties:
@@ -2013,7 +2095,7 @@ components:
         - WP
         - API
       x-ms-enum:
-        modelAsString: true
+        modelAsString: false
         name: TimelineSource
     Topic:
       properties:
@@ -2060,7 +2142,7 @@ components:
           type: integer
         parent:
           anyOf:
-            - $ref: '#/components/schemas/Group'
+            - $ref: '#/components/schemas/SlimGroup'
             - $ref: '#/components/schemas/SlimSubject'
         reactions:
           items:
@@ -2165,6 +2247,8 @@ components:
           type: string
         site:
           type: string
+        stats:
+          $ref: '#/components/schemas/UserStats'
         user_group:
           description: deprecated, use group instead
           type: integer
@@ -2185,6 +2269,7 @@ components:
         - bio
         - networkServices
         - homepage
+        - stats
       title: User
       type: object
     UserCharacterCollection:
@@ -2197,129 +2282,49 @@ components:
         - character
         - createdAt
       type: object
-    UserCollectionsCharacterSummary:
-      properties:
-        count:
-          type: integer
-        detail:
-          items:
-            $ref: '#/components/schemas/SlimCharacter'
-          type: array
-      required:
-        - count
-        - detail
-      type: object
-    UserCollectionsPersonSummary:
-      properties:
-        count:
-          type: integer
-        detail:
-          items:
-            $ref: '#/components/schemas/SlimPerson'
-          type: array
-      required:
-        - count
-        - detail
-      type: object
-    UserCollectionsSubjectSummary:
-      properties:
-        counts:
-          additionalProperties:
-            type: integer
-          example:
-            '1': 0
-            '2': 0
-            '3': 0
-            '4': 0
-            '5': 0
-          type: object
-        details:
-          additionalProperties:
-            items:
-              $ref: '#/components/schemas/SlimSubject'
-            type: array
-          example:
-            '1': []
-            '2':
-              - id: 8
-                images:
-                  common: https://lain.bgm.tv/pic/cover/c/c9/f0/8_wK0z3.jpg
-                  grid: https://lain.bgm.tv/pic/cover/g/c9/f0/8_wK0z3.jpg
-                  large: https://lain.bgm.tv/pic/cover/l/c9/f0/8_wK0z3.jpg
-                  medium: https://lain.bgm.tv/pic/cover/m/c9/f0/8_wK0z3.jpg
-                  small: https://lain.bgm.tv/pic/cover/s/c9/f0/8_wK0z3.jpg
-                locked: false
-                name: コードギアス 反逆のルルーシュR2
-                nameCN: Code Geass 反叛的鲁路修R2
-                nsfw: false
-                type: 2
-            '3': []
-            '4': []
-            '5': []
-          type: object
-      required:
-        - counts
-        - details
-      type: object
-    UserCollectionsSummary:
-      properties:
-        character:
-          $ref: '#/components/schemas/UserCollectionsCharacterSummary'
-        index:
-          $ref: '#/components/schemas/UserIndexesSummary'
-        person:
-          $ref: '#/components/schemas/UserCollectionsPersonSummary'
-        subject:
-          additionalProperties:
-            $ref: '#/components/schemas/UserCollectionsSubjectSummary'
-          example:
-            '1':
-              counts:
-                '1': 0
-                '2': 1
-                '3': 0
-                '4': 0
-                '5': 0
-              details:
-                '1': []
-                '2':
-                  - id: 8
-                    images:
-                      common: https://lain.bgm.tv/pic/cover/c/c9/f0/8_wK0z3.jpg
-                      grid: https://lain.bgm.tv/pic/cover/g/c9/f0/8_wK0z3.jpg
-                      large: https://lain.bgm.tv/pic/cover/l/c9/f0/8_wK0z3.jpg
-                      medium: https://lain.bgm.tv/pic/cover/m/c9/f0/8_wK0z3.jpg
-                      small: https://lain.bgm.tv/pic/cover/s/c9/f0/8_wK0z3.jpg
-                    locked: false
-                    name: コードギアス 反逆のルルーシュR2
-                    nameCN: Code Geass 反叛的鲁路修R2
-                    nsfw: false
-                    type: 2
-                '3': []
-                '4': []
-                '5': []
-          type: object
-      required:
-        - subject
-        - character
-        - person
-        - index
-      type: object
     UserHomepage:
       properties:
         left:
           items:
-            type: string
+            $ref: '#/components/schemas/UserHomepageSection'
           type: array
         right:
           items:
-            type: string
+            $ref: '#/components/schemas/UserHomepageSection'
           type: array
       required:
         - left
         - right
       title: UserHomepage
       type: object
+    UserHomepageSection:
+      description: 用户时光机板块
+      enum:
+        - anime
+        - game
+        - book
+        - music
+        - real
+        - mono
+        - blog
+        - friend
+        - group
+        - index
+      type: string
+      x-enum-varnames:
+        - Anime
+        - Game
+        - Book
+        - Music
+        - Real
+        - Mono
+        - Blog
+        - Friend
+        - Group
+        - Index
+      x-ms-enum:
+        modelAsString: true
+        name: UserHomepageSection
     UserIndexCollection:
       properties:
         createdAt:
@@ -2330,17 +2335,27 @@ components:
         - index
         - createdAt
       type: object
-    UserIndexesSummary:
+    UserIndexStats:
       properties:
-        count:
+        collect:
           type: integer
-        detail:
-          items:
-            $ref: '#/components/schemas/SlimIndex'
-          type: array
+        create:
+          type: integer
       required:
-        - count
-        - detail
+        - create
+        - collect
+      title: UserIndexStats
+      type: object
+    UserMonoCollectionStats:
+      properties:
+        character:
+          type: integer
+        person:
+          type: integer
+      required:
+        - character
+        - person
+      title: UserMonoCollectionStats
       type: object
     UserNetworkService:
       properties:
@@ -2371,6 +2386,29 @@ components:
       required:
         - person
         - createdAt
+      type: object
+    UserStats:
+      properties:
+        blog:
+          type: integer
+        friend:
+          type: integer
+        group:
+          type: integer
+        index:
+          $ref: '#/components/schemas/UserIndexStats'
+        mono:
+          $ref: '#/components/schemas/UserMonoCollectionStats'
+        subject:
+          $ref: '#/components/schemas/UserSubjectCollectionStats'
+      required:
+        - subject
+        - mono
+        - blog
+        - friend
+        - group
+        - index
+      title: UserStats
       type: object
     UserSubjectCollection:
       properties:
@@ -2404,6 +2442,13 @@ components:
         - volStatus
         - private
         - updatedAt
+      type: object
+    UserSubjectCollectionStats:
+      additionalProperties:
+        additionalProperties:
+          type: integer
+        type: object
+      title: UserSubjectCollectionStats
       type: object
     UserSubjectEpisodeCollection:
       properties:
@@ -2473,7 +2518,7 @@ paths:
           HTTPBearer: []
       summary: 获取绝交用户列表
       tags:
-        - user
+        - misc
     post:
       operationId: addToBlocklist
       requestBody:
@@ -2513,7 +2558,7 @@ paths:
           HTTPBearer: []
       summary: 将用户添加到绝交列表
       tags:
-        - user
+        - misc
   /p1/blocklist/{id}:
     delete:
       operationId: removeFromBlocklist
@@ -2549,7 +2594,121 @@ paths:
           HTTPBearer: []
       summary: 将用户从绝交列表移出
       tags:
-        - user
+        - misc
+  /p1/blogs/{entryID}:
+    get:
+      operationId: getBlogEntry
+      parameters:
+        - in: path
+          name: entryID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogEntry'
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - HTTPBearer: []
+      summary: 获取日志详情
+      tags:
+        - blog
+  /p1/blogs/{entryID}/photos:
+    get:
+      operationId: getBlogPhotos
+      parameters:
+        - description: max 100
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: min 0
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+        - in: path
+          name: entryID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/BlogPhoto'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - HTTPBearer: []
+      summary: 获取日志的图片
+      tags:
+        - blog
+  /p1/blogs/{entryID}/subjects:
+    get:
+      operationId: getBlogRelatedSubjects
+      parameters:
+        - in: path
+          name: entryID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SlimSubject'
+                type: array
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - HTTPBearer: []
+      summary: 获取日志的关联条目
+      tags:
+        - blog
   /p1/calendar:
     get:
       operationId: getCalendar
@@ -2820,7 +2979,7 @@ paths:
           HTTPBearer: []
       summary: 标记通知为已读
       tags:
-        - user
+        - misc
   /p1/debug:
     get:
       description: debug 路由
@@ -3364,7 +3523,7 @@ paths:
         next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
 
 
-        dev.bgm38.com 域名使用测试用的 site-key `1x00000000000000000000AA`
+        dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
       operationId: login
       requestBody:
         content:
@@ -3456,7 +3615,7 @@ paths:
                 description: 意料之外的服务器错误
           description: 意料之外的服务器错误
       tags:
-        - user
+        - auth
   /p1/logout:
     post:
       description: 登出
@@ -3495,7 +3654,7 @@ paths:
                 description: 意料之外的服务器错误
           description: 意料之外的服务器错误
       tags:
-        - user
+        - auth
   /p1/me:
     get:
       operationId: getCurrentUser
@@ -3526,8 +3685,9 @@ paths:
           description: 意料之外的服务器错误
       security:
         - CookiesSession: []
+      summary: 获取当前用户信息
       tags:
-        - user
+        - misc
   /p1/notify:
     get:
       operationId: listNotice
@@ -3589,7 +3749,7 @@ paths:
           HTTPBearer: []
       summary: 获取未读通知
       tags:
-        - user
+        - misc
   /p1/persons/{personID}:
     get:
       operationId: getPerson
@@ -4432,7 +4592,7 @@ paths:
         next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
 
 
-        dev.bgm38.com 域名使用测试用的 site-key `1x00000000000000000000AA`
+        dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
       operationId: createSubjectReply
       parameters:
         - example: 371602
@@ -5052,7 +5212,7 @@ paths:
 
                     next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
 
-                    dev.bgm38.com 域名使用测试用的 site-key `1x00000000000000000000AA`
+                    dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
                   type: string
                 text:
                   description: bbcode
@@ -5231,7 +5391,7 @@ paths:
           description: 意料之外的服务器错误
       summary: 获取 Turnstile 令牌
       tags:
-        - user
+        - auth
   /p1/users/-/collections/subjects/-/episodes/{episodeID}:
     get:
       operationId: getUserSubjectCollectionEpisodeByEpisodeID
@@ -5354,6 +5514,64 @@ paths:
       summary: 获取用户信息
       tags:
         - user
+  /p1/users/{username}/blogs:
+    get:
+      operationId: getUserBlogs
+      parameters:
+        - description: max 100
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: min 0
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+        - in: path
+          name: username
+          required: true
+          schema:
+            minLength: 1
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/SlimBlogEntry'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取用户创建的日志
+      tags:
+        - user
   /p1/users/{username}/collections/characters:
     get:
       operationId: getUserCharacterCollections
@@ -5382,6 +5600,23 @@ paths:
             minLength: 1
             type: string
       responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/UserCharacterCollection'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
         '500':
           content:
             application/json:
@@ -5459,6 +5694,23 @@ paths:
             minLength: 1
             type: string
       responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/UserIndexCollection'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
         '500':
           content:
             application/json:
@@ -5536,6 +5788,23 @@ paths:
             minLength: 1
             type: string
       responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/UserPersonCollection'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
         '500':
           content:
             application/json:
@@ -5696,36 +5965,6 @@ paths:
       summary: 获取用户单个条目收藏
       tags:
         - user
-  /p1/users/{username}/collections/summary:
-    get:
-      operationId: getUserCollectionsSummary
-      parameters:
-        - in: path
-          name: username
-          required: true
-          schema:
-            minLength: 1
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserCollectionsSummary'
-          description: Default Response
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-                description: 意料之外的服务器错误
-          description: 意料之外的服务器错误
-      security:
-        - CookiesSession: []
-          HTTPBearer: []
-      summary: 获取用户收藏概览
-      tags:
-        - user
   /p1/users/{username}/followers:
     get:
       operationId: getUserFollowers
@@ -5840,6 +6079,64 @@ paths:
       summary: 获取用户的好友列表
       tags:
         - user
+  /p1/users/{username}/groups:
+    get:
+      operationId: getUserGroups
+      parameters:
+        - description: max 100
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: min 0
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+        - in: path
+          name: username
+          required: true
+          schema:
+            minLength: 1
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/SlimGroup'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取用户加入的小组
+      tags:
+        - user
   /p1/users/{username}/indexes:
     get:
       operationId: getUserIndexes
@@ -5868,6 +6165,23 @@ paths:
             minLength: 1
             type: string
       responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/SlimIndex'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
         '500':
           content:
             application/json:
@@ -5907,6 +6221,14 @@ paths:
             minLength: 1
             type: string
       responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Timeline'
+                type: array
+          description: Default Response
         '500':
           content:
             application/json:
@@ -5996,6 +6318,9 @@ paths:
                 nameCN: 中文名
                 summary: a short description
                 type: 0
+              expectedRevision:
+                name: old name
+                nameCN: old cn name
             schema:
               properties:
                 commitMessage:
@@ -6022,6 +6347,24 @@ paths:
                       type: string
                     type:
                       $ref: '#/components/schemas/EpisodeType'
+                  type: object
+                expectedRevision:
+                  description: >-
+                    a optional object to check if input is changed by others
+
+                    if some key is given, and current data in database doesn't
+                    match input, subject will not be changed
+                  properties:
+                    date:
+                      type: string
+                    duration:
+                      type: string
+                    name:
+                      type: string
+                    nameCN:
+                      type: string
+                    summary:
+                      type: string
                   type: object
               required:
                 - commitMessage
