@@ -231,6 +231,48 @@ components:
         - content
         - cf-turnstile-response
       type: object
+    CreatePost:
+      properties:
+        cf-turnstile-response:
+          description: >-
+            需要
+            [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
+
+            next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
+
+            dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
+          minLength: 1
+          type: string
+        content:
+          minLength: 1
+          type: string
+        replyTo:
+          default: 0
+          description: 被回复的帖子 ID, `0` 代表回复楼主
+          type: integer
+      required:
+        - content
+        - cf-turnstile-response
+      type: object
+    CreateTimelineSay:
+      properties:
+        cf-turnstile-response:
+          description: >-
+            需要
+            [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
+
+            next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
+
+            dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
+          minLength: 1
+          type: string
+        content:
+          minLength: 1
+          type: string
+      required:
+        - content
+        - cf-turnstile-response
+      type: object
     CreateTopic:
       example:
         cf-turnstile-response: 10000000-aaaa-bbbb-cccc-000000000001
@@ -246,7 +288,7 @@ components:
 
             dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
           type: string
-        text:
+        content:
           description: bbcode
           minLength: 1
           type: string
@@ -255,7 +297,7 @@ components:
           type: string
       required:
         - title
-        - text
+        - content
         - cf-turnstile-response
       type: object
     CurrentUser:
@@ -500,6 +542,34 @@ components:
         - duration
         - summary
       type: object
+    EpsisodesNew:
+      properties:
+        episodes:
+          items:
+            properties:
+              date:
+                type: string
+              disc:
+                type: number
+              duration:
+                type: string
+              ep:
+                type: number
+              name:
+                type: string
+              nameCN:
+                type: string
+              summary:
+                type: string
+              type:
+                $ref: '#/components/schemas/EpisodeType'
+            required:
+              - ep
+            type: object
+          type: array
+      required:
+        - episodes
+      type: object
     ErrorResponse:
       description: default error response type
       properties:
@@ -567,17 +637,17 @@ components:
           $ref: '#/components/schemas/Avatar'
         id:
           type: integer
+        members:
+          type: integer
         name:
           type: string
         nsfw:
           type: boolean
+        posts:
+          type: integer
         title:
           type: string
-        totalMembers:
-          type: integer
-        totalPosts:
-          type: integer
-        totalTopics:
+        topics:
           type: integer
       required:
         - id
@@ -588,83 +658,29 @@ components:
         - icon
         - creatorID
         - creator
+        - topics
+        - posts
+        - members
         - description
-        - totalTopics
-        - totalPosts
-        - totalMembers
         - accessible
         - createdAt
       title: Group
       type: object
     GroupMember:
       properties:
-        avatar:
-          $ref: '#/components/schemas/Avatar'
-        id:
-          type: integer
         joinedAt:
           type: integer
-        nickname:
-          type: string
-        username:
-          type: string
+        moderator:
+          type: boolean
+        uid:
+          type: integer
+        user:
+          $ref: '#/components/schemas/SlimUser'
       required:
-        - id
-        - nickname
-        - username
-        - avatar
+        - uid
+        - moderator
         - joinedAt
       title: GroupMember
-      type: object
-    GroupProfile:
-      properties:
-        group:
-          properties:
-            createdAt:
-              type: number
-            description:
-              type: string
-            icon:
-              type: string
-            id:
-              type: integer
-            name:
-              type: string
-            nsfw:
-              type: boolean
-            title:
-              type: string
-            totalMembers:
-              type: integer
-          required:
-            - id
-            - name
-            - nsfw
-            - description
-            - title
-            - createdAt
-            - totalMembers
-            - icon
-          type: object
-        inGroup:
-          description: 是否已经加入小组
-          type: boolean
-        recentAddedMembers:
-          items:
-            $ref: '#/components/schemas/GroupMember'
-          type: array
-        topics:
-          items:
-            $ref: '#/components/schemas/Topic'
-          type: array
-        totalTopics:
-          type: integer
-      required:
-        - recentAddedMembers
-        - topics
-        - inGroup
-        - group
-        - totalTopics
       type: object
     HistorySummary:
       properties:
@@ -998,15 +1014,14 @@ components:
       type: object
     Reaction:
       properties:
-        selected:
-          type: boolean
-        total:
-          type: integer
+        users:
+          items:
+            $ref: '#/components/schemas/SimpleUser'
+          type: array
         value:
           type: integer
       required:
-        - selected
-        - total
+        - users
         - value
       title: Reaction
       type: object
@@ -1046,10 +1061,10 @@ components:
           type: integer
         creator:
           $ref: '#/components/schemas/SlimUser'
+        creatorID:
+          type: integer
         id:
           type: integer
-        isFriend:
-          type: boolean
         reactions:
           items:
             $ref: '#/components/schemas/Reaction'
@@ -1065,12 +1080,26 @@ components:
       required:
         - id
         - replies
-        - creator
+        - creatorID
         - createdAt
         - text
         - state
         - reactions
       title: Reply
+      type: object
+    SimpleUser:
+      properties:
+        id:
+          type: integer
+        nickname:
+          type: string
+        username:
+          type: string
+      required:
+        - id
+        - username
+        - nickname
+      title: SimpleUser
       type: object
     SlimBlogEntry:
       properties:
@@ -1137,6 +1166,8 @@ components:
       type: object
     SlimGroup:
       properties:
+        accessible:
+          type: boolean
         createdAt:
           type: integer
         creatorID:
@@ -1145,14 +1176,14 @@ components:
           $ref: '#/components/schemas/Avatar'
         id:
           type: integer
+        members:
+          type: integer
         name:
           type: string
         nsfw:
           type: boolean
         title:
           type: string
-        totalMembers:
-          type: integer
       required:
         - id
         - name
@@ -1160,7 +1191,8 @@ components:
         - title
         - icon
         - creatorID
-        - totalMembers
+        - members
+        - accessible
         - createdAt
       title: SlimGroup
       type: object
@@ -1256,6 +1288,28 @@ components:
         - nsfw
       title: SlimSubject
       type: object
+    SlimSubjectInterest:
+      properties:
+        comment:
+          type: string
+        rate:
+          type: integer
+        tags:
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/CollectionType'
+        updatedAt:
+          type: integer
+      required:
+        - rate
+        - type
+        - comment
+        - tags
+        - updatedAt
+      title: SlimSubjectInterest
+      type: object
     SlimUser:
       properties:
         avatar:
@@ -1288,10 +1342,10 @@ components:
           type: integer
         creator:
           $ref: '#/components/schemas/SlimUser'
+        creatorID:
+          type: integer
         id:
           type: integer
-        isFriend:
-          type: boolean
         reactions:
           items:
             $ref: '#/components/schemas/Reaction'
@@ -1302,7 +1356,7 @@ components:
           type: string
       required:
         - id
-        - creator
+        - creatorID
         - createdAt
         - text
         - state
@@ -1529,8 +1583,14 @@ components:
       properties:
         comment:
           type: string
+        id:
+          type: integer
         rate:
           type: integer
+        reactions:
+          items:
+            $ref: '#/components/schemas/Reaction'
+          type: array
         type:
           $ref: '#/components/schemas/CollectionType'
         updatedAt:
@@ -1538,6 +1598,7 @@ components:
         user:
           $ref: '#/components/schemas/SlimUser'
       required:
+        - id
         - user
         - type
         - rate
@@ -1628,6 +1689,37 @@ components:
         - grid
       title: SubjectImages
       type: object
+    SubjectInterest:
+      properties:
+        comment:
+          type: string
+        epStatus:
+          type: integer
+        private:
+          type: boolean
+        rate:
+          type: integer
+        tags:
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/CollectionType'
+        updatedAt:
+          type: integer
+        volStatus:
+          type: integer
+      required:
+        - rate
+        - type
+        - comment
+        - tags
+        - epStatus
+        - volStatus
+        - private
+        - updatedAt
+      title: SubjectInterest
+      type: object
     SubjectNew:
       properties:
         infobox:
@@ -1685,6 +1777,31 @@ components:
         - typeCN
         - alias
       title: SubjectPlatform
+      type: object
+    SubjectPosition:
+      properties:
+        position:
+          $ref: '#/components/schemas/SubjectStaffPositionType'
+        staffs:
+          items:
+            $ref: '#/components/schemas/SubjectPositionStaff'
+          type: array
+      required:
+        - position
+        - staffs
+      type: object
+    SubjectPositionStaff:
+      properties:
+        appearEps:
+          type: string
+        person:
+          $ref: '#/components/schemas/SlimPerson'
+        summary:
+          type: string
+      required:
+        - person
+        - summary
+        - appearEps
       type: object
     SubjectRating:
       properties:
@@ -1792,18 +1909,20 @@ components:
         name: SubjectSort
     SubjectStaff:
       properties:
-        person:
-          $ref: '#/components/schemas/SlimPerson'
         positions:
           items:
             $ref: '#/components/schemas/SubjectStaffPosition'
           type: array
+        staff:
+          $ref: '#/components/schemas/SlimPerson'
       required:
-        - person
+        - staff
         - positions
       type: object
     SubjectStaffPosition:
       properties:
+        appearEps:
+          type: string
         summary:
           type: string
         type:
@@ -1811,6 +1930,7 @@ components:
       required:
         - type
         - summary
+        - appearEps
       type: object
     SubjectStaffPositionType:
       properties:
@@ -2051,10 +2171,16 @@ components:
         subject:
           items:
             properties:
+              collectID:
+                type: integer
               comment:
                 type: string
               rate:
                 type: number
+              reactions:
+                items:
+                  $ref: '#/components/schemas/Reaction'
+                type: array
               subject:
                 $ref: '#/components/schemas/SlimSubject'
             required:
@@ -2104,6 +2230,8 @@ components:
           type: integer
         creator:
           $ref: '#/components/schemas/SlimUser'
+        creatorID:
+          type: integer
         display:
           type: integer
         id:
@@ -2111,7 +2239,7 @@ components:
         parentID:
           description: 小组/条目ID
           type: integer
-        repliesCount:
+        replies:
           type: integer
         state:
           type: integer
@@ -2122,22 +2250,26 @@ components:
           type: integer
       required:
         - id
-        - creator
+        - creatorID
         - title
         - parentID
         - createdAt
         - updatedAt
-        - repliesCount
+        - replies
         - state
         - display
       title: Topic
       type: object
     TopicDetail:
       properties:
+        content:
+          type: string
         createdAt:
           type: integer
         creator:
           $ref: '#/components/schemas/SlimUser'
+        display:
+          type: integer
         id:
           type: integer
         parent:
@@ -2154,8 +2286,6 @@ components:
           type: array
         state:
           type: integer
-        text:
-          type: string
         title:
           type: string
       required:
@@ -2163,11 +2293,12 @@ components:
         - parent
         - creator
         - title
-        - text
+        - content
         - state
         - createdAt
         - replies
         - reactions
+        - display
       title: TopicDetail
       type: object
     TrendingSubject:
@@ -2188,9 +2319,18 @@ components:
       required:
         - content
       type: object
+    UpdatePost:
+      properties:
+        content:
+          description: bbcode
+          minLength: 1
+          type: string
+      required:
+        - content
+      type: object
     UpdateTopic:
       properties:
-        text:
+        content:
           description: bbcode
           minLength: 1
           type: string
@@ -2199,7 +2339,7 @@ components:
           type: string
       required:
         - title
-        - text
+        - content
       type: object
     User:
       properties:
@@ -3002,46 +3142,12 @@ paths:
     delete:
       operationId: deleteGroupPost
       parameters:
-        - example: 2092074
-          in: path
+        - in: path
           name: postID
           required: true
           schema:
             type: integer
       responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                properties: {}
-                type: object
-          description: Default Response
-        '401':
-          content:
-            application/json:
-              examples:
-                NOT_ALLOWED:
-                  value:
-                    code: NOT_ALLOWED
-                    error: Unauthorized
-                    message: you don't have permission to delete this post
-                    statusCode: 401
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: default error response type
-        '404':
-          content:
-            application/json:
-              examples:
-                NOT_FOUND:
-                  value:
-                    code: NOT_FOUND
-                    error: Not Found
-                    message: post not found
-                    statusCode: 404
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: default error response type
         '500':
           content:
             application/json:
@@ -3051,53 +3157,14 @@ paths:
           description: 意料之外的服务器错误
       security:
         - CookiesSession: []
+          HTTPBearer: []
+      summary: 删除小组帖子回复
       tags:
-        - group
-    get:
-      operationId: getGroupPost
-      parameters:
-        - example: 2092074
-          in: path
-          name: postID
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Reply'
-          description: Default Response
-        '404':
-          content:
-            application/json:
-              examples:
-                NOT_FOUND:
-                  value:
-                    code: NOT_FOUND
-                    error: Not Found
-                    message: post not found
-                    statusCode: 404
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: default error response type
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-                description: 意料之外的服务器错误
-          description: 意料之外的服务器错误
-      security:
-        - CookiesSession: []
-      tags:
-        - group
+        - topic
     put:
       operationId: editGroupPost
       parameters:
-        - example: 2092074
-          in: path
+        - in: path
           name: postID
           required: true
           schema:
@@ -3105,38 +3172,9 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              text: new post contents
             schema:
-              properties:
-                text:
-                  minLength: 1
-                  type: string
-              required:
-                - text
-              type: object
-        required: true
+              $ref: '#/components/schemas/UpdatePost'
       responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                properties: {}
-                type: object
-          description: Default Response
-        '401':
-          content:
-            application/json:
-              examples:
-                NOT_ALLOWED:
-                  value:
-                    code: NOT_ALLOWED
-                    error: Unauthorized
-                    message: you don't have permission to edit reply
-                    statusCode: 401
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: default error response type
         '500':
           content:
             application/json:
@@ -3146,16 +3184,16 @@ paths:
           description: 意料之外的服务器错误
       security:
         - CookiesSession: []
+          HTTPBearer: []
+      summary: 编辑小组帖子回复
       tags:
-        - group
-  /p1/groups/-/topics/{id}:
+        - topic
+  /p1/groups/-/topics/{topicID}:
     get:
-      description: 获取帖子列表
-      operationId: getGroupTopicDetail
+      operationId: getGroupTopic
       parameters:
-        - example: 371602
-          in: path
-          name: id
+        - in: path
+          name: topicID
           required: true
           schema:
             type: integer
@@ -3173,14 +3211,17 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
                 description: 意料之外的服务器错误
           description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取小组帖子详情
       tags:
         - topic
-  /p1/groups/-/topics/{topicID}:
     put:
+      description: 编辑小组帖子
       operationId: editGroupTopic
       parameters:
-        - example: 371602
-          in: path
+        - in: path
           name: topicID
           required: true
           schema:
@@ -3189,34 +3230,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateTopic'
+              $ref: '#/components/schemas/UpdateTopic'
       responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                properties: {}
-                type: object
-          description: Default Response
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: default error response type
-        '401':
-          content:
-            application/json:
-              examples:
-                NOT_ALLOWED:
-                  value:
-                    code: NOT_ALLOWED
-                    error: Unauthorized
-                    message: you don't have permission to edit a topic
-                    statusCode: 401
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: default error response type
         '500':
           content:
             application/json:
@@ -3226,14 +3241,14 @@ paths:
           description: 意料之外的服务器错误
       security:
         - CookiesSession: []
+          HTTPBearer: []
       tags:
-        - group
+        - topic
   /p1/groups/-/topics/{topicID}/replies:
     post:
       operationId: createGroupReply
       parameters:
-        - example: 371602
-          in: path
+        - in: path
           name: topicID
           required: true
           schema:
@@ -3241,56 +3256,20 @@ paths:
       requestBody:
         content:
           application/json:
-            examples:
-              example1:
-                value:
-                  cf-turnstile-response: 10000000-aaaa-bbbb-cccc-000000000001
-                  content: post contents
-              example2:
-                value:
-                  cf-turnstile-response: 10000000-aaaa-bbbb-cccc-000000000001
-                  content: post contents
-                  replyTo: 2
             schema:
-              properties:
-                cf-turnstile-response:
-                  minLength: 1
-                  type: string
-                content:
-                  minLength: 1
-                  type: string
-                replyTo:
-                  default: 0
-                  description: 被回复的 topic ID, `0` 代表回复楼主
-                  example: 0
-                  type: integer
-              required:
-                - content
-                - cf-turnstile-response
-              type: object
-        required: true
+              $ref: '#/components/schemas/CreatePost'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubReply'
+                properties:
+                  id:
+                    type: integer
+                required:
+                  - id
+                type: object
           description: Default Response
-        '401':
-          content:
-            application/json:
-              examples:
-                NOT_JOIN_PRIVATE_GROUP_ERROR:
-                  value:
-                    code: NOT_JOIN_PRIVATE_GROUP_ERROR
-                    error: Unauthorized
-                    message: >-
-                      you need to join private group '沙盒' before you create a
-                      post or reply
-                    statusCode: 401
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: default error response type
         '500':
           content:
             application/json:
@@ -3300,34 +3279,56 @@ paths:
           description: 意料之外的服务器错误
       security:
         - CookiesSession: []
+          HTTPBearer: []
+      summary: 创建小组帖子回复
+      tags:
+        - topic
+  /p1/groups/{groupName}:
+    get:
+      operationId: getGroup
+      parameters:
+        - in: path
+          name: groupName
+          required: true
+          schema:
+            minLength: 1
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取小组详情
       tags:
         - group
   /p1/groups/{groupName}/members:
     get:
-      description: 获取帖子列表
-      operationId: listGroupMembersByName
+      operationId: getGroupMembers
       parameters:
         - in: query
-          name: type
+          name: moderator
           required: false
           schema:
-            anyOf:
-              - enum:
-                  - mod
-                type: string
-              - enum:
-                  - normal
-                type: string
-              - enum:
-                  - all
-                type: string
-            default: all
+            default: false
+            type: boolean
         - in: query
           name: limit
           required: false
           schema:
-            default: 30
-            maximum: 40
+            default: 20
+            maximum: 100
             type: integer
         - in: query
           name: offset
@@ -3366,60 +3367,22 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
                 description: 意料之外的服务器错误
           description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取小组成员列表
       tags:
-        - topic
-  /p1/groups/{groupName}/profile:
+        - group
+  /p1/groups/{groupName}/topics:
     get:
-      description: 获取小组首页
-      operationId: getGroupProfile
+      operationId: getGroupTopics
       parameters:
         - in: query
           name: limit
           required: false
           schema:
             default: 20
-            maximum: 40
-            type: integer
-        - in: query
-          name: offset
-          required: false
-          schema:
-            default: 0
-            minimum: 0
-            type: integer
-        - in: path
-          name: groupName
-          required: true
-          schema:
-            minLength: 1
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GroupProfile'
-          description: Default Response
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-                description: 意料之外的服务器错误
-          description: 意料之外的服务器错误
-      tags:
-        - topic
-  /p1/groups/{groupName}/topics:
-    get:
-      description: 获取帖子列表
-      operationId: getGroupTopicsByGroupName
-      parameters:
-        - in: query
-          name: limit
-          required: false
-          schema:
-            default: 30
-            maximum: 40
+            maximum: 100
             type: integer
         - in: query
           name: offset
@@ -3451,20 +3414,6 @@ paths:
                   - total
                 type: object
           description: Default Response
-        '404':
-          content:
-            application/json:
-              examples:
-                NotFoundError:
-                  value:
-                    code: NOT_FOUND
-                    error: Not Found
-                    message: topic not found
-                    statusCode: 404
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-                description: 小组不存在
-          description: 小组不存在
         '500':
           content:
             application/json:
@@ -3472,13 +3421,16 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
                 description: 意料之外的服务器错误
           description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取小组帖子列表
       tags:
-        - topic
+        - group
     post:
-      operationId: createNewGroupTopic
+      operationId: createGroupTopic
       parameters:
-        - example: sandbox
-          in: path
+        - in: path
           name: groupName
           required: true
           schema:
@@ -3511,6 +3463,8 @@ paths:
           description: 意料之外的服务器错误
       security:
         - CookiesSession: []
+          HTTPBearer: []
+      summary: 创建小组帖子
       tags:
         - group
   /p1/login:
@@ -4358,46 +4312,12 @@ paths:
     delete:
       operationId: deleteSubjectPost
       parameters:
-        - example: 2092074
-          in: path
+        - in: path
           name: postID
           required: true
           schema:
             type: integer
       responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                properties: {}
-                type: object
-          description: Default Response
-        '401':
-          content:
-            application/json:
-              examples:
-                NOT_ALLOWED:
-                  value:
-                    code: NOT_ALLOWED
-                    error: Unauthorized
-                    message: you don't have permission to delete this post
-                    statusCode: 401
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: default error response type
-        '404':
-          content:
-            application/json:
-              examples:
-                NOT_FOUND:
-                  value:
-                    code: NOT_FOUND
-                    error: Not Found
-                    message: post not found
-                    statusCode: 404
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: default error response type
         '500':
           content:
             application/json:
@@ -4408,56 +4328,13 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 删除自己创建的条目讨论版回复
+      summary: 删除条目讨论回复
       tags:
-        - subject
-    get:
-      operationId: getSubjectPost
-      parameters:
-        - example: 2092074
-          in: path
-          name: postID
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Reply'
-          description: Default Response
-        '404':
-          content:
-            application/json:
-              examples:
-                NOT_FOUND:
-                  value:
-                    code: NOT_FOUND
-                    error: Not Found
-                    message: post not found
-                    statusCode: 404
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: default error response type
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-                description: 意料之外的服务器错误
-          description: 意料之外的服务器错误
-      security:
-        - CookiesSession: []
-          HTTPBearer: []
-      summary: 获取条目讨论版回复
-      tags:
-        - subject
+        - topic
     put:
       operationId: editSubjectPost
       parameters:
-        - example: 2092074
-          in: path
+        - in: path
           name: postID
           required: true
           schema:
@@ -4465,38 +4342,9 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              text: new post contents
             schema:
-              properties:
-                text:
-                  minLength: 1
-                  type: string
-              required:
-                - text
-              type: object
-        required: true
+              $ref: '#/components/schemas/UpdatePost'
       responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                properties: {}
-                type: object
-          description: Default Response
-        '401':
-          content:
-            application/json:
-              examples:
-                NOT_ALLOWED:
-                  value:
-                    code: NOT_ALLOWED
-                    error: Unauthorized
-                    message: you don't have permission to edit reply
-                    statusCode: 401
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: default error response type
         '500':
           content:
             application/json:
@@ -4507,19 +4355,17 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 编辑自己创建的条目讨论版回复
+      summary: 编辑条目讨论回复
       tags:
-        - subject
+        - topic
   /p1/subjects/-/topics/{topicID}:
     get:
       operationId: getSubjectTopic
       parameters:
-        - example: 371602
-          in: path
+        - in: path
           name: topicID
           required: true
           schema:
-            minimum: 0
             type: integer
       responses:
         '200':
@@ -4538,9 +4384,9 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 获取条目讨论
+      summary: 获取条目讨论详情
       tags:
-        - subject
+        - topic
     put:
       operationId: updateSubjectTopic
       parameters:
@@ -4556,7 +4402,7 @@ paths:
           application/json:
             schema:
               properties:
-                text:
+                content:
                   description: bbcode
                   minLength: 1
                   type: string
@@ -4565,7 +4411,7 @@ paths:
                   type: string
               required:
                 - title
-                - text
+                - content
               type: object
         required: true
       responses:
@@ -4581,22 +4427,12 @@ paths:
           HTTPBearer: []
       summary: 编辑自己创建的条目讨论
       tags:
-        - subject
+        - topic
   /p1/subjects/-/topics/{topicID}/replies:
     post:
-      description: >-
-        需要
-        [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-
-
-        next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-
-
-        dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
       operationId: createSubjectReply
       parameters:
-        - example: 371602
-          in: path
+        - in: path
           name: topicID
           required: true
           schema:
@@ -4604,56 +4440,20 @@ paths:
       requestBody:
         content:
           application/json:
-            examples:
-              example1:
-                value:
-                  cf-turnstile-response: 10000000-aaaa-bbbb-cccc-000000000001
-                  content: post contents
-              example2:
-                value:
-                  cf-turnstile-response: 10000000-aaaa-bbbb-cccc-000000000001
-                  content: post contents
-                  replyTo: 2
             schema:
-              properties:
-                cf-turnstile-response:
-                  minLength: 1
-                  type: string
-                content:
-                  minLength: 1
-                  type: string
-                replyTo:
-                  default: 0
-                  description: 被回复的 topic ID, `0` 代表回复楼主
-                  example: 0
-                  type: integer
-              required:
-                - content
-                - cf-turnstile-response
-              type: object
-        required: true
+              $ref: '#/components/schemas/CreatePost'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubReply'
+                properties:
+                  id:
+                    type: integer
+                required:
+                  - id
+                type: object
           description: Default Response
-        '401':
-          content:
-            application/json:
-              examples:
-                NOT_JOIN_PRIVATE_GROUP_ERROR:
-                  value:
-                    code: NOT_JOIN_PRIVATE_GROUP_ERROR
-                    error: Unauthorized
-                    message: >-
-                      you need to join private group '沙盒' before you create a
-                      post or reply
-                    statusCode: 401
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: default error response type
         '500':
           content:
             application/json:
@@ -4664,9 +4464,9 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 创建条目讨论版回复
+      summary: 创建条目讨论回复
       tags:
-        - subject
+        - topic
   /p1/subjects/{subjectID}:
     get:
       operationId: getSubject
@@ -5066,9 +4866,9 @@ paths:
       summary: 获取条目的评论
       tags:
         - subject
-  /p1/subjects/{subjectID}/staffs:
+  /p1/subjects/{subjectID}/staffs/persons:
     get:
-      operationId: getSubjectStaffs
+      operationId: getSubjectStaffPersons
       parameters:
         - description: '人物职位: 监督，原案，脚本,..'
           in: query
@@ -5127,6 +4927,63 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 获取条目的制作人员
+      tags:
+        - subject
+  /p1/subjects/{subjectID}/staffs/positions:
+    get:
+      operationId: getSubjectStaffPositions
+      parameters:
+        - description: max 100
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: min 0
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+        - in: path
+          name: subjectID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/SubjectPosition'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取条目的制作人员职位
       tags:
         - subject
   /p1/subjects/{subjectID}/topics:
@@ -5199,34 +5056,8 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              cf-turnstile-response: 10000000-aaaa-bbbb-cccc-000000000001
-              content: topic content
-              title: topic title
             schema:
-              properties:
-                cf-turnstile-response:
-                  description: >-
-                    需要
-                    [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-
-                    next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-
-                    dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
-                  type: string
-                text:
-                  description: bbcode
-                  minLength: 1
-                  type: string
-                title:
-                  minLength: 1
-                  type: string
-              required:
-                - title
-                - text
-                - cf-turnstile-response
-              type: object
-        required: true
+              $ref: '#/components/schemas/CreateTopic'
       responses:
         '200':
           content:
@@ -5298,6 +5129,38 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 获取时间线
+      tags:
+        - timeline
+    post:
+      operationId: createTimelineSay
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTimelineSay'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                required:
+                  - id
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 发送时间线吐槽
       tags:
         - timeline
   /p1/trending/subjects:
@@ -7241,6 +7104,89 @@ paths:
                 description: 意料之外的服务器错误
           description: 意料之外的服务器错误
       summary: 为条目封面投票
+      tags:
+        - wiki
+  /p1/wiki/subjects/{subjectID}/ep:
+    post:
+      description: 为条目添加新章节
+      operationId: createEpisodes
+      parameters:
+        - example: 363612
+          in: path
+          name: subjectID
+          required: true
+          schema:
+            minimum: 0
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                episodes:
+                  items:
+                    properties:
+                      date:
+                        type: string
+                      disc:
+                        type: number
+                      duration:
+                        type: string
+                      ep:
+                        type: number
+                      name:
+                        type: string
+                      nameCN:
+                        type: string
+                      summary:
+                        type: string
+                      type:
+                        $ref: '#/components/schemas/EpisodeType'
+                    required:
+                      - ep
+                    type: object
+                  type: array
+              required:
+                - episodes
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  episodeIDs:
+                    items:
+                      type: integer
+                    type: array
+                required:
+                  - episodeIDs
+                type: object
+          description: Default Response
+        '401':
+          content:
+            application/json:
+              examples:
+                INVALID_SYNTAX_ERROR:
+                  value:
+                    code: INVALID_SYNTAX_ERROR
+                    error: Bad Request
+                    message: '%s'
+                    statusCode: 400
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
       tags:
         - wiki
   /p1/wiki/subjects/{subjectID}/history-summary:
