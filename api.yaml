@@ -992,6 +992,32 @@ components:
         - subject
         - positions
       type: object
+    Post:
+      properties:
+        content:
+          type: string
+        createdAt:
+          type: integer
+        creator:
+          $ref: '#/components/schemas/SlimUser'
+        creatorID:
+          type: integer
+        id:
+          type: integer
+        state:
+          type: integer
+        topic:
+          $ref: '#/components/schemas/Topic'
+      required:
+        - id
+        - creatorID
+        - creator
+        - createdAt
+        - content
+        - state
+        - topic
+      title: Post
+      type: object
     Profile:
       properties:
         avatar:
@@ -3618,6 +3644,31 @@ paths:
       summary: 删除小组帖子回复
       tags:
         - topic
+    get:
+      operationId: getGroupPost
+      parameters:
+        - in: path
+          name: postID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      summary: 获取小组帖子回复详情
+      tags:
+        - topic
     put:
       operationId: editGroupPost
       parameters:
@@ -4608,6 +4659,31 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 删除条目讨论回复
+      tags:
+        - topic
+    get:
+      operationId: getSubjectPost
+      parameters:
+        - in: path
+          name: postID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      summary: 获取条目讨论回复详情
       tags:
         - topic
     put:
