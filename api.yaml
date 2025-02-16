@@ -649,18 +649,45 @@ components:
       properties:
         joinedAt:
           type: integer
-        moderator:
-          type: boolean
+        role:
+          $ref: '#/components/schemas/GroupMemberRole'
         uid:
           type: integer
         user:
           $ref: '#/components/schemas/SlimUser'
       required:
         - uid
-        - moderator
+        - role
         - joinedAt
       title: GroupMember
       type: object
+    GroupMemberRole:
+      description: |-
+        小组成员角色
+          - -2 = 访客
+          - -1 = 游客
+          - 0 = 小组成员
+          - 1 = 小组长
+          - 2 = 小组管理员
+          - 3 = 禁言成员
+      enum:
+        - -2
+        - -1
+        - 0
+        - 1
+        - 2
+        - 3
+      type: integer
+      x-enum-varnames:
+        - Visitor
+        - Guest
+        - Member
+        - Creator
+        - Moderator
+        - Blocked
+      x-ms-enum:
+        modelAsString: false
+        name: GroupMemberRole
     GroupSort:
       default: created
       description: |-
@@ -4637,11 +4664,10 @@ paths:
       operationId: getGroupMembers
       parameters:
         - in: query
-          name: moderator
+          name: role
           required: false
           schema:
-            default: false
-            type: boolean
+            $ref: '#/components/schemas/GroupMemberRole'
         - in: query
           name: limit
           required: false
