@@ -4399,7 +4399,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 删除小组帖子回复
+      summary: 删除小组话题回复
       tags:
         - topic
     get:
@@ -4424,7 +4424,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
                 description: 意料之外的服务器错误
           description: 意料之外的服务器错误
-      summary: 获取小组帖子回复详情
+      summary: 获取小组话题回复详情
       tags:
         - topic
     put:
@@ -4458,7 +4458,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 编辑小组帖子回复
+      summary: 编辑小组话题回复
       tags:
         - topic
   /p1/groups/-/topics:
@@ -4495,7 +4495,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 获取小组的最新话题
+      summary: 获取最新的小组话题
       tags:
         - group
   /p1/groups/-/topics/{topicID}:
@@ -4524,11 +4524,11 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 获取小组帖子详情
+      summary: 获取小组话题详情
       tags:
         - topic
     put:
-      description: 编辑小组帖子
+      description: 编辑小组话题
       operationId: editGroupTopic
       parameters:
         - in: path
@@ -4599,7 +4599,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 创建小组帖子回复
+      summary: 创建小组话题回复
       tags:
         - topic
   /p1/groups/{groupName}:
@@ -4743,7 +4743,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 获取小组帖子列表
+      summary: 获取小组话题列表
       tags:
         - group
     post:
@@ -4785,7 +4785,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 创建小组帖子
+      summary: 创建小组话题
       tags:
         - group
   /p1/login:
