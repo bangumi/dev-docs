@@ -120,6 +120,8 @@ components:
           type: integer
         images:
           $ref: '#/components/schemas/PersonImages'
+        info:
+          type: string
         infobox:
           $ref: '#/components/schemas/Infobox'
         lock:
@@ -142,6 +144,7 @@ components:
         - nameCN
         - role
         - infobox
+        - info
         - summary
         - comment
         - collects
@@ -579,21 +582,6 @@ components:
         - message
         - statusCode
       type: object
-    FilterMode:
-      description: |-
-        过滤模式
-          - all = 全站
-          - friends = 好友
-      enum:
-        - all
-        - friends
-      type: string
-      x-enum-varnames:
-        - All
-        - Friends
-      x-ms-enum:
-        modelAsString: true
-        name: FilterMode
     Friend:
       properties:
         createdAt:
@@ -673,12 +661,26 @@ components:
         - joinedAt
       title: GroupMember
       type: object
+    GroupSort:
+      default: created
+      description: |-
+        小组排序方式
+          - posts = 帖子数
+          - topics = 主题数
+          - members = 成员数
+          - created = 创建时间
+          - updated = 最新讨论
+      enum:
+        - posts
+        - topics
+        - members
+        - created
+        - updated
+      type: string
     GroupTopic:
       allOf:
         - $ref: '#/components/schemas/TopicBase'
         - properties:
-            content:
-              type: string
             creator:
               $ref: '#/components/schemas/SlimUser'
             group:
@@ -690,10 +692,30 @@ components:
           required:
             - creator
             - group
-            - content
             - replies
           type: object
       title: GroupTopic
+    GroupTopicFilterMode:
+      description: |-
+        小组话题过滤模式
+          - all = 全站
+          - joined = 已加入
+          - created = 我创建的
+          - replied = 我回复的
+      enum:
+        - all
+        - joined
+        - created
+        - replied
+      type: string
+      x-enum-varnames:
+        - All
+        - Joined
+        - Created
+        - Replied
+      x-ms-enum:
+        modelAsString: true
+        name: GroupTopicFilterMode
     HistorySummary:
       properties:
         commitMessage:
@@ -917,6 +939,8 @@ components:
           type: integer
         images:
           $ref: '#/components/schemas/PersonImages'
+        info:
+          type: string
         infobox:
           $ref: '#/components/schemas/Infobox'
         lock:
@@ -939,6 +963,7 @@ components:
         - nameCN
         - type
         - infobox
+        - info
         - career
         - summary
         - comment
@@ -1286,6 +1311,8 @@ components:
           type: integer
         images:
           $ref: '#/components/schemas/PersonImages'
+        info:
+          type: string
         lock:
           type: boolean
         name:
@@ -1301,6 +1328,7 @@ components:
         - name
         - nameCN
         - role
+        - info
         - comment
         - lock
         - nsfw
@@ -1366,6 +1394,8 @@ components:
           type: integer
         images:
           $ref: '#/components/schemas/PersonImages'
+        info:
+          type: string
         lock:
           type: boolean
         name:
@@ -1381,6 +1411,7 @@ components:
         - name
         - nameCN
         - type
+        - info
         - comment
         - lock
         - nsfw
@@ -2152,8 +2183,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/TopicBase'
         - properties:
-            content:
-              type: string
             creator:
               $ref: '#/components/schemas/SlimUser'
             replies:
@@ -2165,7 +2194,6 @@ components:
           required:
             - creator
             - subject
-            - content
             - replies
           type: object
       title: SubjectTopic
@@ -2300,6 +2328,21 @@ components:
       x-ms-enum:
         modelAsString: false
         name: TimelineCat
+    TimelineFilterMode:
+      description: |-
+        时间线过滤模式
+          - all = 全站
+          - friends = 好友
+      enum:
+        - all
+        - friends
+      type: string
+      x-enum-varnames:
+        - All
+        - Friends
+      x-ms-enum:
+        modelAsString: true
+        name: TimelineFilterMode
     TimelineMemo:
       properties:
         blog:
@@ -4276,6 +4319,59 @@ paths:
       summary: 获取当前用户的好友列表
       tags:
         - friend
+  /p1/groups:
+    get:
+      operationId: getGroups
+      parameters:
+        - in: query
+          name: sort
+          required: true
+          schema:
+            $ref: '#/components/schemas/GroupSort'
+        - in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            type: integer
+        - in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/SlimGroup'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取小组列表
+      tags:
+        - group
   /p1/groups/-/posts/{postID}:
     delete:
       operationId: deleteGroupPost
@@ -4365,6 +4461,43 @@ paths:
       summary: 编辑小组帖子回复
       tags:
         - topic
+  /p1/groups/-/topics:
+    get:
+      operationId: getRecentGroupTopics
+      parameters:
+        - description: 登录时默认为 joined, 未登录或没有加入小组时始终为 all
+          in: query
+          name: mode
+          required: true
+          schema:
+            $ref: '#/components/schemas/GroupTopicFilterMode'
+        - in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            type: integer
+        - in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            type: integer
+      responses:
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取小组的最新话题
+      tags:
+        - group
   /p1/groups/-/topics/{topicID}:
     get:
       operationId: getGroupTopic
@@ -6445,7 +6578,7 @@ paths:
           name: mode
           required: false
           schema:
-            $ref: '#/components/schemas/FilterMode'
+            $ref: '#/components/schemas/TimelineFilterMode'
         - description: min 1, max 20
           in: query
           name: limit
@@ -6725,6 +6858,58 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 获取热门条目
+      tags:
+        - trending
+  /p1/trending/subjects/topics:
+    get:
+      operationId: getTrendingSubjectTopics
+      parameters:
+        - description: max 100
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: min 0
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/SubjectTopic'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取热门条目讨论
       tags:
         - trending
   /p1/turnstile:
