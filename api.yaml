@@ -1131,6 +1131,10 @@ components:
           $ref: '#/components/schemas/Avatar'
         bio:
           type: string
+        blocklist:
+          items:
+            type: integer
+          type: array
         friendIDs:
           items:
             type: integer
@@ -1165,6 +1169,7 @@ components:
         - location
         - bio
         - friendIDs
+        - blocklist
         - permissions
       title: Profile
       type: object
