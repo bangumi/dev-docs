@@ -206,6 +206,12 @@ components:
         private:
           description: 仅自己可见
           type: boolean
+        progress:
+          description: |-
+            是否自动完成条目进度，仅在 `type` 为 `看过` 时有效，并且不会产生对应的时间线记录：
+                      - 书籍条目会检查总的话数和卷数，并更新收藏进度到最新;
+                      - 动画和三次元会标记所有正片章节为已完成，并同时更新收藏进度
+          type: boolean
         rate:
           description: 评分，0 表示删除评分
           maximum: 10
@@ -378,6 +384,7 @@ components:
           $ref: '#/components/schemas/EpisodeType'
       required:
         - id
+        - subjectID
         - sort
         - type
         - disc
@@ -386,7 +393,7 @@ components:
         - duration
         - airdate
         - comment
-        - subjectID
+        - desc
       title: Episode
       type: object
     EpisodeCollectionStatus:
@@ -619,6 +626,8 @@ components:
           type: integer
         members:
           type: integer
+        membership:
+          $ref: '#/components/schemas/GroupMember'
         name:
           type: string
         nsfw:
@@ -765,6 +774,8 @@ components:
       type: object
     Index:
       properties:
+        award:
+          type: integer
         collectedAt:
           type: integer
         collects:
@@ -784,11 +795,16 @@ components:
         total:
           type: integer
         type:
+          $ref: '#/components/schemas/IndexType'
+        uid:
           type: integer
         updatedAt:
           type: integer
+        user:
+          $ref: '#/components/schemas/SlimUser'
       required:
         - id
+        - uid
         - type
         - title
         - desc
@@ -796,15 +812,95 @@ components:
         - total
         - collects
         - stats
+        - award
         - createdAt
         - updatedAt
       title: Index
       type: object
+    IndexRelated:
+      properties:
+        award:
+          type: string
+        cat:
+          $ref: '#/components/schemas/IndexRelatedCategory'
+        character:
+          $ref: '#/components/schemas/SlimCharacter'
+        comment:
+          type: string
+        createdAt:
+          type: integer
+        episode:
+          $ref: '#/components/schemas/Episode'
+        id:
+          type: integer
+        order:
+          type: integer
+        person:
+          $ref: '#/components/schemas/SlimPerson'
+        rid:
+          type: integer
+        sid:
+          type: integer
+        subject:
+          $ref: '#/components/schemas/SlimSubject'
+        type:
+          type: integer
+      required:
+        - id
+        - cat
+        - rid
+        - type
+        - sid
+        - order
+        - comment
+        - award
+        - createdAt
+      title: IndexRelated
+      type: object
+    IndexRelatedCategory:
+      description: |-
+        目录关联类型
+          - 0 = 条目
+          - 1 = 角色
+          - 2 = 人物
+          - 3 = 剧集
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+      type: integer
+      x-enum-varnames:
+        - Subject
+        - Character
+        - Person
+        - Episode
+      x-ms-enum:
+        modelAsString: false
+        name: IndexRelatedCategory
     IndexStats:
       additionalProperties:
         type: integer
       title: IndexStats
       type: object
+    IndexType:
+      description: |-
+        目录类型
+          - 0 = 用户
+          - 1 = 公共
+          - 2 = TBA
+      enum:
+        - 0
+        - 1
+        - 2
+      type: integer
+      x-enum-varnames:
+        - User
+        - Public
+        - Award
+      x-ms-enum:
+        modelAsString: false
+        name: IndexType
     Infobox:
       items:
         properties:
@@ -1406,9 +1502,12 @@ components:
         total:
           type: integer
         type:
+          $ref: '#/components/schemas/IndexType'
+        uid:
           type: integer
       required:
         - id
+        - uid
         - type
         - title
         - total
@@ -4823,6 +4922,102 @@ paths:
       summary: 创建小组话题
       tags:
         - group
+  /p1/indexes/{indexID}:
+    get:
+      operationId: getIndex
+      parameters:
+        - in: path
+          name: indexID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Index'
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取目录详情
+      tags:
+        - index
+  /p1/indexes/{indexID}/related:
+    get:
+      operationId: getIndexRelated
+      parameters:
+        - in: query
+          name: cat
+          required: false
+          schema:
+            $ref: '#/components/schemas/IndexRelatedCategory'
+        - in: query
+          name: type
+          required: false
+          schema:
+            $ref: '#/components/schemas/SubjectType'
+        - description: max 100
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: min 0
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+        - in: path
+          name: indexID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/IndexRelated'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取目录的关联内容
+      tags:
+        - index
   /p1/login:
     post:
       description: >-
@@ -8548,16 +8743,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: default error response type
-        '401':
+        '403':
           content:
             application/json:
               examples:
                 NOT_ALLOWED:
                   value:
                     code: NOT_ALLOWED
-                    error: Unauthorized
+                    error: Forbidden
                     message: you don't have permission to non sandbox subject
-                    statusCode: 401
+                    statusCode: 403
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: default error response type
