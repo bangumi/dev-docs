@@ -589,6 +589,21 @@ components:
         - message
         - statusCode
       type: object
+    FilterMode:
+      description: |-
+        过滤模式
+          - all = 全站
+          - friends = 好友
+      enum:
+        - all
+        - friends
+      type: string
+      x-enum-varnames:
+        - All
+        - Friends
+      x-ms-enum:
+        modelAsString: true
+        name: FilterMode
     Friend:
       properties:
         createdAt:
@@ -979,45 +994,19 @@ components:
     Notice:
       properties:
         createdAt:
-          description: unix timestamp in seconds
           type: integer
         id:
           type: integer
-        postID:
+        mainID:
+          description: 对应的 topicID, episodeID, userID ...
+          type: integer
+        relatedID:
+          description: 对应的 postID ...
           type: integer
         sender:
-          properties:
-            avatar:
-              $ref: '#/components/schemas/Avatar'
-            group:
-              type: integer
-            id:
-              example: 1
-              type: integer
-            joinedAt:
-              type: integer
-            nickname:
-              example: Sai🖖
-              type: string
-            sign:
-              type: string
-            username:
-              example: sai
-              type: string
-          required:
-            - id
-            - username
-            - nickname
-            - avatar
-            - group
-            - sign
-            - joinedAt
-          title: SlimUser
-          type: object
+          $ref: '#/components/schemas/SlimUser'
         title:
           type: string
-        topicID:
-          type: integer
         type:
           description: 查看 `./lib/notify.ts` _settings
           type: integer
@@ -1025,13 +1014,14 @@ components:
           type: boolean
       required:
         - id
-        - title
         - type
         - sender
-        - topicID
-        - postID
+        - title
+        - mainID
+        - relatedID
         - createdAt
         - unread
+      title: Notice
       type: object
     Permissions:
       properties:
@@ -1595,6 +1585,8 @@ components:
       properties:
         comment:
           type: string
+        id:
+          type: integer
         rate:
           type: integer
         tags:
@@ -1606,6 +1598,7 @@ components:
         updatedAt:
           type: integer
       required:
+        - id
         - rate
         - type
         - comment
@@ -1880,6 +1873,17 @@ components:
         - type
         - order
       type: object
+    SubjectCollect:
+      properties:
+        interest:
+          $ref: '#/components/schemas/SlimSubjectInterest'
+        user:
+          $ref: '#/components/schemas/SlimUser'
+      required:
+        - user
+        - interest
+      title: SubjectCollect
+      type: object
     SubjectCollection:
       additionalProperties:
         type: integer
@@ -1974,6 +1978,8 @@ components:
           type: string
         epStatus:
           type: integer
+        id:
+          type: integer
         private:
           type: boolean
         rate:
@@ -1989,6 +1995,7 @@ components:
         volStatus:
           type: integer
       required:
+        - id
         - rate
         - type
         - comment
@@ -2453,21 +2460,6 @@ components:
       x-ms-enum:
         modelAsString: false
         name: TimelineCat
-    TimelineFilterMode:
-      description: |-
-        时间线过滤模式
-          - all = 全站
-          - friends = 好友
-      enum:
-        - all
-        - friends
-      type: string
-      x-enum-varnames:
-        - All
-        - Friends
-      x-ms-enum:
-        modelAsString: true
-        name: TimelineFilterMode
     TimelineMemo:
       properties:
         blog:
@@ -2940,58 +2932,18 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 获取绝交用户列表
+      summary: 获取当前用户的绝交用户列表
       tags:
-        - misc
-    post:
-      operationId: addToBlocklist
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                id:
-                  type: integer
-              required:
-                - id
-              type: object
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  blocklist:
-                    items:
-                      type: integer
-                    type: array
-                required:
-                  - blocklist
-                type: object
-          description: Default Response
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-                description: 意料之外的服务器错误
-          description: 意料之外的服务器错误
-      security:
-        - CookiesSession: []
-          HTTPBearer: []
-      summary: 将用户添加到绝交列表
-      tags:
-        - misc
-  /p1/blocklist/{id}:
+        - relationship
+  /p1/blocklist/{username}:
     delete:
-      operationId: removeFromBlocklist
+      operationId: removeUserFromBlocklist
       parameters:
         - in: path
-          name: id
+          name: username
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         '200':
           content:
@@ -3006,6 +2958,12 @@ paths:
                   - blocklist
                 type: object
           description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
         '500':
           content:
             application/json:
@@ -3016,9 +2974,50 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 将用户从绝交列表移出
+      summary: 取消与用户绝交
       tags:
-        - misc
+        - relationship
+    put:
+      operationId: addUserToBlocklist
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  blocklist:
+                    items:
+                      type: integer
+                    type: array
+                required:
+                  - blocklist
+                type: object
+          description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 与用户绝交
+      tags:
+        - relationship
   /p1/blogs/-/comments/{commentID}:
     delete:
       operationId: deleteBlogComment
@@ -3222,6 +3221,12 @@ paths:
                   - id
                 type: object
           description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
         '500':
           content:
             application/json:
@@ -3712,6 +3717,12 @@ paths:
                   - id
                 type: object
           description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
         '500':
           content:
             application/json:
@@ -4096,6 +4107,12 @@ paths:
                 properties: {}
                 type: object
           description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
         '500':
           content:
             application/json:
@@ -4191,6 +4208,82 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 编辑条目的剧集吐槽
+      tags:
+        - episode
+  /p1/episodes/-/comments/{commentID}/like:
+    delete:
+      operationId: unlikeEpisodeComment
+      parameters:
+        - in: path
+          name: commentID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 取消条目的剧集吐槽点赞
+      tags:
+        - episode
+    put:
+      operationId: likeEpisodeComment
+      parameters:
+        - in: path
+          name: commentID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                value:
+                  type: integer
+              required:
+                - value
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 给条目的剧集吐槽点赞
       tags:
         - episode
   /p1/episodes/{episodeID}:
@@ -4320,6 +4413,12 @@ paths:
                   - id
                 type: object
           description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
         '500':
           content:
             application/json:
@@ -4384,7 +4483,7 @@ paths:
           HTTPBearer: []
       summary: 获取当前用户的关注者列表
       tags:
-        - friend
+        - relationship
   /p1/friends:
     get:
       operationId: getMyFriends
@@ -4436,7 +4535,78 @@ paths:
           HTTPBearer: []
       summary: 获取当前用户的好友列表
       tags:
-        - friend
+        - relationship
+  /p1/friends/{username}:
+    delete:
+      operationId: removeFriend
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 取消好友
+      tags:
+        - relationship
+    put:
+      operationId: addFriend
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 添加好友
+      tags:
+        - relationship
   /p1/groups:
     get:
       operationId: getGroups
@@ -4577,6 +4747,82 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 编辑小组话题回复
+      tags:
+        - topic
+  /p1/groups/-/posts/{postID}/like:
+    delete:
+      operationId: unlikeGroupPost
+      parameters:
+        - in: path
+          name: postID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 取消小组话题回复点赞
+      tags:
+        - topic
+    post:
+      operationId: likeGroupPost
+      parameters:
+        - in: path
+          name: postID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                value:
+                  type: integer
+              required:
+                - value
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 给小组话题回复点赞
       tags:
         - topic
   /p1/groups/-/topics:
@@ -4724,6 +4970,12 @@ paths:
                   - id
                 type: object
           description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
         '500':
           content:
             application/json:
@@ -4909,6 +5161,12 @@ paths:
                   - id
                 type: object
           description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
         '500':
           content:
             application/json:
@@ -5623,6 +5881,12 @@ paths:
                   - id
                 type: object
           description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
         '500':
           content:
             application/json:
@@ -5975,6 +6239,82 @@ paths:
       summary: 获取条目列表
       tags:
         - subject
+  /p1/subjects/-/collects/{collectID}/like:
+    delete:
+      operationId: unlikeSubjectCollect
+      parameters:
+        - in: path
+          name: collectID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 取消条目收藏点赞
+      tags:
+        - subject
+    put:
+      operationId: likeSubjectCollect
+      parameters:
+        - in: path
+          name: collectID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                value:
+                  type: integer
+              required:
+                - value
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 给条目收藏点赞
+      tags:
+        - subject
   /p1/subjects/-/posts/{postID}:
     delete:
       operationId: deleteSubjectPost
@@ -6062,6 +6402,82 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 编辑条目讨论回复
+      tags:
+        - topic
+  /p1/subjects/-/posts/{postID}/like:
+    delete:
+      operationId: unlikeSubjectPost
+      parameters:
+        - in: path
+          name: postID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 取消条目讨论回复点赞
+      tags:
+        - topic
+    put:
+      operationId: likeSubjectPost
+      parameters:
+        - in: path
+          name: postID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                value:
+                  type: integer
+              required:
+                - value
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 给条目讨论回复点赞
       tags:
         - topic
   /p1/subjects/-/topics:
@@ -6220,6 +6636,12 @@ paths:
                   - id
                 type: object
           description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
         '500':
           content:
             application/json:
@@ -6323,6 +6745,74 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 获取条目的角色
+      tags:
+        - subject
+  /p1/subjects/{subjectID}/collects:
+    get:
+      operationId: getSubjectCollects
+      parameters:
+        - in: query
+          name: type
+          required: false
+          schema:
+            $ref: '#/components/schemas/CollectionType'
+        - description: 默认为 all, 未登录或没有好友时始终为 all
+          in: query
+          name: mode
+          required: false
+          schema:
+            $ref: '#/components/schemas/FilterMode'
+        - description: max 100
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: min 0
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+        - in: path
+          name: subjectID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/SubjectCollect'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取条目的收藏用户
       tags:
         - subject
   /p1/subjects/{subjectID}/comments:
@@ -6838,6 +7328,12 @@ paths:
                   - id
                 type: object
           description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
         '500':
           content:
             application/json:
@@ -6860,7 +7356,7 @@ paths:
           name: mode
           required: false
           schema:
-            $ref: '#/components/schemas/TimelineFilterMode'
+            $ref: '#/components/schemas/FilterMode'
         - description: min 1, max 20
           in: query
           name: limit
@@ -6919,6 +7415,12 @@ paths:
                   - id
                 type: object
           description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
         '500':
           content:
             application/json:
@@ -7072,6 +7574,12 @@ paths:
                   - id
                 type: object
           description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
         '500':
           content:
             application/json:
