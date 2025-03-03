@@ -4779,7 +4779,7 @@ paths:
       summary: 取消小组话题回复点赞
       tags:
         - topic
-    post:
+    put:
       operationId: likeGroupPost
       parameters:
         - in: path
