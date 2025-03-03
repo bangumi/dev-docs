@@ -1212,16 +1212,6 @@ components:
       properties:
         avatar:
           $ref: '#/components/schemas/Avatar'
-        bio:
-          type: string
-        blocklist:
-          items:
-            type: integer
-          type: array
-        friendIDs:
-          items:
-            type: integer
-          type: array
         group:
           type: integer
         id:
@@ -1250,9 +1240,6 @@ components:
         - joinedAt
         - site
         - location
-        - bio
-        - friendIDs
-        - blocklist
         - permissions
       title: Profile
       type: object
@@ -3763,21 +3750,12 @@ paths:
               type: object
       responses:
         '200':
-          description: 没有返回值
-        '401':
           content:
             application/json:
-              examples:
-                NeedLoginError:
-                  value:
-                    code: NEED_LOGIN
-                    error: Unauthorized
-                    message: you need to login before marking notifications as read
-                    statusCode: 401
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-                description: 未登录
-          description: 未登录
+                properties: {}
+                type: object
+          description: Default Response
         '500':
           content:
             application/json:
@@ -4707,6 +4685,36 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 获取当前用户的关注者列表
+      tags:
+        - relationship
+  /p1/friendlist:
+    get:
+      operationId: getFriendlist
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  friendlist:
+                    items:
+                      type: integer
+                    type: array
+                required:
+                  - friendlist
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取当前用户的好友 ID 列表
       tags:
         - relationship
   /p1/friends:
@@ -5711,20 +5719,6 @@ paths:
                   - total
                 type: object
           description: Default Response
-        '401':
-          content:
-            application/json:
-              examples:
-                NeedLoginError:
-                  value:
-                    code: NEED_LOGIN
-                    error: Unauthorized
-                    message: you need to login before getting notifications
-                    statusCode: 401
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-                description: 未登录
-          description: 未登录
         '500':
           content:
             application/json:
