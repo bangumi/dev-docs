@@ -669,6 +669,24 @@ components:
         - createdAt
       title: Group
       type: object
+    GroupFilterMode:
+      description: |-
+        小组过滤模式
+          - all = 所有小组
+          - joined = 我加入的小组
+          - managed = 我管理的小组
+      enum:
+        - all
+        - joined
+        - managed
+      type: string
+      x-enum-varnames:
+        - All
+        - Joined
+        - Managed
+      x-ms-enum:
+        modelAsString: true
+        name: GroupFilterMode
     GroupMember:
       properties:
         joinedAt:
@@ -4844,6 +4862,11 @@ paths:
     get:
       operationId: getGroups
       parameters:
+        - in: query
+          name: mode
+          required: false
+          schema:
+            $ref: '#/components/schemas/GroupFilterMode'
         - in: query
           name: sort
           required: true
