@@ -9138,6 +9138,7 @@ paths:
                   minLength: 1
                   type: string
                 expectedRevision:
+                  additionalProperties: false
                   description: >-
                     a optional object to check if input is changed by others
 
@@ -9145,17 +9146,30 @@ paths:
                     match input, subject will not be changed
                   properties:
                     infobox:
-                      minLength: 1
-                      type: string
+                      anyOf:
+                        - type: 'null'
+                        - minLength: 1
+                          type: string
                     metaTags:
-                      items:
-                        type: string
-                      type: array
+                      anyOf:
+                        - type: 'null'
+                        - items:
+                            type: string
+                          type: array
                     name:
-                      minLength: 1
-                      type: string
+                      anyOf:
+                        - type: 'null'
+                        - minLength: 1
+                          type: string
                     platform:
-                      type: integer
+                      anyOf:
+                        - type: 'null'
+                        - type: integer
+                    summary:
+                      anyOf:
+                        - type: 'null'
+                        - minLength: 1
+                          type: string
                   type: object
                 subject:
                   example:
@@ -9301,6 +9315,7 @@ paths:
                   minLength: 1
                   type: string
                 expectedRevision:
+                  additionalProperties: false
                   description: >-
                     a optional object to check if input is changed by others
 
@@ -9308,17 +9323,30 @@ paths:
                     match input, subject will not be changed
                   properties:
                     infobox:
-                      minLength: 1
-                      type: string
+                      anyOf:
+                        - type: 'null'
+                        - minLength: 1
+                          type: string
                     metaTags:
-                      items:
-                        type: string
-                      type: array
+                      anyOf:
+                        - type: 'null'
+                        - items:
+                            type: string
+                          type: array
                     name:
-                      minLength: 1
-                      type: string
+                      anyOf:
+                        - type: 'null'
+                        - minLength: 1
+                          type: string
                     platform:
-                      type: integer
+                      anyOf:
+                        - type: 'null'
+                        - type: integer
+                    summary:
+                      anyOf:
+                        - type: 'null'
+                        - minLength: 1
+                          type: string
                   type: object
                 subject:
                   $ref: '#/components/schemas/SubjectEdit'
