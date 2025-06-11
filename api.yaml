@@ -358,6 +358,15 @@ components:
       properties:
         airdate:
           type: string
+        collection:
+          properties:
+            status:
+              $ref: '#/components/schemas/EpisodeCollectionStatus'
+            updatedAt:
+              type: integer
+          required:
+            - status
+          type: object
         comment:
           type: integer
         desc:
@@ -374,8 +383,6 @@ components:
           type: string
         sort:
           type: number
-        status:
-          $ref: '#/components/schemas/EpisodeCollectionStatus'
         subject:
           $ref: '#/components/schemas/SlimSubject'
         subjectID:
@@ -8903,9 +8910,7 @@ paths:
                   value:
                     code: WIKI_CHANGED
                     error: Bad Request
-                    message: >-
-                      expected data doesn't match, name changed, expecting "1",
-                      currently "2"
+                    message: "expected data doesn't match\nIndex: name\n===================================================================\n--- name\texpected\n+++ name\tcurrent\n@@ -1,1 +1,1 @@\n-1234\n+水樹奈々\n"
                     statusCode: 400
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -9134,6 +9139,12 @@ paths:
                   }}
             schema:
               properties:
+                authorID:
+                  description: >-
+                    when header x-admin-token is provided, use this as author
+                    id.
+                  exclusiveMinimum: 0
+                  type: integer
                 commitMessage:
                   minLength: 1
                   type: string
