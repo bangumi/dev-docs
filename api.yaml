@@ -2117,8 +2117,6 @@ components:
       type: object
     SubjectPositionStaff:
       properties:
-        appearEps:
-          type: string
         person:
           $ref: '#/components/schemas/SlimPerson'
         summary:
@@ -2126,7 +2124,6 @@ components:
       required:
         - person
         - summary
-        - appearEps
       type: object
     SubjectRating:
       properties:
@@ -2288,8 +2285,6 @@ components:
       type: object
     SubjectStaffPosition:
       properties:
-        appearEps:
-          type: string
         summary:
           type: string
         type:
@@ -2297,7 +2292,6 @@ components:
       required:
         - type
         - summary
-        - appearEps
       type: object
     SubjectStaffPositionType:
       properties:
