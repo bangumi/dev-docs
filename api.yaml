@@ -2117,8 +2117,6 @@ components:
       type: object
     SubjectPositionStaff:
       properties:
-        appearEps:
-          type: string
         person:
           $ref: '#/components/schemas/SlimPerson'
         summary:
@@ -2126,7 +2124,6 @@ components:
       required:
         - person
         - summary
-        - appearEps
       type: object
     SubjectRating:
       properties:
@@ -2288,8 +2285,6 @@ components:
       type: object
     SubjectStaffPosition:
       properties:
-        appearEps:
-          type: string
         summary:
           type: string
         type:
@@ -2297,7 +2292,6 @@ components:
       required:
         - type
         - summary
-        - appearEps
       type: object
     SubjectStaffPositionType:
       properties:
@@ -2579,32 +2573,15 @@ components:
       title: TimelineMemo
       type: object
     TimelineSource:
-      description: |-
-        时间线来源
-          - 0 = 网站
-          - 1 = 移动端
-          - 2 = https://bgm.tv/onair
-          - 3 = https://netaba.re/
-          - 4 = WP
-          - 5 = API
-      enum:
-        - 0
-        - 1
-        - 2
-        - 3
-        - 4
-        - 5
-      type: integer
-      x-enum-varnames:
-        - Web
-        - Mobile
-        - OnAir
-        - InTouch
-        - WP
-        - API
-      x-ms-enum:
-        modelAsString: false
-        name: TimelineSource
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+      required:
+        - name
+      title: TimelineSource
+      type: object
     Topic:
       properties:
         createdAt:
