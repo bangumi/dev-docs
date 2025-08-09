@@ -2562,7 +2562,6 @@ components:
             required:
               - subject
               - comment
-              - rate
             type: object
           type: array
         wiki:
