@@ -329,6 +329,44 @@ components:
       required:
         - content
       type: object
+    CreateIndex:
+      properties:
+        desc:
+          description: 目录描述
+          type: string
+        private:
+          description: 仅自己可见
+          type: boolean
+        title:
+          description: 目录标题
+          maxLength: 80
+          minLength: 1
+          type: string
+      required:
+        - title
+        - desc
+      title: CreateIndex
+      type: object
+    CreateIndexRelated:
+      properties:
+        award:
+          type: string
+        cat:
+          $ref: '#/components/schemas/IndexRelatedCategory'
+        comment:
+          type: string
+        order:
+          type: integer
+        sid:
+          type: integer
+        type:
+          type: integer
+      required:
+        - cat
+        - type
+        - sid
+      title: CreateIndexRelated
+      type: object
     CreateReply:
       properties:
         content:
@@ -405,7 +443,7 @@ components:
       type: object
     EpisodeCollectionStatus:
       description: |-
-        剧集收藏状态
+        章节收藏状态
           - 0 = 撤消/删除
           - 1 = 想看
           - 2 = 看过
@@ -826,6 +864,8 @@ components:
           type: string
         id:
           type: integer
+        private:
+          type: boolean
         replies:
           type: integer
         stats:
@@ -848,6 +888,7 @@ components:
         - type
         - title
         - desc
+        - private
         - replies
         - total
         - collects
@@ -861,6 +902,8 @@ components:
       properties:
         award:
           type: string
+        blog:
+          $ref: '#/components/schemas/SlimBlogEntry'
         cat:
           $ref: '#/components/schemas/IndexRelatedCategory'
         character:
@@ -871,6 +914,8 @@ components:
           type: integer
         episode:
           $ref: '#/components/schemas/Episode'
+        groupTopic:
+          $ref: '#/components/schemas/GroupTopic'
         id:
           type: integer
         order:
@@ -883,6 +928,8 @@ components:
           type: integer
         subject:
           $ref: '#/components/schemas/SlimSubject'
+        subjectTopic:
+          $ref: '#/components/schemas/SubjectTopic'
         type:
           type: integer
       required:
@@ -903,7 +950,10 @@ components:
           - 0 = 条目
           - 1 = 角色
           - 2 = 人物
-          - 3 = 剧集
+          - 3 = 章节
+          - 4 = 日志
+          - 5 = 小组话题
+          - 6 = 条目讨论
       enum:
         - 0
         - 1
@@ -915,12 +965,41 @@ components:
         - Character
         - Person
         - Episode
+        - Blog
+        - GroupTopic
+        - SubjectTopic
       x-ms-enum:
         modelAsString: false
         name: IndexRelatedCategory
     IndexStats:
-      additionalProperties:
-        type: integer
+      properties:
+        blog:
+          type: integer
+        character:
+          type: integer
+        episode:
+          type: integer
+        groupTopic:
+          type: integer
+        person:
+          type: integer
+        subject:
+          properties:
+            anime:
+              type: integer
+            book:
+              type: integer
+            game:
+              type: integer
+            music:
+              type: integer
+            real:
+              type: integer
+          type: object
+        subjectTopic:
+          type: integer
+      required:
+        - subject
       title: IndexStats
       type: object
     IndexType:
@@ -1499,6 +1578,8 @@ components:
           type: integer
         id:
           type: integer
+        private:
+          type: boolean
         title:
           type: string
         total:
@@ -1512,6 +1593,7 @@ components:
         - uid
         - type
         - title
+        - private
         - total
         - createdAt
       title: SlimIndex
@@ -1954,6 +2036,8 @@ components:
           type: boolean
         platform:
           type: integer
+        series:
+          type: boolean
         summary:
           type: string
       required:
@@ -2061,6 +2145,8 @@ components:
           type: boolean
         platform:
           type: integer
+        series:
+          type: boolean
         summary:
           type: string
         type:
@@ -2381,6 +2467,8 @@ components:
           type: boolean
         platform:
           type: integer
+        series:
+          type: boolean
         summary:
           type: string
         typeID:
@@ -2657,6 +2745,32 @@ components:
           type: boolean
         type:
           $ref: '#/components/schemas/EpisodeCollectionStatus'
+      type: object
+    UpdateIndex:
+      properties:
+        desc:
+          description: 目录描述
+          type: string
+        private:
+          description: 仅自己可见
+          type: boolean
+        title:
+          description: 目录标题
+          maxLength: 80
+          minLength: 1
+          type: string
+      title: UpdateIndex
+      type: object
+    UpdateIndexRelated:
+      properties:
+        comment:
+          type: string
+        order:
+          type: integer
+      required:
+        - order
+        - comment
+      title: UpdateIndexRelated
       type: object
     UpdateSubjectProgress:
       properties:
@@ -3724,6 +3838,63 @@ paths:
       summary: 创建角色的吐槽
       tags:
         - character
+  /p1/characters/{characterID}/indexes:
+    get:
+      operationId: getCharacterIndexes
+      parameters:
+        - description: max 100
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: min 0
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+        - in: path
+          name: characterID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/SlimIndex'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取角色关联的目录
+      tags:
+        - character
   /p1/clear-notify:
     post:
       description: |-
@@ -4376,7 +4547,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 删除条目的剧集吐槽
+      summary: 删除条目的章节吐槽
       tags:
         - episode
     put:
@@ -4411,7 +4582,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 编辑条目的剧集吐槽
+      summary: 编辑条目的章节吐槽
       tags:
         - episode
   /p1/episodes/-/comments/{commentID}/like:
@@ -4441,7 +4612,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 取消条目的剧集吐槽点赞
+      summary: 取消条目的章节吐槽点赞
       tags:
         - episode
     put:
@@ -4487,7 +4658,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 给条目的剧集吐槽点赞
+      summary: 给条目的章节吐槽点赞
       tags:
         - episode
   /p1/episodes/{episodeID}:
@@ -4517,7 +4688,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 获取剧集信息
+      summary: 获取章节信息
       tags:
         - episode
   /p1/episodes/{episodeID}/comments:
@@ -4585,7 +4756,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
                 description: 意料之外的服务器错误
           description: 意料之外的服务器错误
-      summary: 获取条目的剧集吐槽箱
+      summary: 获取条目的章节吐槽箱
       tags:
         - episode
     post:
@@ -4633,7 +4804,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 创建条目的剧集吐槽
+      summary: 创建条目的章节吐槽
       tags:
         - episode
   /p1/followers:
@@ -5419,7 +5590,133 @@ paths:
       summary: 创建小组话题
       tags:
         - group
+  /p1/indexes:
+    post:
+      operationId: createIndex
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIndex'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                required:
+                  - id
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 创建目录
+      tags:
+        - index
+  /p1/indexes/-/comments/{commentID}:
+    delete:
+      operationId: deleteIndexComment
+      parameters:
+        - in: path
+          name: commentID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 删除目录的评论
+      tags:
+        - index
+    put:
+      operationId: updateIndexComment
+      parameters:
+        - in: path
+          name: commentID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateContent'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 编辑目录的评论
+      tags:
+        - index
   /p1/indexes/{indexID}:
+    delete:
+      operationId: deleteIndex
+      parameters:
+        - in: path
+          name: indexID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 删除目录
+      tags:
+        - index
     get:
       operationId: getIndex
       parameters:
@@ -5446,6 +5743,170 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 获取目录详情
+      tags:
+        - index
+    patch:
+      operationId: updateIndex
+      parameters:
+        - in: path
+          name: indexID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateIndex'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 更新目录
+      tags:
+        - index
+  /p1/indexes/{indexID}/comments:
+    get:
+      operationId: getIndexComments
+      parameters:
+        - in: path
+          name: indexID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  allOf:
+                    - properties:
+                        content:
+                          type: string
+                        createdAt:
+                          type: integer
+                        creatorID:
+                          type: integer
+                        id:
+                          type: integer
+                        mainID:
+                          type: integer
+                        reactions:
+                          items:
+                            $ref: '#/components/schemas/Reaction'
+                          type: array
+                        relatedID:
+                          type: integer
+                        state:
+                          type: integer
+                        user:
+                          $ref: '#/components/schemas/SlimUser'
+                      required:
+                        - id
+                        - mainID
+                        - creatorID
+                        - relatedID
+                        - createdAt
+                        - content
+                        - state
+                      type: object
+                    - properties:
+                        replies:
+                          items:
+                            $ref: '#/components/schemas/CommentBase'
+                          type: array
+                      required:
+                        - replies
+                      type: object
+                  type: object
+                type: array
+          description: Default Response
+        '404':
+          content:
+            application/json:
+              examples:
+                NOT_FOUND:
+                  value:
+                    code: NOT_FOUND
+                    error: Not Found
+                    message: index not found
+                    statusCode: 404
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取目录的评论
+      tags:
+        - index
+    post:
+      operationId: createIndexComment
+      parameters:
+        - in: path
+          name: indexID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/CreateReply'
+                - $ref: '#/components/schemas/TurnstileToken'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    description: new comment id
+                    type: integer
+                required:
+                  - id
+                type: object
+          description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 创建目录的评论
       tags:
         - index
   /p1/indexes/{indexID}/related:
@@ -5513,6 +5974,118 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 获取目录的关联内容
+      tags:
+        - index
+    put:
+      operationId: putIndexRelated
+      parameters:
+        - in: path
+          name: indexID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIndexRelated'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                required:
+                  - id
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 添加目录关联内容
+      tags:
+        - index
+  /p1/indexes/{indexID}/related/{id}:
+    delete:
+      operationId: deleteIndexRelated
+      parameters:
+        - in: path
+          name: indexID
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 删除目录关联内容
+      tags:
+        - index
+    patch:
+      operationId: patchIndexRelated
+      parameters:
+        - in: path
+          name: indexID
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateIndexRelated'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 更新目录关联内容
       tags:
         - index
   /p1/login:
@@ -6123,6 +6696,63 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 创建人物的吐槽
+      tags:
+        - person
+  /p1/persons/{personID}/indexes:
+    get:
+      operationId: getPersonIndexes
+      parameters:
+        - description: max 100
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: min 0
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+        - in: path
+          name: personID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/SlimIndex'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取人物关联的目录
       tags:
         - person
   /p1/persons/{personID}/works:
@@ -7161,7 +7791,64 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 获取条目的剧集
+      summary: 获取条目的章节
+      tags:
+        - subject
+  /p1/subjects/{subjectID}/indexes:
+    get:
+      operationId: getSubjectIndexes
+      parameters:
+        - description: max 100
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: min 0
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+        - in: path
+          name: subjectID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/SlimIndex'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取条目关联的目录
       tags:
         - subject
   /p1/subjects/{subjectID}/recs:
@@ -8976,6 +9663,8 @@ paths:
                   type: boolean
                 platform:
                   type: integer
+                series:
+                  type: boolean
                 summary:
                   type: string
                 type:
@@ -9213,6 +9902,8 @@ paths:
                       type: boolean
                     platform:
                       type: integer
+                    series:
+                      type: boolean
                     summary:
                       type: string
                   type: object
