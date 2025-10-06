@@ -41,6 +41,8 @@ components:
           type: string
         type:
           type: integer
+        uid:
+          type: integer
         updatedAt:
           type: integer
         user:
@@ -50,6 +52,7 @@ components:
       required:
         - id
         - type
+        - uid
         - user
         - title
         - icon
@@ -1493,10 +1496,12 @@ components:
           type: integer
         updatedAt:
           type: integer
+        user:
+          $ref: '#/components/schemas/SlimUser'
       required:
         - id
-        - uid
         - type
+        - uid
         - title
         - icon
         - summary
