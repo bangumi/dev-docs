@@ -378,6 +378,26 @@ components:
       required:
         - content
       type: object
+    CreateReport:
+      properties:
+        comment:
+          description: 举报说明（可选）
+          maxLength: 2000
+          type: string
+        id:
+          description: 被举报对象的 ID
+          minimum: 1
+          type: integer
+        type:
+          $ref: '#/components/schemas/ReportType'
+        value:
+          $ref: '#/components/schemas/ReportReason'
+      required:
+        - type
+        - id
+        - value
+      title: CreateReport
+      type: object
     CreateTopic:
       properties:
         content:
@@ -1425,6 +1445,96 @@ components:
         - state
       title: ReplyBase
       type: object
+    ReportReason:
+      description: |-
+        举报原因
+          - 1 = 辱骂、人身攻击
+          - 2 = 刷屏、无关内容
+          - 3 = 政治相关
+          - 4 = 违法信息
+          - 5 = 泄露隐私
+          - 6 = 涉嫌刷分
+          - 7 = 引战
+          - 8 = 广告
+          - 9 = 剧透
+          - 99 = 其他
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 99
+      type: integer
+      x-enum-varnames:
+        - Abuse
+        - Spam
+        - Political
+        - Illegal
+        - Privacy
+        - CheatScore
+        - Flame
+        - Advertisement
+        - Spoiler
+        - Other
+      x-ms-enum:
+        modelAsString: false
+        name: ReportReason
+    ReportType:
+      description: |-
+        举报类型
+          - 6 = 用户
+          - 7 = 小组话题
+          - 8 = 小组回复
+          - 9 = 条目话题
+          - 10 = 条目回复
+          - 11 = 章节回复
+          - 12 = 角色回复
+          - 13 = 人物回复
+          - 14 = 日志
+          - 15 = 日志回复
+          - 16 = 时间线
+          - 17 = 时间线回复
+          - 18 = 目录
+          - 19 = 目录回复
+      enum:
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        - 18
+        - 19
+      type: integer
+      x-enum-varnames:
+        - User
+        - GroupTopic
+        - GroupReply
+        - SubjectTopic
+        - SubjectReply
+        - EpisodeReply
+        - CharacterReply
+        - PersonReply
+        - Blog
+        - BlogReply
+        - Timeline
+        - TimelineReply
+        - Index
+        - IndexReply
+      x-ms-enum:
+        modelAsString: false
+        name: ReportType
     SearchCharacter:
       properties:
         filter:
@@ -6633,6 +6743,44 @@ paths:
       summary: 获取人物的参与作品
       tags:
         - person
+  /p1/report:
+    post:
+      operationId: createReport
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReport'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                required:
+                  - message
+                type: object
+          description: Default Response
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 报告疑虑
+      tags:
+        - user
   /p1/search/characters:
     post:
       operationId: searchCharacters
