@@ -8457,6 +8457,9 @@ paths:
         - timeline
   /p1/timeline/-/events:
     get:
+      description: >-
+        这是一个 SSE (Server-Sent Events) 流，不是普通的 JSON 响应。客户端需要使用 EventSource 或类似的
+        SSE 客户端来订阅此接口。每个事件以 `data: {...}\n\n` 格式发送。
       operationId: getTimelineEvents
       parameters:
         - in: query
@@ -8472,9 +8475,17 @@ paths:
           content:
             application/json:
               schema:
-                description: Server-Sent Events stream
-                type: string
-          description: Server-Sent Events stream
+                description: SSE 事件数据
+                properties:
+                  event:
+                    description: '事件类型: ''connected'' | ''timeline'''
+                    type: string
+                  timeline:
+                    $ref: '#/components/schemas/Timeline'
+                required:
+                  - event
+                type: object
+          description: SSE 事件数据
         '500':
           content:
             application/json:
