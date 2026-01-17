@@ -7204,9 +7204,21 @@ paths:
           required: false
           schema:
             items:
-              description: wiki 标签，包括 分类/来源/类型/题材/地区/受众 等
+              description: 标签。默认按 wiki/meta 标签查询，结合 tagsCat 可切换为用户标签。
               type: string
             type: array
+        - description: tags 过滤类别：meta=wiki 标签（默认），subject=用户标签
+          in: query
+          name: tagsCat
+          required: false
+          schema:
+            anyOf:
+              - enum:
+                  - meta
+                type: string
+              - enum:
+                  - subject
+                type: string
       responses:
         '200':
           content:
