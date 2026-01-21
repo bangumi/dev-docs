@@ -7771,6 +7771,7 @@ paths:
           required: false
           schema:
             default: 0
+            maximum: 500
             minimum: 0
             type: integer
         - in: path
