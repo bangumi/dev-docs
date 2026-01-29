@@ -2452,6 +2452,10 @@ components:
       type: object
     SubjectNew:
       properties:
+        date:
+          example: '0000-00-00'
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
         infobox:
           minLength: 1
           type: string
@@ -9633,6 +9637,87 @@ paths:
       summary: 获取角色当前的 wiki 信息
       tags:
         - wiki
+    patch:
+      operationId: patchCharacterInfo
+      parameters:
+        - in: path
+          name: characterID
+          required: true
+          schema:
+            minimum: 1
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                character:
+                  additionalProperties: false
+                  properties:
+                    infobox:
+                      minLength: 1
+                      type: string
+                    name:
+                      minLength: 1
+                      type: string
+                    summary:
+                      type: string
+                  type: object
+                commitMessage:
+                  minLength: 1
+                  type: string
+                expectedRevision:
+                  additionalProperties: false
+                  default: {}
+                  properties:
+                    infobox:
+                      minLength: 1
+                      type: string
+                    name:
+                      minLength: 1
+                      type: string
+                    summary:
+                      type: string
+                  type: object
+              required:
+                - commitMessage
+                - expectedRevision
+                - character
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 编辑角色
+      tags:
+        - wiki
   /p1/wiki/characters/{characterID}/history-summary:
     get:
       operationId: characterEditHistorySummary
@@ -10015,6 +10100,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
+      summary: 编辑人物
       tags:
         - wiki
   /p1/wiki/persons/{personID}/history-summary:
@@ -10112,13 +10198,16 @@ paths:
         - wiki
   /p1/wiki/subjects:
     post:
-      description: 创建新条目
       operationId: createNewSubject
       requestBody:
         content:
           application/json:
             schema:
               properties:
+                date:
+                  example: '0000-00-00'
+                  pattern: ^\d{4}-\d{2}-\d{2}$
+                  type: string
                 infobox:
                   minLength: 1
                   type: string
@@ -10182,6 +10271,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
+      summary: 创建新条目
       tags:
         - wiki
   /p1/wiki/subjects/-/revisions/{revisionID}:
