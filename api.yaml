@@ -10994,10 +10994,148 @@ paths:
       summary: 获取人物-条目关联 wiki 历史编辑摘要
       tags:
         - wiki
-  /p1/wiki/recent:
+  /p1/wiki/recent/characters:
+    get:
+      description: 获取最近两天的角色wiki更新
+      operationId: getRecentCharacterWiki
+      parameters:
+        - description: |-
+            unix time stamp, only return last update time >= since
+
+            only allow recent 2 days
+          in: path
+          name: since
+          required: true
+          schema:
+            default: 0
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    createdAt:
+                      type: integer
+                    id:
+                      type: integer
+                  required:
+                    - id
+                    - createdAt
+                  type: object
+                type: array
+          description: Default Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      tags:
+        - wiki
+  /p1/wiki/recent/episodes:
+    get:
+      description: 获取最近两天的章节wiki更新
+      operationId: getRecentEpisodeWiki
+      parameters:
+        - description: |-
+            unix time stamp, only return last update time >= since
+
+            only allow recent 2 days
+          in: path
+          name: since
+          required: true
+          schema:
+            default: 0
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    createdAt:
+                      type: integer
+                    id:
+                      type: integer
+                  required:
+                    - id
+                    - createdAt
+                  type: object
+                type: array
+          description: Default Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      tags:
+        - wiki
+  /p1/wiki/recent/persons:
+    get:
+      description: 获取最近两天的人物wiki更新
+      operationId: getRecentPersonWiki
+      parameters:
+        - description: |-
+            unix time stamp, only return last update time >= since
+
+            only allow recent 2 days
+          in: path
+          name: since
+          required: true
+          schema:
+            default: 0
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    createdAt:
+                      type: integer
+                    id:
+                      type: integer
+                  required:
+                    - id
+                    - createdAt
+                  type: object
+                type: array
+          description: Default Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      tags:
+        - wiki
+  /p1/wiki/recent/subjects:
     get:
       description: 获取最近两天的wiki更新
-      operationId: getRecentWiki
+      operationId: getRecentSubjectWiki
       parameters:
         - description: |-
             unix time stamp, only return last update time >= since
