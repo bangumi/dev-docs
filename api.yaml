@@ -343,8 +343,12 @@ components:
           type: integer
         infobox:
           type: string
+        locked:
+          type: boolean
         name:
           type: string
+        redirect:
+          type: integer
         summary:
           type: string
       required:
@@ -352,6 +356,8 @@ components:
         - name
         - infobox
         - summary
+        - locked
+        - redirect
       type: object
     CollectSubject:
       properties:
@@ -1552,6 +1558,8 @@ components:
           type: integer
         infobox:
           type: string
+        locked:
+          type: boolean
         name:
           type: string
         profession:
@@ -1571,6 +1579,8 @@ components:
             writer:
               type: boolean
           type: object
+        redirect:
+          type: integer
         summary:
           type: string
         typeID:
@@ -1581,6 +1591,8 @@ components:
         - typeID
         - infobox
         - summary
+        - locked
+        - redirect
         - profession
       type: object
     PersonWork:
@@ -3092,6 +3104,8 @@ components:
           type: integer
         infobox:
           type: string
+        locked:
+          type: boolean
         metaTags:
           items:
             type: string
@@ -3101,6 +3115,8 @@ components:
         nsfw:
           type: boolean
         platform:
+          type: integer
+        redirect:
           type: integer
         series:
           type: boolean
@@ -3113,6 +3129,8 @@ components:
         - name
         - typeID
         - infobox
+        - locked
+        - redirect
         - platform
         - availablePlatform
         - metaTags
