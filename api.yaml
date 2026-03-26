@@ -10260,6 +10260,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: default error response type
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
         '500':
           content:
             application/json:
@@ -10384,6 +10390,67 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 获取角色 wiki 历史编辑摘要
+      tags:
+        - wiki
+  /p1/wiki/characters/{characterID}/potraits:
+    post:
+      operationId: uploadCharacterPotrait
+      parameters:
+        - in: path
+          name: characterID
+          required: true
+          schema:
+            minimum: 1
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                img:
+                  description: base64 encoded raw bytes, 4mb size limit on **decoded** size
+                  format: byte
+                  type: string
+              required:
+                - img
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  img:
+                    description: image filename
+                    type: string
+                required:
+                  - img
+                type: object
+          description: Default Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 上传角色肖像
       tags:
         - wiki
   /p1/wiki/characters/{characterID}/subjects/history-summary:
@@ -10829,6 +10896,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: default error response type
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
         '500':
           content:
             application/json:
@@ -10953,6 +11026,67 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 获取人物 wiki 历史编辑摘要
+      tags:
+        - wiki
+  /p1/wiki/persons/{personID}/potraits:
+    post:
+      operationId: uploadPersonPotrait
+      parameters:
+        - in: path
+          name: personID
+          required: true
+          schema:
+            minimum: 1
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                img:
+                  description: base64 encoded raw bytes, 4mb size limit on **decoded** size
+                  format: byte
+                  type: string
+              required:
+                - img
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  img:
+                    description: image filename
+                    type: string
+                required:
+                  - img
+                type: object
+          description: Default Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 上传人物肖像
       tags:
         - wiki
   /p1/wiki/persons/{personID}/subjects/history-summary:
