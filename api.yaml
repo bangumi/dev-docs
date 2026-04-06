@@ -1398,6 +1398,40 @@ components:
         - user
         - createdAt
       type: object
+    PersonEdit:
+      additionalProperties: false
+      properties:
+        infobox:
+          minLength: 1
+          type: string
+        name:
+          minLength: 1
+          type: string
+        profession:
+          properties:
+            actor:
+              type: boolean
+            artist:
+              type: boolean
+            illustrator:
+              type: boolean
+            mangaka:
+              type: boolean
+            producer:
+              type: boolean
+            seiyu:
+              type: boolean
+            writer:
+              type: boolean
+          type: object
+        summary:
+          type: string
+      required:
+        - name
+        - infobox
+        - summary
+        - profession
+      type: object
     PersonImages:
       properties:
         grid:
@@ -1876,19 +1910,19 @@ components:
           - 5 = 条目->角色关联
           - 6 = 条目->声优关联
           - 10 = 条目->人物关联
-         
+
           - 2 = 角色编辑
           - 13 = 角色合体
           - 14 = 角色删除
           - 4 = 角色->条目关联
           - 7 = 角色->声优关联
-         
+
           - 3 = 人物编辑
           - 15 = 人物合体
           - 16 = 人物删除
           - 8 = 人物->声优关联
           - 9 = 人物->条目关联
-         
+
           - 18 = 章节编辑
           - 181 = 章节合体
           - 182 = 章节移动
@@ -10206,6 +10240,12 @@ paths:
             schema:
               additionalProperties: false
               properties:
+                authorID:
+                  description: >-
+                    when header x-admin-token is provided, use this as author
+                    id.
+                  exclusiveMinimum: 0
+                  type: integer
                 character:
                   additionalProperties: false
                   properties:
@@ -10848,6 +10888,12 @@ paths:
             schema:
               additionalProperties: false
               properties:
+                authorID:
+                  description: >-
+                    when header x-admin-token is provided, use this as author
+                    id.
+                  exclusiveMinimum: 0
+                  type: integer
                 commitMessage:
                   minLength: 1
                   type: string
@@ -10873,6 +10919,23 @@ paths:
                     name:
                       minLength: 1
                       type: string
+                    profession:
+                      properties:
+                        actor:
+                          type: boolean
+                        artist:
+                          type: boolean
+                        illustrator:
+                          type: boolean
+                        mangaka:
+                          type: boolean
+                        producer:
+                          type: boolean
+                        seiyu:
+                          type: boolean
+                        writer:
+                          type: boolean
+                      type: object
                     summary:
                       type: string
                   type: object
