@@ -1882,10 +1882,13 @@ components:
           type: integer
         creator:
           properties:
+            nickname:
+              type: string
             username:
               type: string
           required:
             - username
+            - nickname
           type: object
         id:
           type: integer
