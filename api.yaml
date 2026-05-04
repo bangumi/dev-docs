@@ -138,7 +138,7 @@ components:
         redirect:
           type: integer
         role:
-          type: integer
+          $ref: '#/components/schemas/CharacterType'
         summary:
           type: string
       required:
@@ -236,6 +236,45 @@ components:
       x-ms-enum:
         modelAsString: false
         name: CharacterCastType
+    CharacterCreate:
+      additionalProperties: false
+      properties:
+        img:
+          description: base64 encoded raw bytes, 4mb size limit on **decoded** size
+          format: byte
+          type: string
+        infobox:
+          minLength: 1
+          type: string
+        name:
+          minLength: 1
+          type: string
+        summary:
+          type: string
+        type:
+          $ref: '#/components/schemas/CharacterType'
+      required:
+        - name
+        - infobox
+        - summary
+        - type
+      type: object
+    CharacterEdit:
+      additionalProperties: false
+      properties:
+        infobox:
+          minLength: 1
+          type: string
+        name:
+          minLength: 1
+          type: string
+        summary:
+          type: string
+      required:
+        - name
+        - infobox
+        - summary
+      type: object
     CharacterRelation:
       properties:
         character:
@@ -337,6 +376,27 @@ components:
           - order
         type: object
       type: array
+    CharacterType:
+      description: |-
+        角色类型
+          - 1 = 角色
+          - 2 = 机体
+          - 3 = 舰船
+          - 4 = 组织机构
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+      type: integer
+      x-enum-varnames:
+        - Crt
+        - Mecha
+        - Vessel
+        - Org
+      x-ms-enum:
+        modelAsString: false
+        name: CharacterType
     CharacterWikiInfo:
       properties:
         id:
@@ -429,6 +489,8 @@ components:
               type: array
             relatedID:
               type: integer
+            relatedPhotoID:
+              type: integer
             state:
               type: integer
             user:
@@ -467,6 +529,8 @@ components:
             $ref: '#/components/schemas/Reaction'
           type: array
         relatedID:
+          type: integer
+        relatedPhotoID:
           type: integer
         state:
           type: integer
@@ -1247,6 +1311,74 @@ components:
         - password
         - turnstileToken
       type: object
+    MonoPhoto:
+      properties:
+        comment:
+          type: string
+        createdAt:
+          type: integer
+        creatorID:
+          type: integer
+        id:
+          type: integer
+        images:
+          $ref: '#/components/schemas/MonoPhotoImages'
+        lastPost:
+          type: integer
+        mainID:
+          type: integer
+        spoiler:
+          type: boolean
+        tags:
+          items:
+            type: string
+          type: array
+        target:
+          type: string
+        title:
+          type: string
+        type:
+          type: integer
+        updatedAt:
+          type: integer
+        user:
+          $ref: '#/components/schemas/SlimUser'
+      required:
+        - id
+        - type
+        - mainID
+        - creatorID
+        - target
+        - images
+        - title
+        - comment
+        - tags
+        - spoiler
+        - createdAt
+        - updatedAt
+        - lastPost
+      title: MonoPhoto
+      type: object
+    MonoPhotoImages:
+      properties:
+        common:
+          type: string
+        grid:
+          type: string
+        large:
+          type: string
+        medium:
+          type: string
+        small:
+          type: string
+      required:
+        - large
+        - common
+        - medium
+        - small
+        - grid
+      title: MonoPhotoImages
+      type: object
     Notice:
       properties:
         createdAt:
@@ -1322,7 +1454,7 @@ components:
         summary:
           type: string
         type:
-          type: integer
+          $ref: '#/components/schemas/PersonType'
       required:
         - id
         - name
@@ -1397,6 +1529,46 @@ components:
       required:
         - user
         - createdAt
+      type: object
+    PersonCreate:
+      additionalProperties: false
+      properties:
+        img:
+          description: base64 encoded raw bytes, 4mb size limit on **decoded** size
+          format: byte
+          type: string
+        infobox:
+          minLength: 1
+          type: string
+        name:
+          minLength: 1
+          type: string
+        profession:
+          properties:
+            actor:
+              type: boolean
+            artist:
+              type: boolean
+            illustrator:
+              type: boolean
+            mangaka:
+              type: boolean
+            producer:
+              type: boolean
+            seiyu:
+              type: boolean
+            writer:
+              type: boolean
+          type: object
+        summary:
+          type: string
+        type:
+          $ref: '#/components/schemas/PersonType'
+      required:
+        - name
+        - infobox
+        - summary
+        - type
       type: object
     PersonEdit:
       additionalProperties: false
@@ -4003,6 +4175,8 @@ paths:
                           type: array
                         relatedID:
                           type: integer
+                        relatedPhotoID:
+                          type: integer
                         state:
                           type: integer
                         user:
@@ -4464,6 +4638,8 @@ paths:
                           type: array
                         relatedID:
                           type: integer
+                        relatedPhotoID:
+                          type: integer
                         state:
                           type: integer
                         user:
@@ -4606,6 +4782,300 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 获取角色关联的目录
+      tags:
+        - character
+  /p1/characters/{characterID}/photos:
+    get:
+      operationId: getCharacterPhotos
+      parameters:
+        - description: max 100
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 24
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: min 0
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+        - in: path
+          name: characterID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/MonoPhoto'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取角色相册列表
+      tags:
+        - character
+  /p1/characters/{characterID}/photos/preview:
+    get:
+      operationId: getCharacterPhotoPreview
+      parameters:
+        - description: max 20
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 6
+            maximum: 20
+            minimum: 1
+            type: integer
+        - in: path
+          name: characterID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/MonoPhoto'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取角色首页相册预览
+      tags:
+        - character
+  /p1/characters/{characterID}/photos/{photoID}:
+    get:
+      operationId: getCharacterPhoto
+      parameters:
+        - in: path
+          name: characterID
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: photoID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonoPhoto'
+          description: Default Response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取角色相册图片
+      tags:
+        - character
+  /p1/characters/{characterID}/photos/{photoID}/comments:
+    get:
+      operationId: getCharacterPhotoComments
+      parameters:
+        - in: path
+          name: characterID
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: photoID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  allOf:
+                    - properties:
+                        content:
+                          type: string
+                        createdAt:
+                          type: integer
+                        creatorID:
+                          type: integer
+                        id:
+                          type: integer
+                        mainID:
+                          type: integer
+                        reactions:
+                          items:
+                            $ref: '#/components/schemas/Reaction'
+                          type: array
+                        relatedID:
+                          type: integer
+                        relatedPhotoID:
+                          type: integer
+                        state:
+                          type: integer
+                        user:
+                          $ref: '#/components/schemas/SlimUser'
+                      required:
+                        - id
+                        - mainID
+                        - creatorID
+                        - relatedID
+                        - createdAt
+                        - content
+                        - state
+                      type: object
+                    - properties:
+                        replies:
+                          items:
+                            $ref: '#/components/schemas/CommentBase'
+                          type: array
+                      required:
+                        - replies
+                      type: object
+                type: array
+          description: Default Response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取角色相册图片的评论
+      tags:
+        - character
+    post:
+      operationId: createCharacterPhotoComment
+      parameters:
+        - in: path
+          name: characterID
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: photoID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/CreateReply'
+                - $ref: '#/components/schemas/TurnstileToken'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    description: new comment id
+                    type: integer
+                required:
+                  - id
+                type: object
+          description: Default Response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 创建角色相册图片的评论
       tags:
         - character
   /p1/characters/{characterID}/relations:
@@ -5484,6 +5954,8 @@ paths:
                             $ref: '#/components/schemas/Reaction'
                           type: array
                         relatedID:
+                          type: integer
+                        relatedPhotoID:
                           type: integer
                         state:
                           type: integer
@@ -6551,6 +7023,8 @@ paths:
                           type: array
                         relatedID:
                           type: integer
+                        relatedPhotoID:
+                          type: integer
                         state:
                           type: integer
                         user:
@@ -7268,6 +7742,8 @@ paths:
                           type: array
                         relatedID:
                           type: integer
+                        relatedPhotoID:
+                          type: integer
                         state:
                           type: integer
                         user:
@@ -7410,6 +7886,300 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 获取人物关联的目录
+      tags:
+        - person
+  /p1/persons/{personID}/photos:
+    get:
+      operationId: getPersonPhotos
+      parameters:
+        - description: max 100
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 24
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: min 0
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+        - in: path
+          name: personID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/MonoPhoto'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取人物相册列表
+      tags:
+        - person
+  /p1/persons/{personID}/photos/preview:
+    get:
+      operationId: getPersonPhotoPreview
+      parameters:
+        - description: max 20
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 6
+            maximum: 20
+            minimum: 1
+            type: integer
+        - in: path
+          name: personID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/MonoPhoto'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取人物首页相册预览
+      tags:
+        - person
+  /p1/persons/{personID}/photos/{photoID}:
+    get:
+      operationId: getPersonPhoto
+      parameters:
+        - in: path
+          name: personID
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: photoID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonoPhoto'
+          description: Default Response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取人物相册图片
+      tags:
+        - person
+  /p1/persons/{personID}/photos/{photoID}/comments:
+    get:
+      operationId: getPersonPhotoComments
+      parameters:
+        - in: path
+          name: personID
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: photoID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  allOf:
+                    - properties:
+                        content:
+                          type: string
+                        createdAt:
+                          type: integer
+                        creatorID:
+                          type: integer
+                        id:
+                          type: integer
+                        mainID:
+                          type: integer
+                        reactions:
+                          items:
+                            $ref: '#/components/schemas/Reaction'
+                          type: array
+                        relatedID:
+                          type: integer
+                        relatedPhotoID:
+                          type: integer
+                        state:
+                          type: integer
+                        user:
+                          $ref: '#/components/schemas/SlimUser'
+                      required:
+                        - id
+                        - mainID
+                        - creatorID
+                        - relatedID
+                        - createdAt
+                        - content
+                        - state
+                      type: object
+                    - properties:
+                        replies:
+                          items:
+                            $ref: '#/components/schemas/CommentBase'
+                          type: array
+                      required:
+                        - replies
+                      type: object
+                type: array
+          description: Default Response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取人物相册图片的评论
+      tags:
+        - person
+    post:
+      operationId: createPersonPhotoComment
+      parameters:
+        - in: path
+          name: personID
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: photoID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/CreateReply'
+                - $ref: '#/components/schemas/TurnstileToken'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    description: new comment id
+                    type: integer
+                required:
+                  - id
+                type: object
+          description: Default Response
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 创建人物相册图片的评论
       tags:
         - person
   /p1/persons/{personID}/relations:
@@ -9265,6 +10035,8 @@ paths:
                           type: array
                         relatedID:
                           type: integer
+                        relatedPhotoID:
+                          type: integer
                         state:
                           type: integer
                         user:
@@ -10082,6 +10854,85 @@ paths:
       summary: 获取用户时间胶囊
       tags:
         - user
+  /p1/wiki/characters:
+    post:
+      operationId: postCharacterInfo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                authorID:
+                  description: >-
+                    when header x-admin-token is provided, use this as author
+                    id.
+                  exclusiveMinimum: 0
+                  type: integer
+                character:
+                  additionalProperties: false
+                  properties:
+                    img:
+                      description: >-
+                        base64 encoded raw bytes, 4mb size limit on **decoded**
+                        size
+                      format: byte
+                      type: string
+                    infobox:
+                      minLength: 1
+                      type: string
+                    name:
+                      minLength: 1
+                      type: string
+                    summary:
+                      type: string
+                    type:
+                      $ref: '#/components/schemas/CharacterType'
+                  required:
+                    - name
+                    - infobox
+                    - summary
+                    - type
+                  type: object
+              required:
+                - character
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  characterID:
+                    type: integer
+                required:
+                  - characterID
+                type: object
+          description: Default Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 创建角色
+      tags:
+        - wiki
   /p1/wiki/characters/-/casts/revisions/{revisionID}:
     get:
       operationId: getCharacterCastRevisionInfo
@@ -10451,6 +11302,12 @@ paths:
             schema:
               additionalProperties: false
               properties:
+                authorID:
+                  description: >-
+                    when header x-admin-token is provided, use this as author
+                    id.
+                  exclusiveMinimum: 0
+                  type: integer
                 img:
                   description: base64 encoded raw bytes, 4mb size limit on **decoded** size
                   format: byte
@@ -10728,6 +11585,102 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: 意料之外的服务器错误
+      tags:
+        - wiki
+  /p1/wiki/persons:
+    post:
+      operationId: postPersonInfo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                authorID:
+                  description: >-
+                    when header x-admin-token is provided, use this as author
+                    id.
+                  exclusiveMinimum: 0
+                  type: integer
+                person:
+                  additionalProperties: false
+                  properties:
+                    img:
+                      description: >-
+                        base64 encoded raw bytes, 4mb size limit on **decoded**
+                        size
+                      format: byte
+                      type: string
+                    infobox:
+                      minLength: 1
+                      type: string
+                    name:
+                      minLength: 1
+                      type: string
+                    profession:
+                      properties:
+                        actor:
+                          type: boolean
+                        artist:
+                          type: boolean
+                        illustrator:
+                          type: boolean
+                        mangaka:
+                          type: boolean
+                        producer:
+                          type: boolean
+                        seiyu:
+                          type: boolean
+                        writer:
+                          type: boolean
+                      type: object
+                    summary:
+                      type: string
+                    type:
+                      $ref: '#/components/schemas/PersonType'
+                  required:
+                    - name
+                    - infobox
+                    - summary
+                    - type
+                  type: object
+              required:
+                - person
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  personID:
+                    type: integer
+                required:
+                  - personID
+                type: object
+          description: Default Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 创建人物
       tags:
         - wiki
   /p1/wiki/persons/-/casts/revisions/{revisionID}:
@@ -11116,6 +12069,12 @@ paths:
             schema:
               additionalProperties: false
               properties:
+                authorID:
+                  description: >-
+                    when header x-admin-token is provided, use this as author
+                    id.
+                  exclusiveMinimum: 0
+                  type: integer
                 img:
                   description: base64 encoded raw bytes, 4mb size limit on **decoded** size
                   format: byte
@@ -12320,6 +13279,23 @@ paths:
     get:
       operationId: subjectEditHistorySummary
       parameters:
+        - description: max 100
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: min 0
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
         - in: path
           name: subjectID
           required: true
@@ -12331,9 +13307,18 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/RevisionHistory'
-                type: array
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/RevisionHistory'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
           description: Default Response
         '401':
           content:
