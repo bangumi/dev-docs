@@ -11286,9 +11286,9 @@ paths:
       summary: 获取角色 wiki 历史编辑摘要
       tags:
         - wiki
-  /p1/wiki/characters/{characterID}/potraits:
+  /p1/wiki/characters/{characterID}/portraits:
     post:
-      operationId: uploadCharacterPotrait
+      operationId: uploadCharacterPortrait
       parameters:
         - in: path
           name: characterID
@@ -12053,9 +12053,9 @@ paths:
       summary: 获取人物 wiki 历史编辑摘要
       tags:
         - wiki
-  /p1/wiki/persons/{personID}/potraits:
+  /p1/wiki/persons/{personID}/portraits:
     post:
-      operationId: uploadPersonPotrait
+      operationId: uploadPersonPortrait
       parameters:
         - in: path
           name: personID
