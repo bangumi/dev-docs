@@ -2388,6 +2388,7 @@ components:
           medium: https://lain.bgm.tv/pic/cover/m/c9/f0/8_wK0z3.jpg
           small: https://lain.bgm.tv/pic/cover/s/c9/f0/8_wK0z3.jpg
         locked: false
+        metaTags: []
         name: コードギアス 反逆のルルーシュR2
         nameCN: Code Geass 反叛的鲁路修R2
         nsfw: false
@@ -2403,6 +2404,10 @@ components:
           $ref: '#/components/schemas/SlimSubjectInterest'
         locked:
           type: boolean
+        metaTags:
+          items:
+            type: string
+          type: array
         name:
           type: string
         nameCN:
@@ -2419,6 +2424,7 @@ components:
         - nameCN
         - type
         - info
+        - metaTags
         - rating
         - locked
         - nsfw
