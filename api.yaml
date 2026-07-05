@@ -2529,7 +2529,7 @@ components:
           动画制作:
             - v: サンライズ
           官方网站:
-            - v: http://www.geass.jp/r2/
+            - v: https://www.geass.jp/r2/
           导演:
             - v: 谷口悟朗
           摄影监督:
@@ -7483,6 +7483,127 @@ paths:
       summary: 获取未读通知
       tags:
         - misc
+  /p1/passkey/login/options:
+    post:
+      description: |-
+
+        获取 WebAuthn authentication options。
+        不传 credentials 时（usernameless 模式），浏览器将展示系统账户选择器。
+      operationId: passkeyLoginOptions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                credentials:
+                  items:
+                    properties:
+                      credentialId:
+                        type: string
+                      transports:
+                        items:
+                          type: string
+                        type: array
+                    required:
+                      - credentialId
+                    type: object
+                  type: array
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  challenge:
+                    type: string
+                  options: {}
+                  rpId:
+                    type: string
+                required:
+                  - options
+                  - challenge
+                  - rpId
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      summary: 获取 Passkey 登录选项
+      tags:
+        - misc
+  /p1/passkey/login/verify:
+    post:
+      operationId: passkeyLoginVerify
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                challenge:
+                  description: 之前 options 返回的 challenge
+                  type: string
+                credential:
+                  additionalProperties: true
+                  properties:
+                    clientExtensionResults:
+                      additionalProperties: true
+                      properties: {}
+                      type: object
+                    id:
+                      type: string
+                    rawId:
+                      type: string
+                    response:
+                      properties:
+                        authenticatorData:
+                          type: string
+                        clientDataJSON:
+                          type: string
+                        signature:
+                          type: string
+                        userHandle:
+                          type: string
+                      required:
+                        - clientDataJSON
+                        - authenticatorData
+                        - signature
+                      type: object
+                    type:
+                      enum:
+                        - public-key
+                      type: string
+                  required:
+                    - id
+                    - rawId
+                    - type
+                    - response
+                    - clientExtensionResults
+                  type: object
+              required:
+                - challenge
+                - credential
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      summary: 验证 Passkey 登录并签发 session
+      tags:
+        - misc
   /p1/persons/-/comments/{commentID}:
     delete:
       operationId: deletePersonComment
@@ -8323,6 +8444,267 @@ paths:
       summary: 获取人物的参与作品
       tags:
         - person
+  /p1/privacy:
+    get:
+      operationId: getPrivacy
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  preferences:
+                    properties:
+                      allowNsfw:
+                        type: boolean
+                      canSetNsfwSubject:
+                        type: boolean
+                      showNsfwSubject:
+                        type: boolean
+                    required:
+                      - showNsfwSubject
+                      - canSetNsfwSubject
+                      - allowNsfw
+                    type: object
+                  settings:
+                    properties:
+                      commentNotification:
+                        enum:
+                          - all
+                          - friends
+                          - none
+                        type: string
+                      follow:
+                        enum:
+                          - all
+                          - none
+                        type: string
+                      friendNotification:
+                        enum:
+                          - all
+                          - none
+                        type: string
+                      mentionNotification:
+                        enum:
+                          - all
+                          - friends
+                          - none
+                        type: string
+                      privateMessage:
+                        enum:
+                          - all
+                          - friends
+                          - none
+                        type: string
+                      timelineCollectReply:
+                        enum:
+                          - all
+                          - friends
+                          - none
+                        type: string
+                      timelineReply:
+                        enum:
+                          - all
+                          - friends
+                          - none
+                        type: string
+                    required:
+                      - privateMessage
+                      - timelineReply
+                      - timelineCollectReply
+                      - follow
+                      - mentionNotification
+                      - commentNotification
+                      - friendNotification
+                    type: object
+                required:
+                  - settings
+                  - preferences
+                type: object
+          description: Default Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: Get current user privacy settings
+      tags:
+        - user
+    patch:
+      operationId: patchPrivacy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                preferences:
+                  additionalProperties: false
+                  properties:
+                    showNsfwSubject:
+                      type: boolean
+                  type: object
+                settings:
+                  additionalProperties: false
+                  properties:
+                    commentNotification:
+                      enum:
+                        - all
+                        - friends
+                        - none
+                      type: string
+                    follow:
+                      enum:
+                        - all
+                        - none
+                      type: string
+                    friendNotification:
+                      enum:
+                        - all
+                        - none
+                      type: string
+                    mentionNotification:
+                      enum:
+                        - all
+                        - friends
+                        - none
+                      type: string
+                    privateMessage:
+                      enum:
+                        - all
+                        - friends
+                        - none
+                      type: string
+                    timelineCollectReply:
+                      enum:
+                        - all
+                        - friends
+                        - none
+                      type: string
+                    timelineReply:
+                      enum:
+                        - all
+                        - friends
+                        - none
+                      type: string
+                  type: object
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  preferences:
+                    properties:
+                      allowNsfw:
+                        type: boolean
+                      canSetNsfwSubject:
+                        type: boolean
+                      showNsfwSubject:
+                        type: boolean
+                    required:
+                      - showNsfwSubject
+                      - canSetNsfwSubject
+                      - allowNsfw
+                    type: object
+                  settings:
+                    properties:
+                      commentNotification:
+                        enum:
+                          - all
+                          - friends
+                          - none
+                        type: string
+                      follow:
+                        enum:
+                          - all
+                          - none
+                        type: string
+                      friendNotification:
+                        enum:
+                          - all
+                          - none
+                        type: string
+                      mentionNotification:
+                        enum:
+                          - all
+                          - friends
+                          - none
+                        type: string
+                      privateMessage:
+                        enum:
+                          - all
+                          - friends
+                          - none
+                        type: string
+                      timelineCollectReply:
+                        enum:
+                          - all
+                          - friends
+                          - none
+                        type: string
+                      timelineReply:
+                        enum:
+                          - all
+                          - friends
+                          - none
+                        type: string
+                    required:
+                      - privateMessage
+                      - timelineReply
+                      - timelineCollectReply
+                      - follow
+                      - mentionNotification
+                      - commentNotification
+                      - friendNotification
+                    type: object
+                required:
+                  - settings
+                  - preferences
+                type: object
+          description: Default Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: Update current user privacy settings
+      tags:
+        - user
   /p1/report:
     post:
       operationId: createReport
