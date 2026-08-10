@@ -4456,6 +4456,143 @@
           }
         }
       },
+      "ProgressSubject": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SlimSubject"
+          },
+          {
+            "type": "object",
+            "required": [
+              "eps",
+              "volumes",
+              "series",
+              "doing",
+              "airDate",
+              "weekday"
+            ],
+            "properties": {
+              "eps": {
+                "type": "integer"
+              },
+              "volumes": {
+                "type": "integer"
+              },
+              "series": {
+                "type": "boolean"
+              },
+              "doing": {
+                "type": "integer"
+              },
+              "airDate": {
+                "type": "string"
+              },
+              "weekday": {
+                "type": "integer"
+              }
+            }
+          }
+        ]
+      },
+      "ProgressItem": {
+        "type": "object",
+        "required": [
+          "subject",
+          "interest",
+          "percent",
+          "todayOnAir",
+          "lastUnwatchedEp",
+          "eps"
+        ],
+        "properties": {
+          "subject": {
+            "$ref": "#/components/schemas/ProgressSubject"
+          },
+          "interest": {
+            "$ref": "#/components/schemas/SubjectInterest"
+          },
+          "percent": {
+            "type": "number"
+          },
+          "todayOnAir": {
+            "type": "boolean"
+          },
+          "lastUnwatchedEp": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object",
+                "required": [
+                  "id",
+                  "sort"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "sort": {
+                    "type": "number"
+                  }
+                }
+              }
+            ]
+          },
+          "eps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Episode"
+            }
+          }
+        }
+      },
+      "HomeResponse": {
+        "type": "object",
+        "required": [
+          "progress",
+          "timeline",
+          "groupTopics",
+          "famousGroups",
+          "hotSubjectTopics",
+          "calendar"
+        ],
+        "properties": {
+          "progress": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProgressItem"
+            }
+          },
+          "timeline": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Timeline"
+            }
+          },
+          "groupTopics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupTopic"
+            }
+          },
+          "famousGroups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SlimGroup"
+            }
+          },
+          "hotSubjectTopics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubjectTopic"
+            }
+          },
+          "calendar": {
+            "$ref": "#/components/schemas/Calendar"
+          }
+        }
+      },
       "TrendingSubject": {
         "type": "object",
         "required": [
@@ -10004,6 +10141,44 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/home": {
+      "get": {
+        "operationId": "getHome",
+        "summary": "获取首页数据",
+        "tags": [
+          "home"
+        ],
+        "description": "聚合首页所需的全部数据：进度管理、好友时间线、小组话题、热门小组、热门条目讨论与每日放送。根据登录状态分发：未登录时个人区块（进度/时间线/小组话题）为空，仅返回公开区块；已登录时返回全部区块。各个区块独立计算，单个区块失败时返回空数据，不影响其他区块。",
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HomeResponse"
                 }
               }
             }
