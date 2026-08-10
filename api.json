@@ -21,35 +21,17 @@
     "schemas": {
       "CharacterType": {
         "type": "integer",
-        "enum": [
-          1,
-          2,
-          3,
-          4
-        ],
+        "enum": [1, 2, 3, 4],
         "x-ms-enum": {
           "name": "CharacterType",
           "modelAsString": false
         },
-        "x-enum-varnames": [
-          "Crt",
-          "Mecha",
-          "Vessel",
-          "Org"
-        ],
+        "x-enum-varnames": ["Crt", "Mecha", "Vessel", "Org"],
         "description": "角色类型\n  - 1 = 角色\n  - 2 = 机体\n  - 3 = 舰船\n  - 4 = 组织机构"
       },
       "CharacterCastType": {
         "type": "integer",
-        "enum": [
-          0,
-          2,
-          1,
-          3,
-          4,
-          5,
-          6
-        ],
+        "enum": [0, 2, 1, 3, 4, 5, 6],
         "x-ms-enum": {
           "name": "CharacterCastType",
           "modelAsString": false
@@ -67,84 +49,37 @@
       },
       "CollectionType": {
         "type": "integer",
-        "enum": [
-          1,
-          2,
-          3,
-          4,
-          5
-        ],
+        "enum": [1, 2, 3, 4, 5],
         "x-ms-enum": {
           "name": "CollectionType",
           "modelAsString": false
         },
-        "x-enum-varnames": [
-          "Wish",
-          "Collect",
-          "Doing",
-          "OnHold",
-          "Dropped"
-        ],
+        "x-enum-varnames": ["Wish", "Collect", "Doing", "OnHold", "Dropped"],
         "description": "条目收藏状态\n  - 1 = 想看\n  - 2 = 看过\n  - 3 = 在看\n  - 4 = 搁置\n  - 5 = 抛弃"
       },
       "EpisodeCollectionStatus": {
         "type": "integer",
-        "enum": [
-          0,
-          1,
-          2,
-          3
-        ],
+        "enum": [0, 1, 2, 3],
         "x-ms-enum": {
           "name": "EpisodeCollectionStatus",
           "modelAsString": false
         },
-        "x-enum-varnames": [
-          "None",
-          "Wish",
-          "Done",
-          "Dropped"
-        ],
+        "x-enum-varnames": ["None", "Wish", "Done", "Dropped"],
         "description": "章节收藏状态\n  - 0 = 撤消/删除\n  - 1 = 想看\n  - 2 = 看过\n  - 3 = 抛弃"
       },
       "EpisodeType": {
         "type": "integer",
-        "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6
-        ],
+        "enum": [0, 1, 2, 3, 4, 5, 6],
         "x-ms-enum": {
           "name": "EpisodeType",
           "modelAsString": false
         },
-        "x-enum-varnames": [
-          "Normal",
-          "Special",
-          "OP",
-          "ED",
-          "Pre",
-          "MAD",
-          "Other"
-        ],
+        "x-enum-varnames": ["Normal", "Special", "OP", "ED", "Pre", "MAD", "Other"],
         "description": "话数类型\n  - 0 = 本篇\n  - 1 = 特别篇\n  - 2 = OP\n  - 3 = ED\n  - 4 = 预告/宣传/广告\n  - 5 = MAD\n  - 6 = 其他"
       },
       "EpisodeWikiInfo": {
         "type": "object",
-        "required": [
-          "id",
-          "subjectID",
-          "name",
-          "nameCN",
-          "type",
-          "ep",
-          "duration",
-          "summary"
-        ],
+        "required": ["id", "subjectID", "name", "nameCN", "type", "ep", "duration", "summary"],
         "properties": {
           "id": {
             "type": "integer"
@@ -184,39 +119,17 @@
       },
       "GroupMemberRole": {
         "type": "integer",
-        "enum": [
-          -2,
-          -1,
-          0,
-          1,
-          2,
-          3
-        ],
+        "enum": [-2, -1, 0, 1, 2, 3],
         "x-ms-enum": {
           "name": "GroupMemberRole",
           "modelAsString": false
         },
-        "x-enum-varnames": [
-          "Visitor",
-          "Guest",
-          "Member",
-          "Creator",
-          "Moderator",
-          "Blocked"
-        ],
+        "x-enum-varnames": ["Visitor", "Guest", "Member", "Creator", "Moderator", "Blocked"],
         "description": "小组成员角色\n  - -2 = 访客\n  - -1 = 游客\n  - 0 = 小组成员\n  - 1 = 小组长\n  - 2 = 小组管理员\n  - 3 = 禁言成员"
       },
       "IndexRelatedCategory": {
         "type": "integer",
-        "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6
-        ],
+        "enum": [0, 1, 2, 3, 4, 5, 6],
         "x-ms-enum": {
           "name": "IndexRelatedCategory",
           "modelAsString": false
@@ -234,54 +147,27 @@
       },
       "IndexType": {
         "type": "integer",
-        "enum": [
-          0,
-          1,
-          2
-        ],
+        "enum": [0, 1, 2],
         "x-ms-enum": {
           "name": "IndexType",
           "modelAsString": false
         },
-        "x-enum-varnames": [
-          "User",
-          "Public",
-          "Award"
-        ],
+        "x-enum-varnames": ["User", "Public", "Award"],
         "description": "目录类型\n  - 0 = 用户\n  - 1 = 公共\n  - 2 = TBA"
       },
       "PersonType": {
         "type": "integer",
-        "enum": [
-          1,
-          2,
-          3
-        ],
+        "enum": [1, 2, 3],
         "x-ms-enum": {
           "name": "PersonType",
           "modelAsString": false
         },
-        "x-enum-varnames": [
-          "Individual",
-          "Company",
-          "Group"
-        ],
+        "x-enum-varnames": ["Individual", "Company", "Group"],
         "description": "人物类型\n  - 1 = 个人\n  - 2 = 公司\n  - 3 = 组合"
       },
       "ReportReason": {
         "type": "integer",
-        "enum": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          99
-        ],
+        "enum": [1, 2, 3, 4, 5, 6, 7, 8, 9, 99],
         "x-ms-enum": {
           "name": "ReportReason",
           "modelAsString": false
@@ -302,22 +188,7 @@
       },
       "ReportType": {
         "type": "integer",
-        "enum": [
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19
-        ],
+        "enum": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
         "x-ms-enum": {
           "name": "ReportType",
           "modelAsString": false
@@ -343,31 +214,8 @@
       "RevisionType": {
         "type": "integer",
         "enum": [
-          1,
-          103,
-          104,
-          11,
-          12,
-          17,
-          5,
-          6,
-          10,
-          2,
-          13,
-          14,
-          4,
-          7,
-          3,
-          15,
-          16,
-          8,
-          9,
-          18,
-          181,
-          182,
-          183,
-          184,
-          185
+          1, 103, 104, 11, 12, 17, 5, 6, 10, 2, 13, 14, 4, 7, 3, 15, 16, 8, 9, 18, 181, 182, 183,
+          184, 185
         ],
         "x-ms-enum": {
           "name": "RevisionType",
@@ -404,39 +252,17 @@
       },
       "SubjectType": {
         "type": "integer",
-        "enum": [
-          1,
-          2,
-          3,
-          4,
-          6
-        ],
+        "enum": [1, 2, 3, 4, 6],
         "x-ms-enum": {
           "name": "SubjectType",
           "modelAsString": false
         },
-        "x-enum-varnames": [
-          "Book",
-          "Anime",
-          "Music",
-          "Game",
-          "Real"
-        ],
+        "x-enum-varnames": ["Book", "Anime", "Music", "Game", "Real"],
         "description": "条目类型\n  - 1 = 书籍\n  - 2 = 动画\n  - 3 = 音乐\n  - 4 = 游戏\n  - 6 = 三次元\n\n  没有 5"
       },
       "TimelineCat": {
         "type": "integer",
-        "enum": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9
-        ],
+        "enum": [1, 2, 3, 4, 5, 6, 7, 8, 9],
         "x-ms-enum": {
           "name": "TimelineCat",
           "modelAsString": false
@@ -456,12 +282,7 @@
       },
       "CharacterCreate": {
         "type": "object",
-        "required": [
-          "name",
-          "infobox",
-          "summary",
-          "type"
-        ],
+        "required": ["name", "infobox", "summary", "type"],
         "properties": {
           "name": {
             "type": "string",
@@ -487,11 +308,7 @@
       },
       "CharacterEdit": {
         "type": "object",
-        "required": [
-          "name",
-          "infobox",
-          "summary"
-        ],
+        "required": ["name", "infobox", "summary"],
         "properties": {
           "name": {
             "type": "string",
@@ -551,9 +368,7 @@
       },
       "CreateContent": {
         "type": "object",
-        "required": [
-          "content"
-        ],
+        "required": ["content"],
         "properties": {
           "content": {
             "type": "string",
@@ -563,10 +378,7 @@
       },
       "CreateIndex": {
         "type": "object",
-        "required": [
-          "title",
-          "desc"
-        ],
+        "required": ["title", "desc"],
         "properties": {
           "title": {
             "type": "string",
@@ -587,10 +399,7 @@
       },
       "CreateIndexRelated": {
         "type": "object",
-        "required": [
-          "cat",
-          "sid"
-        ],
+        "required": ["cat", "sid"],
         "properties": {
           "cat": {
             "$ref": "#/components/schemas/IndexRelatedCategory"
@@ -612,9 +421,7 @@
       },
       "CreateReply": {
         "type": "object",
-        "required": [
-          "content"
-        ],
+        "required": ["content"],
         "properties": {
           "content": {
             "type": "string",
@@ -629,11 +436,7 @@
       },
       "CreateReport": {
         "type": "object",
-        "required": [
-          "type",
-          "id",
-          "value"
-        ],
+        "required": ["type", "id", "value"],
         "properties": {
           "type": {
             "$ref": "#/components/schemas/ReportType"
@@ -656,10 +459,7 @@
       },
       "CreateTopic": {
         "type": "object",
-        "required": [
-          "title",
-          "content"
-        ],
+        "required": ["title", "content"],
         "properties": {
           "title": {
             "type": "string",
@@ -674,78 +474,43 @@
       },
       "FilterMode": {
         "type": "string",
-        "enum": [
-          "all",
-          "friends"
-        ],
+        "enum": ["all", "friends"],
         "x-ms-enum": {
           "name": "FilterMode",
           "modelAsString": true
         },
-        "x-enum-varnames": [
-          "All",
-          "Friends"
-        ],
+        "x-enum-varnames": ["All", "Friends"],
         "description": "过滤模式\n  - all = 全站\n  - friends = 好友"
       },
       "GroupFilterMode": {
         "type": "string",
-        "enum": [
-          "all",
-          "joined",
-          "managed"
-        ],
+        "enum": ["all", "joined", "managed"],
         "x-ms-enum": {
           "name": "GroupFilterMode",
           "modelAsString": true
         },
-        "x-enum-varnames": [
-          "All",
-          "Joined",
-          "Managed"
-        ],
+        "x-enum-varnames": ["All", "Joined", "Managed"],
         "description": "小组过滤模式\n  - all = 所有小组\n  - joined = 我加入的小组\n  - managed = 我管理的小组"
       },
       "GroupSort": {
         "type": "string",
-        "enum": [
-          "posts",
-          "topics",
-          "members",
-          "created",
-          "updated"
-        ],
+        "enum": ["posts", "topics", "members", "created", "updated"],
         "default": "created",
         "description": "小组排序方式\n  - posts = 帖子数\n  - topics = 主题数\n  - members = 成员数\n  - created = 创建时间\n  - updated = 最新讨论"
       },
       "GroupTopicFilterMode": {
         "type": "string",
-        "enum": [
-          "all",
-          "joined",
-          "created",
-          "replied"
-        ],
+        "enum": ["all", "joined", "created", "replied"],
         "x-ms-enum": {
           "name": "GroupTopicFilterMode",
           "modelAsString": true
         },
-        "x-enum-varnames": [
-          "All",
-          "Joined",
-          "Created",
-          "Replied"
-        ],
+        "x-enum-varnames": ["All", "Joined", "Created", "Replied"],
         "description": "小组话题过滤模式\n  - all = 全站\n  - joined = 已加入\n  - created = 我创建的\n  - replied = 我回复的"
       },
       "PersonCreate": {
         "type": "object",
-        "required": [
-          "name",
-          "infobox",
-          "summary",
-          "type"
-        ],
+        "required": ["name", "infobox", "summary", "type"],
         "properties": {
           "name": {
             "type": "string",
@@ -797,12 +562,7 @@
       },
       "PersonEdit": {
         "type": "object",
-        "required": [
-          "name",
-          "infobox",
-          "summary",
-          "profession"
-        ],
+        "required": ["name", "infobox", "summary", "profession"],
         "properties": {
           "name": {
             "type": "string",
@@ -859,9 +619,7 @@
       },
       "SearchCharacter": {
         "type": "object",
-        "required": [
-          "keyword"
-        ],
+        "required": ["keyword"],
         "properties": {
           "keyword": {
             "type": "string",
@@ -874,9 +632,7 @@
       },
       "SearchPerson": {
         "type": "object",
-        "required": [
-          "keyword"
-        ],
+        "required": ["keyword"],
         "properties": {
           "keyword": {
             "type": "string",
@@ -889,9 +645,7 @@
       },
       "SearchSubject": {
         "type": "object",
-        "required": [
-          "keyword"
-        ],
+        "required": ["keyword"],
         "properties": {
           "keyword": {
             "type": "string",
@@ -907,25 +661,13 @@
       },
       "SubjectBrowseSort": {
         "type": "string",
-        "enum": [
-          "rank",
-          "trends",
-          "collects",
-          "date",
-          "title"
-        ],
+        "enum": ["rank", "trends", "collects", "date", "title"],
         "default": "rank",
         "x-ms-enum": {
           "name": "SubjectBrowseSort",
           "modelAsString": true
         },
-        "x-enum-varnames": [
-          "Rank",
-          "Trends",
-          "Collects",
-          "Date",
-          "Title"
-        ],
+        "x-enum-varnames": ["Rank", "Trends", "Collects", "Date", "Title"],
         "description": "条目浏览排序方式\n  - rank = 排名\n  - trends = 热度\n  - collects = 收藏数\n  - date = 发布日期\n  - title = 标题"
       },
       "SubjectSearchFilter": {
@@ -985,30 +727,18 @@
       },
       "SubjectSearchSort": {
         "type": "string",
-        "enum": [
-          "match",
-          "heat",
-          "rank",
-          "score"
-        ],
+        "enum": ["match", "heat", "rank", "score"],
         "default": "match",
         "x-ms-enum": {
           "name": "SubjectSearchSort",
           "modelAsString": true
         },
-        "x-enum-varnames": [
-          "Match",
-          "Heat",
-          "Rank",
-          "Score"
-        ],
+        "x-enum-varnames": ["Match", "Heat", "Rank", "Score"],
         "description": "条目搜索排序方式\n  - match = 匹配程度\n  - heat = 收藏人数\n  - rank = 排名由高到低\n  - score = 评分"
       },
       "TurnstileToken": {
         "type": "object",
-        "required": [
-          "turnstileToken"
-        ],
+        "required": ["turnstileToken"],
         "properties": {
           "turnstileToken": {
             "type": "string",
@@ -1018,9 +748,7 @@
       },
       "UpdateContent": {
         "type": "object",
-        "required": [
-          "content"
-        ],
+        "required": ["content"],
         "properties": {
           "content": {
             "type": "string",
@@ -1062,10 +790,7 @@
       },
       "UpdateIndexRelated": {
         "type": "object",
-        "required": [
-          "order",
-          "comment"
-        ],
+        "required": ["order", "comment"],
         "properties": {
           "order": {
             "type": "integer"
@@ -1093,10 +818,7 @@
       },
       "UpdateTopic": {
         "type": "object",
-        "required": [
-          "title",
-          "content"
-        ],
+        "required": ["title", "content"],
         "properties": {
           "title": {
             "type": "string",
@@ -1111,11 +833,7 @@
       },
       "Avatar": {
         "type": "object",
-        "required": [
-          "small",
-          "medium",
-          "large"
-        ],
+        "required": ["small", "medium", "large"],
         "properties": {
           "small": {
             "type": "string"
@@ -1203,13 +921,7 @@
       },
       "BlogPhoto": {
         "type": "object",
-        "required": [
-          "id",
-          "target",
-          "icon",
-          "vote",
-          "createdAt"
-        ],
+        "required": ["id", "target", "icon", "vote", "createdAt"],
         "properties": {
           "id": {
             "type": "integer"
@@ -1293,10 +1005,7 @@
       },
       "InfoboxItem": {
         "type": "object",
-        "required": [
-          "key",
-          "values"
-        ],
+        "required": ["key", "values"],
         "properties": {
           "key": {
             "type": "string"
@@ -1305,9 +1014,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": [
-                "v"
-              ],
+              "required": ["v"],
               "properties": {
                 "k": {
                   "type": "string"
@@ -1324,9 +1031,7 @@
       },
       "InfoboxValue": {
         "type": "object",
-        "required": [
-          "v"
-        ],
+        "required": ["v"],
         "properties": {
           "k": {
             "type": "string"
@@ -1339,11 +1044,7 @@
       },
       "CharacterCast": {
         "type": "object",
-        "required": [
-          "person",
-          "relation",
-          "summary"
-        ],
+        "required": ["person", "relation", "summary"],
         "properties": {
           "person": {
             "$ref": "#/components/schemas/SlimPerson"
@@ -1358,13 +1059,7 @@
       },
       "CharacterRelation": {
         "type": "object",
-        "required": [
-          "character",
-          "relation",
-          "spoiler",
-          "ended",
-          "comment"
-        ],
+        "required": ["character", "relation", "spoiler", "ended", "comment"],
         "properties": {
           "character": {
             "$ref": "#/components/schemas/SlimCharacter"
@@ -1385,12 +1080,7 @@
       },
       "CharacterRevisionWikiInfo": {
         "type": "object",
-        "required": [
-          "name",
-          "infobox",
-          "summary",
-          "extra"
-        ],
+        "required": ["name", "infobox", "summary", "extra"],
         "properties": {
           "name": {
             "type": "string"
@@ -1413,11 +1103,7 @@
       },
       "CharacterSubject": {
         "type": "object",
-        "required": [
-          "subject",
-          "casts",
-          "type"
-        ],
+        "required": ["subject", "casts", "type"],
         "properties": {
           "subject": {
             "$ref": "#/components/schemas/SlimSubject"
@@ -1435,10 +1121,7 @@
       },
       "CharacterSubjectRelation": {
         "type": "object",
-        "required": [
-          "subject",
-          "type"
-        ],
+        "required": ["subject", "type"],
         "properties": {
           "subject": {
             "$ref": "#/components/schemas/SlimSubject"
@@ -1450,14 +1133,7 @@
       },
       "CharacterWikiInfo": {
         "type": "object",
-        "required": [
-          "id",
-          "name",
-          "infobox",
-          "summary",
-          "locked",
-          "redirect"
-        ],
+        "required": ["id", "name", "infobox", "summary", "locked", "redirect"],
         "properties": {
           "id": {
             "type": "integer"
@@ -1483,15 +1159,7 @@
         "allOf": [
           {
             "type": "object",
-            "required": [
-              "id",
-              "mainID",
-              "creatorID",
-              "relatedID",
-              "createdAt",
-              "content",
-              "state"
-            ],
+            "required": ["id", "mainID", "creatorID", "relatedID", "createdAt", "content", "state"],
             "properties": {
               "id": {
                 "type": "integer"
@@ -1530,9 +1198,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "replies"
-            ],
+            "required": ["replies"],
             "properties": {
               "replies": {
                 "type": "array",
@@ -1546,15 +1212,7 @@
       },
       "CommentBase": {
         "type": "object",
-        "required": [
-          "id",
-          "mainID",
-          "creatorID",
-          "relatedID",
-          "createdAt",
-          "content",
-          "state"
-        ],
+        "required": ["id", "mainID", "creatorID", "relatedID", "createdAt", "content", "state"],
         "properties": {
           "id": {
             "type": "integer"
@@ -1645,9 +1303,7 @@
           },
           "collection": {
             "type": "object",
-            "required": [
-              "status"
-            ],
+            "required": ["status"],
             "properties": {
               "status": {
                 "$ref": "#/components/schemas/EpisodeCollectionStatus"
@@ -1662,12 +1318,7 @@
       },
       "ErrorResponse": {
         "type": "object",
-        "required": [
-          "code",
-          "error",
-          "message",
-          "statusCode"
-        ],
+        "required": ["code", "error", "message", "statusCode"],
         "properties": {
           "code": {
             "type": "string"
@@ -1686,12 +1337,7 @@
       },
       "Friend": {
         "type": "object",
-        "required": [
-          "user",
-          "grade",
-          "createdAt",
-          "description"
-        ],
+        "required": ["user", "grade", "createdAt", "description"],
         "properties": {
           "user": {
             "$ref": "#/components/schemas/SlimUser"
@@ -1776,11 +1422,7 @@
       },
       "GroupMember": {
         "type": "object",
-        "required": [
-          "uid",
-          "role",
-          "joinedAt"
-        ],
+        "required": ["uid", "role", "joinedAt"],
         "properties": {
           "uid": {
             "type": "integer"
@@ -1804,10 +1446,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "group",
-              "replies"
-            ],
+            "required": ["group", "replies"],
             "properties": {
               "group": {
                 "$ref": "#/components/schemas/SlimGroup"
@@ -1891,17 +1530,7 @@
       },
       "IndexRelated": {
         "type": "object",
-        "required": [
-          "id",
-          "cat",
-          "rid",
-          "type",
-          "sid",
-          "order",
-          "comment",
-          "award",
-          "createdAt"
-        ],
+        "required": ["id", "cat", "rid", "type", "sid", "order", "comment", "award", "createdAt"],
         "properties": {
           "id": {
             "type": "integer"
@@ -1956,9 +1585,7 @@
       },
       "IndexStats": {
         "type": "object",
-        "required": [
-          "subject"
-        ],
+        "required": ["subject"],
         "properties": {
           "subject": {
             "type": "object",
@@ -2005,10 +1632,7 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "key",
-            "values"
-          ],
+          "required": ["key", "values"],
           "properties": {
             "key": {
               "type": "string"
@@ -2017,9 +1641,7 @@
               "type": "array",
               "items": {
                 "type": "object",
-                "required": [
-                  "v"
-                ],
+                "required": ["v"],
                 "properties": {
                   "k": {
                     "type": "string"
@@ -2104,13 +1726,7 @@
       },
       "MonoPhotoImages": {
         "type": "object",
-        "required": [
-          "large",
-          "common",
-          "medium",
-          "small",
-          "grid"
-        ],
+        "required": ["large", "common", "medium", "small", "grid"],
         "properties": {
           "large": {
             "type": "string"
@@ -2132,16 +1748,7 @@
       },
       "Notice": {
         "type": "object",
-        "required": [
-          "id",
-          "type",
-          "sender",
-          "title",
-          "mainID",
-          "relatedID",
-          "createdAt",
-          "unread"
-        ],
+        "required": ["id", "type", "sender", "title", "mainID", "relatedID", "createdAt", "unread"],
         "properties": {
           "id": {
             "type": "integer"
@@ -2175,9 +1782,7 @@
       },
       "Permissions": {
         "type": "object",
-        "required": [
-          "subjectWikiEdit"
-        ],
+        "required": ["subjectWikiEdit"],
         "properties": {
           "subjectWikiEdit": {
             "type": "boolean"
@@ -2258,10 +1863,7 @@
       },
       "PersonCharacter": {
         "type": "object",
-        "required": [
-          "character",
-          "relations"
-        ],
+        "required": ["character", "relations"],
         "properties": {
           "character": {
             "$ref": "#/components/schemas/SlimCharacter"
@@ -2276,10 +1878,7 @@
       },
       "PersonCollect": {
         "type": "object",
-        "required": [
-          "user",
-          "createdAt"
-        ],
+        "required": ["user", "createdAt"],
         "properties": {
           "user": {
             "$ref": "#/components/schemas/SlimUser"
@@ -2291,12 +1890,7 @@
       },
       "PersonImages": {
         "type": "object",
-        "required": [
-          "large",
-          "medium",
-          "small",
-          "grid"
-        ],
+        "required": ["large", "medium", "small", "grid"],
         "properties": {
           "large": {
             "type": "string"
@@ -2315,13 +1909,7 @@
       },
       "PersonRelation": {
         "type": "object",
-        "required": [
-          "person",
-          "relation",
-          "spoiler",
-          "ended",
-          "comment"
-        ],
+        "required": ["person", "relation", "spoiler", "ended", "comment"],
         "properties": {
           "person": {
             "$ref": "#/components/schemas/SlimPerson"
@@ -2342,11 +1930,7 @@
       },
       "PersonRelationType": {
         "type": "object",
-        "required": [
-          "id",
-          "cn",
-          "desc"
-        ],
+        "required": ["id", "cn", "desc"],
         "properties": {
           "id": {
             "type": "integer"
@@ -2370,13 +1954,7 @@
       },
       "PersonRevisionWikiInfo": {
         "type": "object",
-        "required": [
-          "name",
-          "infobox",
-          "summary",
-          "profession",
-          "extra"
-        ],
+        "required": ["name", "infobox", "summary", "profession", "extra"],
         "properties": {
           "name": {
             "type": "string"
@@ -2487,10 +2065,7 @@
       },
       "PersonWork": {
         "type": "object",
-        "required": [
-          "subject",
-          "positions"
-        ],
+        "required": ["subject", "positions"],
         "properties": {
           "subject": {
             "$ref": "#/components/schemas/SlimSubject"
@@ -2505,15 +2080,7 @@
       },
       "Post": {
         "type": "object",
-        "required": [
-          "id",
-          "creatorID",
-          "creator",
-          "createdAt",
-          "content",
-          "state",
-          "topic"
-        ],
+        "required": ["id", "creatorID", "creator", "createdAt", "content", "state", "topic"],
         "properties": {
           "id": {
             "type": "integer"
@@ -2589,10 +2156,7 @@
       },
       "Reaction": {
         "type": "object",
-        "required": [
-          "users",
-          "value"
-        ],
+        "required": ["users", "value"],
         "properties": {
           "users": {
             "type": "array",
@@ -2613,9 +2177,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "replies"
-            ],
+            "required": ["replies"],
             "properties": {
               "replies": {
                 "type": "array",
@@ -2630,13 +2192,7 @@
       },
       "ReplyBase": {
         "type": "object",
-        "required": [
-          "id",
-          "creatorID",
-          "createdAt",
-          "content",
-          "state"
-        ],
+        "required": ["id", "creatorID", "createdAt", "content", "state"],
         "properties": {
           "id": {
             "type": "integer"
@@ -2667,23 +2223,14 @@
       },
       "RevisionHistory": {
         "type": "object",
-        "required": [
-          "id",
-          "creator",
-          "type",
-          "commitMessage",
-          "createdAt"
-        ],
+        "required": ["id", "creator", "type", "commitMessage", "createdAt"],
         "properties": {
           "id": {
             "type": "integer"
           },
           "creator": {
             "type": "object",
-            "required": [
-              "username",
-              "nickname"
-            ],
+            "required": ["username", "nickname"],
             "properties": {
               "username": {
                 "type": "string"
@@ -2707,11 +2254,7 @@
       },
       "SimpleUser": {
         "type": "object",
-        "required": [
-          "id",
-          "username",
-          "nickname"
-        ],
+        "required": ["id", "username", "nickname"],
         "properties": {
           "id": {
             "type": "integer"
@@ -2778,16 +2321,7 @@
       },
       "SlimCharacter": {
         "type": "object",
-        "required": [
-          "id",
-          "name",
-          "nameCN",
-          "role",
-          "info",
-          "comment",
-          "lock",
-          "nsfw"
-        ],
+        "required": ["id", "name", "nameCN", "role", "info", "comment", "lock", "nsfw"],
         "properties": {
           "id": {
             "type": "integer"
@@ -2912,17 +2446,7 @@
       },
       "SlimPerson": {
         "type": "object",
-        "required": [
-          "id",
-          "name",
-          "nameCN",
-          "type",
-          "info",
-          "career",
-          "comment",
-          "lock",
-          "nsfw"
-        ],
+        "required": ["id", "name", "nameCN", "type", "info", "career", "comment", "lock", "nsfw"],
         "properties": {
           "id": {
             "type": "integer"
@@ -3033,14 +2557,7 @@
       },
       "SlimSubjectInterest": {
         "type": "object",
-        "required": [
-          "id",
-          "rate",
-          "type",
-          "comment",
-          "tags",
-          "updatedAt"
-        ],
+        "required": ["id", "rate", "type", "comment", "tags", "updatedAt"],
         "properties": {
           "id": {
             "type": "integer"
@@ -3068,15 +2585,7 @@
       },
       "SlimUser": {
         "type": "object",
-        "required": [
-          "id",
-          "username",
-          "nickname",
-          "avatar",
-          "group",
-          "sign",
-          "joinedAt"
-        ],
+        "required": ["id", "username", "nickname", "avatar", "group", "sign", "joinedAt"],
         "properties": {
           "id": {
             "type": "integer",
@@ -3372,18 +2881,7 @@
             "wikiTpl": "TVAnime"
           },
           "rating": {
-            "count": [
-              44,
-              15,
-              32,
-              66,
-              145,
-              457,
-              1472,
-              3190,
-              2640,
-              1377
-            ],
+            "count": [44, 15, 32, 66, 145, 457, 1472, 3190, 2640, 1377],
             "score": 8.19,
             "total": 9438
           },
@@ -3397,12 +2895,7 @@
       },
       "SubjectAirtime": {
         "type": "object",
-        "required": [
-          "date",
-          "month",
-          "weekday",
-          "year"
-        ],
+        "required": ["date", "month", "weekday", "year"],
         "properties": {
           "date": {
             "type": "string"
@@ -3421,12 +2914,7 @@
       },
       "SubjectCharacter": {
         "type": "object",
-        "required": [
-          "character",
-          "casts",
-          "type",
-          "order"
-        ],
+        "required": ["character", "casts", "type", "order"],
         "properties": {
           "character": {
             "$ref": "#/components/schemas/SlimCharacter"
@@ -3447,10 +2935,7 @@
       },
       "SubjectCollect": {
         "type": "object",
-        "required": [
-          "user",
-          "interest"
-        ],
+        "required": ["user", "interest"],
         "properties": {
           "user": {
             "$ref": "#/components/schemas/SlimUser"
@@ -3470,13 +2955,7 @@
       },
       "SubjectImages": {
         "type": "object",
-        "required": [
-          "large",
-          "common",
-          "medium",
-          "small",
-          "grid"
-        ],
+        "required": ["large", "common", "medium", "small", "grid"],
         "properties": {
           "large": {
             "type": "string"
@@ -3545,14 +3024,7 @@
       },
       "SubjectInterestComment": {
         "type": "object",
-        "required": [
-          "id",
-          "user",
-          "type",
-          "rate",
-          "comment",
-          "updatedAt"
-        ],
+        "required": ["id", "user", "type", "rate", "comment", "updatedAt"],
         "properties": {
           "id": {
             "type": "integer"
@@ -3583,12 +3055,7 @@
       },
       "SubjectPlatform": {
         "type": "object",
-        "required": [
-          "id",
-          "type",
-          "typeCN",
-          "alias"
-        ],
+        "required": ["id", "type", "typeCN", "alias"],
         "properties": {
           "id": {
             "type": "integer"
@@ -3625,10 +3092,7 @@
       },
       "SubjectPosition": {
         "type": "object",
-        "required": [
-          "position",
-          "staffs"
-        ],
+        "required": ["position", "staffs"],
         "properties": {
           "position": {
             "$ref": "#/components/schemas/SubjectStaffPositionType"
@@ -3643,11 +3107,7 @@
       },
       "SubjectPositionStaff": {
         "type": "object",
-        "required": [
-          "person",
-          "summary",
-          "appearEps"
-        ],
+        "required": ["person", "summary", "appearEps"],
         "properties": {
           "person": {
             "$ref": "#/components/schemas/SlimPerson"
@@ -3662,12 +3122,7 @@
       },
       "SubjectRating": {
         "type": "object",
-        "required": [
-          "rank",
-          "count",
-          "score",
-          "total"
-        ],
+        "required": ["rank", "count", "score", "total"],
         "properties": {
           "rank": {
             "type": "integer"
@@ -3689,11 +3144,7 @@
       },
       "SubjectRec": {
         "type": "object",
-        "required": [
-          "subject",
-          "sim",
-          "count"
-        ],
+        "required": ["subject", "sim", "count"],
         "properties": {
           "subject": {
             "$ref": "#/components/schemas/SlimSubject"
@@ -3709,11 +3160,7 @@
       },
       "SubjectRelation": {
         "type": "object",
-        "required": [
-          "subject",
-          "relation",
-          "order"
-        ],
+        "required": ["subject", "relation", "order"],
         "properties": {
           "subject": {
             "$ref": "#/components/schemas/SlimSubject"
@@ -3728,13 +3175,7 @@
       },
       "SubjectRelationType": {
         "type": "object",
-        "required": [
-          "id",
-          "en",
-          "cn",
-          "jp",
-          "desc"
-        ],
+        "required": ["id", "en", "cn", "jp", "desc"],
         "properties": {
           "id": {
             "type": "integer"
@@ -3755,11 +3196,7 @@
       },
       "SubjectReview": {
         "type": "object",
-        "required": [
-          "id",
-          "user",
-          "entry"
-        ],
+        "required": ["id", "user", "entry"],
         "properties": {
           "id": {
             "type": "integer"
@@ -3775,10 +3212,7 @@
       },
       "SubjectStaff": {
         "type": "object",
-        "required": [
-          "staff",
-          "positions"
-        ],
+        "required": ["staff", "positions"],
         "properties": {
           "staff": {
             "$ref": "#/components/schemas/SlimPerson"
@@ -3793,11 +3227,7 @@
       },
       "SubjectStaffPosition": {
         "type": "object",
-        "required": [
-          "type",
-          "summary",
-          "appearEps"
-        ],
+        "required": ["type", "summary", "appearEps"],
         "properties": {
           "type": {
             "$ref": "#/components/schemas/SubjectStaffPositionType"
@@ -3812,12 +3242,7 @@
       },
       "SubjectStaffPositionType": {
         "type": "object",
-        "required": [
-          "id",
-          "en",
-          "cn",
-          "jp"
-        ],
+        "required": ["id", "en", "cn", "jp"],
         "properties": {
           "id": {
             "type": "integer"
@@ -3835,10 +3260,7 @@
       },
       "SubjectTag": {
         "type": "object",
-        "required": [
-          "name",
-          "count"
-        ],
+        "required": ["name", "count"],
         "properties": {
           "name": {
             "type": "string"
@@ -3856,10 +3278,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "subject",
-              "replies"
-            ],
+            "required": ["subject", "replies"],
             "properties": {
               "subject": {
                 "$ref": "#/components/schemas/SlimSubject"
@@ -3877,17 +3296,7 @@
       },
       "Timeline": {
         "type": "object",
-        "required": [
-          "id",
-          "uid",
-          "cat",
-          "type",
-          "memo",
-          "batch",
-          "source",
-          "replies",
-          "createdAt"
-        ],
+        "required": ["id", "uid", "cat", "type", "memo", "batch", "source", "replies", "createdAt"],
         "properties": {
           "id": {
             "type": "integer"
@@ -3960,10 +3369,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": [
-                "subject",
-                "comment"
-              ],
+              "required": ["subject", "comment"],
               "properties": {
                 "subject": {
                   "$ref": "#/components/schemas/SlimSubject"
@@ -3985,11 +3391,7 @@
             "properties": {
               "batch": {
                 "type": "object",
-                "required": [
-                  "epsTotal",
-                  "volsTotal",
-                  "subject"
-                ],
+                "required": ["epsTotal", "volsTotal", "subject"],
                 "properties": {
                   "epsTotal": {
                     "type": "string"
@@ -4010,10 +3412,7 @@
               },
               "single": {
                 "type": "object",
-                "required": [
-                  "episode",
-                  "subject"
-                ],
+                "required": ["episode", "subject"],
                 "properties": {
                   "episode": {
                     "$ref": "#/components/schemas/Episode"
@@ -4036,10 +3435,7 @@
               },
               "nickname": {
                 "type": "object",
-                "required": [
-                  "before",
-                  "after"
-                ],
+                "required": ["before", "after"],
                 "properties": {
                   "before": {
                     "type": "string"
@@ -4059,10 +3455,7 @@
           },
           "mono": {
             "type": "object",
-            "required": [
-              "characters",
-              "persons"
-            ],
+            "required": ["characters", "persons"],
             "properties": {
               "characters": {
                 "type": "array",
@@ -4083,9 +3476,7 @@
       },
       "TimelineSource": {
         "type": "object",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "properties": {
           "name": {
             "type": "string"
@@ -4201,13 +3592,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": [
-                "name",
-                "title",
-                "url",
-                "color",
-                "account"
-              ],
+              "required": ["name", "title", "url", "color", "account"],
               "properties": {
                 "name": {
                   "type": "string"
@@ -4239,13 +3624,7 @@
       },
       "UserNetworkService": {
         "type": "object",
-        "required": [
-          "name",
-          "title",
-          "url",
-          "color",
-          "account"
-        ],
+        "required": ["name", "title", "url", "color", "account"],
         "properties": {
           "name": {
             "type": "string"
@@ -4267,10 +3646,7 @@
       },
       "UserHomepage": {
         "type": "object",
-        "required": [
-          "left",
-          "right"
-        ],
+        "required": ["left", "right"],
         "properties": {
           "left": {
             "type": "array",
@@ -4321,10 +3697,7 @@
       },
       "UserIndexStats": {
         "type": "object",
-        "required": [
-          "create",
-          "collect"
-        ],
+        "required": ["create", "collect"],
         "properties": {
           "create": {
             "type": "integer"
@@ -4337,10 +3710,7 @@
       },
       "UserMonoCollectionStats": {
         "type": "object",
-        "required": [
-          "character",
-          "person"
-        ],
+        "required": ["character", "person"],
         "properties": {
           "character": {
             "type": "integer"
@@ -4353,14 +3723,7 @@
       },
       "UserStats": {
         "type": "object",
-        "required": [
-          "subject",
-          "mono",
-          "blog",
-          "friend",
-          "group",
-          "index"
-        ],
+        "required": ["subject", "mono", "blog", "friend", "group", "index"],
         "properties": {
           "subject": {
             "$ref": "#/components/schemas/UserSubjectCollectionStats"
@@ -4395,11 +3758,7 @@
       },
       "LoginRequestBody": {
         "type": "object",
-        "required": [
-          "email",
-          "password",
-          "turnstileToken"
-        ],
+        "required": ["email", "password", "turnstileToken"],
         "properties": {
           "email": {
             "type": "string",
@@ -4426,10 +3785,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "required": [
-              "subject",
-              "watchers"
-            ],
+            "required": ["subject", "watchers"],
             "properties": {
               "subject": {
                 "$ref": "#/components/schemas/SlimSubject"
@@ -4443,10 +3799,7 @@
       },
       "CalendarItem": {
         "type": "object",
-        "required": [
-          "subject",
-          "watchers"
-        ],
+        "required": ["subject", "watchers"],
         "properties": {
           "subject": {
             "$ref": "#/components/schemas/SlimSubject"
@@ -4463,14 +3816,7 @@
           },
           {
             "type": "object",
-            "required": [
-              "eps",
-              "volumes",
-              "series",
-              "doing",
-              "airDate",
-              "weekday"
-            ],
+            "required": ["eps", "volumes", "series", "doing", "airDate", "weekday"],
             "properties": {
               "eps": {
                 "type": "integer"
@@ -4496,14 +3842,7 @@
       },
       "ProgressItem": {
         "type": "object",
-        "required": [
-          "subject",
-          "interest",
-          "percent",
-          "todayOnAir",
-          "lastUnwatchedEp",
-          "eps"
-        ],
+        "required": ["subject", "interest", "percent", "todayOnAir", "lastUnwatchedEp", "eps"],
         "properties": {
           "subject": {
             "$ref": "#/components/schemas/ProgressSubject"
@@ -4524,10 +3863,7 @@
               },
               {
                 "type": "object",
-                "required": [
-                  "id",
-                  "sort"
-                ],
+                "required": ["id", "sort"],
                 "properties": {
                   "id": {
                     "type": "integer"
@@ -4593,12 +3929,84 @@
           }
         }
       },
-      "TrendingSubject": {
+      "SubjectHomeResponse": {
         "type": "object",
         "required": [
           "subject",
-          "count"
+          "episodes",
+          "characters",
+          "staff",
+          "relations",
+          "recs",
+          "comments",
+          "reviews",
+          "indexes",
+          "topics"
         ],
+        "properties": {
+          "subject": {
+            "$ref": "#/components/schemas/Subject"
+          },
+          "episodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Episode"
+            }
+          },
+          "characters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubjectCharacter"
+            }
+          },
+          "staff": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubjectStaff"
+            }
+          },
+          "relations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubjectRelation"
+            }
+          },
+          "recs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubjectRec"
+            }
+          },
+          "comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubjectInterestComment"
+            }
+          },
+          "reviews": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubjectReview"
+            }
+          },
+          "indexes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SlimIndex"
+            }
+          },
+          "topics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Topic"
+            }
+          }
+        },
+        "title": "SubjectHomeResponse"
+      },
+      "TrendingSubject": {
+        "type": "object",
+        "required": ["subject", "count"],
         "properties": {
           "subject": {
             "$ref": "#/components/schemas/SlimSubject"
@@ -4610,14 +4018,7 @@
       },
       "SubjectEdit": {
         "type": "object",
-        "required": [
-          "name",
-          "infobox",
-          "platform",
-          "nsfw",
-          "metaTags",
-          "summary"
-        ],
+        "required": ["name", "infobox", "platform", "nsfw", "metaTags", "summary"],
         "properties": {
           "name": {
             "type": "string",
@@ -4661,10 +4062,7 @@
       },
       "WikiPlatform": {
         "type": "object",
-        "required": [
-          "id",
-          "text"
-        ],
+        "required": ["id", "text"],
         "properties": {
           "id": {
             "type": "integer"
@@ -4741,20 +4139,11 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "subject",
-            "type",
-            "order"
-          ],
+          "required": ["subject", "type", "order"],
           "properties": {
             "subject": {
               "type": "object",
-              "required": [
-                "id",
-                "typeID",
-                "name",
-                "nameCN"
-              ],
+              "required": ["id", "typeID", "name", "nameCN"],
               "properties": {
                 "id": {
                   "type": "integer"
@@ -4783,19 +4172,11 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "character",
-            "type",
-            "order"
-          ],
+          "required": ["character", "type", "order"],
           "properties": {
             "character": {
               "type": "object",
-              "required": [
-                "id",
-                "name",
-                "nameCN"
-              ],
+              "required": ["id", "name", "nameCN"],
               "properties": {
                 "id": {
                   "type": "integer"
@@ -4821,18 +4202,11 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "person",
-            "position"
-          ],
+          "required": ["person", "position"],
           "properties": {
             "person": {
               "type": "object",
-              "required": [
-                "id",
-                "name",
-                "nameCN"
-              ],
+              "required": ["id", "name", "nameCN"],
               "properties": {
                 "id": {
                   "type": "integer"
@@ -4853,15 +4227,7 @@
       },
       "SubjectNew": {
         "type": "object",
-        "required": [
-          "name",
-          "type",
-          "platform",
-          "infobox",
-          "nsfw",
-          "metaTags",
-          "summary"
-        ],
+        "required": ["name", "type", "platform", "infobox", "nsfw", "metaTags", "summary"],
         "properties": {
           "name": {
             "type": "string",
@@ -4901,13 +4267,7 @@
       },
       "SubjectRevisionWikiInfo": {
         "type": "object",
-        "required": [
-          "id",
-          "name",
-          "infobox",
-          "metaTags",
-          "summary"
-        ],
+        "required": ["id", "name", "infobox", "metaTags", "summary"],
         "properties": {
           "id": {
             "type": "integer"
@@ -4931,17 +4291,13 @@
       },
       "EpsisodesNew": {
         "type": "object",
-        "required": [
-          "episodes"
-        ],
+        "required": ["episodes"],
         "properties": {
           "episodes": {
             "type": "array",
             "items": {
               "type": "object",
-              "required": [
-                "ep"
-              ],
+              "required": ["ep"],
               "properties": {
                 "name": {
                   "type": "string"
@@ -4978,10 +4334,7 @@
       },
       "EpsisodesEdit": {
         "type": "object",
-        "required": [
-          "commitMessage",
-          "episodes"
-        ],
+        "required": ["commitMessage", "episodes"],
         "properties": {
           "commitMessage": {
             "type": "string"
@@ -4990,9 +4343,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": [
-                "id"
-              ],
+              "required": ["id"],
               "properties": {
                 "name": {
                   "type": "string"
@@ -5055,14 +4406,7 @@
       },
       "UserSubjectContribution": {
         "type": "object",
-        "required": [
-          "id",
-          "type",
-          "subjectID",
-          "name",
-          "commitMessage",
-          "createdAt"
-        ],
+        "required": ["id", "type", "subjectID", "name", "commitMessage", "createdAt"],
         "properties": {
           "id": {
             "type": "integer"
@@ -5088,14 +4432,7 @@
       },
       "UserCharacterContribution": {
         "type": "object",
-        "required": [
-          "id",
-          "type",
-          "characterID",
-          "name",
-          "commitMessage",
-          "createdAt"
-        ],
+        "required": ["id", "type", "characterID", "name", "commitMessage", "createdAt"],
         "properties": {
           "id": {
             "type": "integer"
@@ -5123,20 +4460,11 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "subject",
-            "type",
-            "order"
-          ],
+          "required": ["subject", "type", "order"],
           "properties": {
             "subject": {
               "type": "object",
-              "required": [
-                "id",
-                "typeID",
-                "name",
-                "nameCN"
-              ],
+              "required": ["id", "typeID", "name", "nameCN"],
               "properties": {
                 "id": {
                   "type": "integer"
@@ -5165,19 +4493,11 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "subject",
-            "person"
-          ],
+          "required": ["subject", "person"],
           "properties": {
             "subject": {
               "type": "object",
-              "required": [
-                "id",
-                "typeID",
-                "name",
-                "nameCN"
-              ],
+              "required": ["id", "typeID", "name", "nameCN"],
               "properties": {
                 "id": {
                   "type": "integer"
@@ -5195,11 +4515,7 @@
             },
             "person": {
               "type": "object",
-              "required": [
-                "id",
-                "name",
-                "nameCN"
-              ],
+              "required": ["id", "name", "nameCN"],
               "properties": {
                 "id": {
                   "type": "integer"
@@ -5217,14 +4533,7 @@
       },
       "UserPersonContribution": {
         "type": "object",
-        "required": [
-          "id",
-          "type",
-          "personID",
-          "name",
-          "commitMessage",
-          "createdAt"
-        ],
+        "required": ["id", "type", "personID", "name", "commitMessage", "createdAt"],
         "properties": {
           "id": {
             "type": "integer"
@@ -5252,19 +4561,11 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "subject",
-            "position"
-          ],
+          "required": ["subject", "position"],
           "properties": {
             "subject": {
               "type": "object",
-              "required": [
-                "id",
-                "typeID",
-                "name",
-                "nameCN"
-              ],
+              "required": ["id", "typeID", "name", "nameCN"],
               "properties": {
                 "id": {
                   "type": "integer"
@@ -5290,19 +4591,11 @@
         "type": "array",
         "items": {
           "type": "object",
-          "required": [
-            "subject",
-            "character"
-          ],
+          "required": ["subject", "character"],
           "properties": {
             "subject": {
               "type": "object",
-              "required": [
-                "id",
-                "typeID",
-                "name",
-                "nameCN"
-              ],
+              "required": ["id", "typeID", "name", "nameCN"],
               "properties": {
                 "id": {
                   "type": "integer"
@@ -5320,11 +4613,7 @@
             },
             "character": {
               "type": "object",
-              "required": [
-                "id",
-                "name",
-                "nameCN"
-              ],
+              "required": ["id", "name", "nameCN"],
               "properties": {
                 "id": {
                   "type": "integer"
@@ -5342,19 +4631,13 @@
       },
       "RecentWikiChange": {
         "type": "object",
-        "required": [
-          "subject",
-          "persons"
-        ],
+        "required": ["subject", "persons"],
         "properties": {
           "subject": {
             "type": "array",
             "items": {
               "type": "object",
-              "required": [
-                "id",
-                "createdAt"
-              ],
+              "required": ["id", "createdAt"],
               "properties": {
                 "id": {
                   "type": "integer"
@@ -5369,10 +4652,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": [
-                "id",
-                "createdAt"
-              ],
+              "required": ["id", "createdAt"],
               "properties": {
                 "id": {
                   "type": "integer"
@@ -5418,9 +4698,7 @@
     "/p1/logout": {
       "post": {
         "operationId": "logout",
-        "tags": [
-          "auth"
-        ],
+        "tags": ["auth"],
         "description": "登出",
         "requestBody": {
           "required": true,
@@ -5468,9 +4746,7 @@
     "/p1/login": {
       "post": {
         "operationId": "login",
-        "tags": [
-          "auth"
-        ],
+        "tags": ["auth"],
         "description": "需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)\n\nnext.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`\n\ndev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`",
         "requestBody": {
           "required": true,
@@ -5588,18 +4864,12 @@
       "get": {
         "operationId": "getTurnstileToken",
         "summary": "获取 Turnstile 令牌",
-        "tags": [
-          "auth"
-        ],
+        "tags": ["auth"],
         "description": "为防止滥用，Redirect URI 为白名单机制，如需添加请提交 PR。",
         "parameters": [
           {
             "schema": {
-              "enum": [
-                "dark",
-                "light",
-                "auto"
-              ]
+              "enum": ["dark", "light", "auto"]
             },
             "in": "query",
             "name": "theme",
@@ -5632,9 +4902,7 @@
       "get": {
         "operationId": "getBlogEntry",
         "summary": "获取日志详情",
-        "tags": [
-          "blog"
-        ],
+        "tags": ["blog"],
         "parameters": [
           {
             "schema": {
@@ -5679,9 +4947,7 @@
       "get": {
         "operationId": "getBlogRelatedSubjects",
         "summary": "获取日志的关联条目",
-        "tags": [
-          "blog"
-        ],
+        "tags": ["blog"],
         "parameters": [
           {
             "schema": {
@@ -5729,9 +4995,7 @@
       "get": {
         "operationId": "getBlogPhotos",
         "summary": "获取日志的图片",
-        "tags": [
-          "blog"
-        ],
+        "tags": ["blog"],
         "parameters": [
           {
             "schema": {
@@ -5778,10 +5042,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -5815,9 +5076,7 @@
       "get": {
         "operationId": "getBlogComments",
         "summary": "获取日志的吐槽箱",
-        "tags": [
-          "blog"
-        ],
+        "tags": ["blog"],
         "parameters": [
           {
             "schema": {
@@ -5892,9 +5151,7 @@
                       },
                       {
                         "type": "object",
-                        "required": [
-                          "replies"
-                        ],
+                        "required": ["replies"],
                         "properties": {
                           "replies": {
                             "type": "array",
@@ -5935,9 +5192,7 @@
       "post": {
         "operationId": "createBlogComment",
         "summary": "创建日志的吐槽",
-        "tags": [
-          "blog"
-        ],
+        "tags": ["blog"],
         "requestBody": {
           "required": true,
           "content": {
@@ -5978,9 +5233,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "properties": {
                     "id": {
                       "type": "integer",
@@ -6018,9 +5271,7 @@
       "put": {
         "operationId": "updateBlogComment",
         "summary": "编辑日志的吐槽",
-        "tags": [
-          "blog"
-        ],
+        "tags": ["blog"],
         "requestBody": {
           "required": true,
           "content": {
@@ -6074,9 +5325,7 @@
       "delete": {
         "operationId": "deleteBlogComment",
         "summary": "删除日志的吐槽",
-        "tags": [
-          "blog"
-        ],
+        "tags": ["blog"],
         "parameters": [
           {
             "schema": {
@@ -6122,9 +5371,7 @@
       "get": {
         "operationId": "getCalendar",
         "summary": "获取每日放送",
-        "tags": [
-          "calendar"
-        ],
+        "tags": ["calendar"],
         "security": [
           {
             "CookiesSession": [],
@@ -6159,9 +5406,7 @@
       "get": {
         "operationId": "getCharacter",
         "summary": "获取角色",
-        "tags": [
-          "character"
-        ],
+        "tags": ["character"],
         "parameters": [
           {
             "schema": {
@@ -6216,9 +5461,7 @@
       "get": {
         "operationId": "getCharacterRelations",
         "summary": "获取角色关联角色",
-        "tags": [
-          "character"
-        ],
+        "tags": ["character"],
         "parameters": [
           {
             "schema": {
@@ -6265,10 +5508,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -6312,9 +5552,7 @@
       "get": {
         "operationId": "getCharacterCasts",
         "summary": "获取角色出演作品",
-        "tags": [
-          "character"
-        ],
+        "tags": ["character"],
         "parameters": [
           {
             "schema": {
@@ -6378,10 +5616,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -6425,9 +5660,7 @@
       "get": {
         "operationId": "getCharacterCollects",
         "summary": "获取角色的收藏用户",
-        "tags": [
-          "character"
-        ],
+        "tags": ["character"],
         "parameters": [
           {
             "schema": {
@@ -6474,10 +5707,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -6521,9 +5751,7 @@
       "get": {
         "operationId": "getCharacterComments",
         "summary": "获取角色的吐槽箱",
-        "tags": [
-          "character"
-        ],
+        "tags": ["character"],
         "parameters": [
           {
             "schema": {
@@ -6598,9 +5826,7 @@
                       },
                       {
                         "type": "object",
-                        "required": [
-                          "replies"
-                        ],
+                        "required": ["replies"],
                         "properties": {
                           "replies": {
                             "type": "array",
@@ -6641,9 +5867,7 @@
       "post": {
         "operationId": "createCharacterComment",
         "summary": "创建角色的吐槽",
-        "tags": [
-          "character"
-        ],
+        "tags": ["character"],
         "requestBody": {
           "required": true,
           "content": {
@@ -6684,9 +5908,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "properties": {
                     "id": {
                       "type": "integer",
@@ -6724,9 +5946,7 @@
       "get": {
         "operationId": "getCharacterPhotoPreview",
         "summary": "获取角色首页相册预览",
-        "tags": [
-          "character"
-        ],
+        "tags": ["character"],
         "parameters": [
           {
             "schema": {
@@ -6762,10 +5982,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -6809,9 +6026,7 @@
       "get": {
         "operationId": "getCharacterPhotos",
         "summary": "获取角色相册列表",
-        "tags": [
-          "character"
-        ],
+        "tags": ["character"],
         "parameters": [
           {
             "schema": {
@@ -6858,10 +6073,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -6905,9 +6117,7 @@
       "get": {
         "operationId": "getCharacterPhoto",
         "summary": "获取角色相册图片",
-        "tags": [
-          "character"
-        ],
+        "tags": ["character"],
         "parameters": [
           {
             "schema": {
@@ -6970,9 +6180,7 @@
       "get": {
         "operationId": "getCharacterPhotoComments",
         "summary": "获取角色相册图片的评论",
-        "tags": [
-          "character"
-        ],
+        "tags": ["character"],
         "parameters": [
           {
             "schema": {
@@ -7055,9 +6263,7 @@
                       },
                       {
                         "type": "object",
-                        "required": [
-                          "replies"
-                        ],
+                        "required": ["replies"],
                         "properties": {
                           "replies": {
                             "type": "array",
@@ -7098,9 +6304,7 @@
       "post": {
         "operationId": "createCharacterPhotoComment",
         "summary": "创建角色相册图片的评论",
-        "tags": [
-          "character"
-        ],
+        "tags": ["character"],
         "requestBody": {
           "required": true,
           "content": {
@@ -7149,9 +6353,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "properties": {
                     "id": {
                       "type": "integer",
@@ -7199,9 +6401,7 @@
       "get": {
         "operationId": "getCharacterIndexes",
         "summary": "获取角色关联的目录",
-        "tags": [
-          "character"
-        ],
+        "tags": ["character"],
         "parameters": [
           {
             "schema": {
@@ -7248,10 +6448,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -7285,9 +6482,7 @@
       "put": {
         "operationId": "updateCharacterComment",
         "summary": "编辑角色的吐槽",
-        "tags": [
-          "character"
-        ],
+        "tags": ["character"],
         "requestBody": {
           "required": true,
           "content": {
@@ -7341,9 +6536,7 @@
       "delete": {
         "operationId": "deleteCharacterComment",
         "summary": "删除角色的吐槽",
-        "tags": [
-          "character"
-        ],
+        "tags": ["character"],
         "parameters": [
           {
             "schema": {
@@ -7389,9 +6582,7 @@
       "get": {
         "operationId": "getMySubjectCollections",
         "summary": "获取当前用户的条目收藏",
-        "tags": [
-          "collection"
-        ],
+        "tags": ["collection"],
         "parameters": [
           {
             "schema": {
@@ -7456,10 +6647,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -7493,9 +6681,7 @@
       "patch": {
         "operationId": "updateSubjectProgress",
         "summary": "更新条目进度",
-        "tags": [
-          "collection"
-        ],
+        "tags": ["collection"],
         "requestBody": {
           "required": true,
           "content": {
@@ -7559,9 +6745,7 @@
       "put": {
         "operationId": "updateSubjectCollection",
         "summary": "新增或修改条目收藏",
-        "tags": [
-          "collection"
-        ],
+        "tags": ["collection"],
         "requestBody": {
           "required": true,
           "content": {
@@ -7627,9 +6811,7 @@
       "patch": {
         "operationId": "updateEpisodeProgress",
         "summary": "更新章节进度",
-        "tags": [
-          "collection"
-        ],
+        "tags": ["collection"],
         "requestBody": {
           "required": true,
           "content": {
@@ -7695,9 +6877,7 @@
       "get": {
         "operationId": "getMyCharacterCollections",
         "summary": "获取当前用户的角色收藏",
-        "tags": [
-          "collection"
-        ],
+        "tags": ["collection"],
         "parameters": [
           {
             "schema": {
@@ -7736,10 +6916,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -7773,9 +6950,7 @@
       "put": {
         "operationId": "addCharacterCollection",
         "summary": "新增角色收藏",
-        "tags": [
-          "collection"
-        ],
+        "tags": ["collection"],
         "parameters": [
           {
             "schema": {
@@ -7829,9 +7004,7 @@
       "delete": {
         "operationId": "deleteCharacterCollection",
         "summary": "删除角色收藏",
-        "tags": [
-          "collection"
-        ],
+        "tags": ["collection"],
         "parameters": [
           {
             "schema": {
@@ -7887,9 +7060,7 @@
       "get": {
         "operationId": "getMyPersonCollections",
         "summary": "获取当前用户的人物收藏",
-        "tags": [
-          "collection"
-        ],
+        "tags": ["collection"],
         "parameters": [
           {
             "schema": {
@@ -7928,10 +7099,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -7965,9 +7133,7 @@
       "put": {
         "operationId": "addPersonCollection",
         "summary": "新增人物收藏",
-        "tags": [
-          "collection"
-        ],
+        "tags": ["collection"],
         "parameters": [
           {
             "schema": {
@@ -8021,9 +7187,7 @@
       "delete": {
         "operationId": "deletePersonCollection",
         "summary": "删除人物收藏",
-        "tags": [
-          "collection"
-        ],
+        "tags": ["collection"],
         "parameters": [
           {
             "schema": {
@@ -8079,9 +7243,7 @@
       "get": {
         "operationId": "getMyIndexCollections",
         "summary": "获取当前用户的目录收藏",
-        "tags": [
-          "collection"
-        ],
+        "tags": ["collection"],
         "parameters": [
           {
             "schema": {
@@ -8120,10 +7282,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -8157,9 +7316,7 @@
       "put": {
         "operationId": "addIndexCollection",
         "summary": "新增目录收藏",
-        "tags": [
-          "collection"
-        ],
+        "tags": ["collection"],
         "parameters": [
           {
             "schema": {
@@ -8213,9 +7370,7 @@
       "delete": {
         "operationId": "deleteIndexCollection",
         "summary": "删除目录收藏",
-        "tags": [
-          "collection"
-        ],
+        "tags": ["collection"],
         "parameters": [
           {
             "schema": {
@@ -8271,9 +7426,7 @@
       "get": {
         "operationId": "getEpisode",
         "summary": "获取章节信息",
-        "tags": [
-          "episode"
-        ],
+        "tags": ["episode"],
         "parameters": [
           {
             "schema": {
@@ -8319,9 +7472,7 @@
       "get": {
         "operationId": "getEpisodeComments",
         "summary": "获取条目的章节吐槽箱",
-        "tags": [
-          "episode"
-        ],
+        "tags": ["episode"],
         "parameters": [
           {
             "schema": {
@@ -8391,9 +7542,7 @@
                       },
                       {
                         "type": "object",
-                        "required": [
-                          "replies"
-                        ],
+                        "required": ["replies"],
                         "properties": {
                           "replies": {
                             "type": "array",
@@ -8424,9 +7573,7 @@
       "post": {
         "operationId": "createEpisodeComment",
         "summary": "创建条目的章节吐槽",
-        "tags": [
-          "episode"
-        ],
+        "tags": ["episode"],
         "requestBody": {
           "required": true,
           "content": {
@@ -8468,9 +7615,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "properties": {
                     "id": {
                       "type": "integer",
@@ -8508,18 +7653,14 @@
       "put": {
         "operationId": "likeEpisodeComment",
         "summary": "给条目的章节吐槽点赞",
-        "tags": [
-          "episode"
-        ],
+        "tags": ["episode"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "value"
-                ],
+                "required": ["value"],
                 "properties": {
                   "value": {
                     "type": "integer"
@@ -8582,9 +7723,7 @@
       "delete": {
         "operationId": "unlikeEpisodeComment",
         "summary": "取消条目的章节吐槽点赞",
-        "tags": [
-          "episode"
-        ],
+        "tags": ["episode"],
         "parameters": [
           {
             "schema": {
@@ -8630,9 +7769,7 @@
       "put": {
         "operationId": "updateEpisodeComment",
         "summary": "编辑条目的章节吐槽",
-        "tags": [
-          "episode"
-        ],
+        "tags": ["episode"],
         "requestBody": {
           "required": true,
           "content": {
@@ -8687,9 +7824,7 @@
       "delete": {
         "operationId": "deleteEpisodeComment",
         "summary": "删除条目的章节吐槽",
-        "tags": [
-          "episode"
-        ],
+        "tags": ["episode"],
         "parameters": [
           {
             "schema": {
@@ -8736,9 +7871,7 @@
       "get": {
         "operationId": "getMyFriends",
         "summary": "获取当前用户的好友列表",
-        "tags": [
-          "relationship"
-        ],
+        "tags": ["relationship"],
         "parameters": [
           {
             "schema": {
@@ -8777,10 +7910,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -8814,9 +7944,7 @@
       "put": {
         "operationId": "addFriend",
         "summary": "添加好友",
-        "tags": [
-          "relationship"
-        ],
+        "tags": ["relationship"],
         "parameters": [
           {
             "schema": {
@@ -8870,9 +7998,7 @@
       "delete": {
         "operationId": "removeFriend",
         "summary": "取消好友",
-        "tags": [
-          "relationship"
-        ],
+        "tags": ["relationship"],
         "parameters": [
           {
             "schema": {
@@ -8928,9 +8054,7 @@
       "get": {
         "operationId": "getMyFollowers",
         "summary": "获取当前用户的关注者列表",
-        "tags": [
-          "relationship"
-        ],
+        "tags": ["relationship"],
         "parameters": [
           {
             "schema": {
@@ -8969,10 +8093,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -9006,9 +8127,7 @@
       "get": {
         "operationId": "getFriendlist",
         "summary": "获取当前用户的好友 ID 列表",
-        "tags": [
-          "relationship"
-        ],
+        "tags": ["relationship"],
         "security": [
           {
             "CookiesSession": [],
@@ -9022,9 +8141,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "friendlist"
-                  ],
+                  "required": ["friendlist"],
                   "properties": {
                     "friendlist": {
                       "type": "array",
@@ -9054,9 +8171,7 @@
       "get": {
         "operationId": "getBlocklist",
         "summary": "获取当前用户的绝交用户列表",
-        "tags": [
-          "relationship"
-        ],
+        "tags": ["relationship"],
         "security": [
           {
             "CookiesSession": [],
@@ -9070,9 +8185,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "blocklist"
-                  ],
+                  "required": ["blocklist"],
                   "properties": {
                     "blocklist": {
                       "type": "array",
@@ -9102,9 +8215,7 @@
       "put": {
         "operationId": "addUserToBlocklist",
         "summary": "与用户绝交",
-        "tags": [
-          "relationship"
-        ],
+        "tags": ["relationship"],
         "parameters": [
           {
             "schema": {
@@ -9128,9 +8239,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "blocklist"
-                  ],
+                  "required": ["blocklist"],
                   "properties": {
                     "blocklist": {
                       "type": "array",
@@ -9168,9 +8277,7 @@
       "delete": {
         "operationId": "removeUserFromBlocklist",
         "summary": "取消与用户绝交",
-        "tags": [
-          "relationship"
-        ],
+        "tags": ["relationship"],
         "parameters": [
           {
             "schema": {
@@ -9194,9 +8301,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "blocklist"
-                  ],
+                  "required": ["blocklist"],
                   "properties": {
                     "blocklist": {
                       "type": "array",
@@ -9236,9 +8341,7 @@
       "get": {
         "operationId": "getGroups",
         "summary": "获取小组列表",
-        "tags": [
-          "group"
-        ],
+        "tags": ["group"],
         "parameters": [
           {
             "schema": {
@@ -9289,10 +8392,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -9326,9 +8426,7 @@
       "get": {
         "operationId": "getGroup",
         "summary": "获取小组详情",
-        "tags": [
-          "group"
-        ],
+        "tags": ["group"],
         "parameters": [
           {
             "schema": {
@@ -9374,9 +8472,7 @@
       "get": {
         "operationId": "getGroupMembers",
         "summary": "获取小组成员列表",
-        "tags": [
-          "group"
-        ],
+        "tags": ["group"],
         "parameters": [
           {
             "schema": {
@@ -9428,10 +8524,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -9465,9 +8558,7 @@
       "get": {
         "operationId": "getGroupTopics",
         "summary": "获取小组话题列表",
-        "tags": [
-          "group"
-        ],
+        "tags": ["group"],
         "parameters": [
           {
             "schema": {
@@ -9511,10 +8602,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -9546,9 +8634,7 @@
       "post": {
         "operationId": "createGroupTopic",
         "summary": "创建小组话题",
-        "tags": [
-          "group"
-        ],
+        "tags": ["group"],
         "requestBody": {
           "required": true,
           "content": {
@@ -9590,9 +8676,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "properties": {
                     "id": {
                       "type": "integer",
@@ -9630,9 +8714,7 @@
       "get": {
         "operationId": "getRecentGroupTopics",
         "summary": "获取最新的小组话题",
-        "tags": [
-          "group"
-        ],
+        "tags": ["group"],
         "parameters": [
           {
             "schema": {
@@ -9675,10 +8757,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -9712,9 +8791,7 @@
       "get": {
         "operationId": "getGroupTopic",
         "summary": "获取小组话题详情",
-        "tags": [
-          "topic"
-        ],
+        "tags": ["topic"],
         "parameters": [
           {
             "schema": {
@@ -9756,9 +8833,7 @@
       },
       "put": {
         "operationId": "editGroupTopic",
-        "tags": [
-          "topic"
-        ],
+        "tags": ["topic"],
         "description": "编辑小组话题",
         "requestBody": {
           "required": true,
@@ -9815,9 +8890,7 @@
       "get": {
         "operationId": "getGroupPost",
         "summary": "获取小组话题回复详情",
-        "tags": [
-          "topic"
-        ],
+        "tags": ["topic"],
         "parameters": [
           {
             "schema": {
@@ -9854,9 +8927,7 @@
       "put": {
         "operationId": "editGroupPost",
         "summary": "编辑小组话题回复",
-        "tags": [
-          "topic"
-        ],
+        "tags": ["topic"],
         "requestBody": {
           "required": true,
           "content": {
@@ -9910,9 +8981,7 @@
       "delete": {
         "operationId": "deleteGroupPost",
         "summary": "删除小组话题回复",
-        "tags": [
-          "topic"
-        ],
+        "tags": ["topic"],
         "parameters": [
           {
             "schema": {
@@ -9958,18 +9027,14 @@
       "put": {
         "operationId": "likeGroupPost",
         "summary": "给小组话题回复点赞",
-        "tags": [
-          "topic"
-        ],
+        "tags": ["topic"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "value"
-                ],
+                "required": ["value"],
                 "properties": {
                   "value": {
                     "type": "integer"
@@ -10032,9 +9097,7 @@
       "delete": {
         "operationId": "unlikeGroupPost",
         "summary": "取消小组话题回复点赞",
-        "tags": [
-          "topic"
-        ],
+        "tags": ["topic"],
         "parameters": [
           {
             "schema": {
@@ -10080,9 +9143,7 @@
       "post": {
         "operationId": "createGroupReply",
         "summary": "创建小组话题回复",
-        "tags": [
-          "topic"
-        ],
+        "tags": ["topic"],
         "requestBody": {
           "required": true,
           "content": {
@@ -10123,9 +9184,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "properties": {
                     "id": {
                       "type": "integer"
@@ -10162,9 +9221,7 @@
       "get": {
         "operationId": "getHome",
         "summary": "获取首页数据",
-        "tags": [
-          "home"
-        ],
+        "tags": ["home"],
         "description": "聚合首页所需的全部数据：进度管理、好友时间线、小组话题、热门小组、热门条目讨论与每日放送。根据登录状态分发：未登录时个人区块（进度/时间线/小组话题）为空，仅返回公开区块；已登录时返回全部区块。各个区块独立计算，单个区块失败时返回空数据，不影响其他区块。",
         "security": [
           {
@@ -10200,9 +9257,7 @@
       "post": {
         "operationId": "createIndex",
         "summary": "创建目录",
-        "tags": [
-          "index"
-        ],
+        "tags": ["index"],
         "requestBody": {
           "required": true,
           "content": {
@@ -10226,9 +9281,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "properties": {
                     "id": {
                       "type": "integer"
@@ -10255,9 +9308,7 @@
       "get": {
         "operationId": "getIndex",
         "summary": "获取目录详情",
-        "tags": [
-          "index"
-        ],
+        "tags": ["index"],
         "parameters": [
           {
             "schema": {
@@ -10300,9 +9351,7 @@
       "patch": {
         "operationId": "updateIndex",
         "summary": "更新目录",
-        "tags": [
-          "index"
-        ],
+        "tags": ["index"],
         "requestBody": {
           "required": true,
           "content": {
@@ -10356,9 +9405,7 @@
       "delete": {
         "operationId": "deleteIndex",
         "summary": "删除目录",
-        "tags": [
-          "index"
-        ],
+        "tags": ["index"],
         "parameters": [
           {
             "schema": {
@@ -10404,9 +9451,7 @@
       "get": {
         "operationId": "getIndexRelated",
         "summary": "获取目录的关联内容",
-        "tags": [
-          "index"
-        ],
+        "tags": ["index"],
         "parameters": [
           {
             "schema": {
@@ -10469,10 +9514,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -10504,9 +9546,7 @@
       "put": {
         "operationId": "putIndexRelated",
         "summary": "添加目录关联内容",
-        "tags": [
-          "index"
-        ],
+        "tags": ["index"],
         "requestBody": {
           "required": true,
           "content": {
@@ -10540,9 +9580,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "properties": {
                     "id": {
                       "type": "integer"
@@ -10569,9 +9607,7 @@
       "patch": {
         "operationId": "patchIndexRelated",
         "summary": "更新目录关联内容",
-        "tags": [
-          "index"
-        ],
+        "tags": ["index"],
         "requestBody": {
           "required": true,
           "content": {
@@ -10633,9 +9669,7 @@
       "delete": {
         "operationId": "deleteIndexRelated",
         "summary": "删除目录关联内容",
-        "tags": [
-          "index"
-        ],
+        "tags": ["index"],
         "parameters": [
           {
             "schema": {
@@ -10689,9 +9723,7 @@
       "get": {
         "operationId": "getIndexComments",
         "summary": "获取目录的评论",
-        "tags": [
-          "index"
-        ],
+        "tags": ["index"],
         "parameters": [
           {
             "schema": {
@@ -10766,9 +9798,7 @@
                       },
                       {
                         "type": "object",
-                        "required": [
-                          "replies"
-                        ],
+                        "required": ["replies"],
                         "properties": {
                           "replies": {
                             "type": "array",
@@ -10809,9 +9839,7 @@
       "post": {
         "operationId": "createIndexComment",
         "summary": "创建目录的评论",
-        "tags": [
-          "index"
-        ],
+        "tags": ["index"],
         "requestBody": {
           "required": true,
           "content": {
@@ -10852,9 +9880,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "properties": {
                     "id": {
                       "type": "integer",
@@ -10892,9 +9918,7 @@
       "put": {
         "operationId": "updateIndexComment",
         "summary": "编辑目录的评论",
-        "tags": [
-          "index"
-        ],
+        "tags": ["index"],
         "requestBody": {
           "required": true,
           "content": {
@@ -10948,9 +9972,7 @@
       "delete": {
         "operationId": "deleteIndexComment",
         "summary": "删除目录的评论",
-        "tags": [
-          "index"
-        ],
+        "tags": ["index"],
         "parameters": [
           {
             "schema": {
@@ -10996,9 +10018,7 @@
       "get": {
         "operationId": "getCurrentUser",
         "summary": "获取当前用户信息",
-        "tags": [
-          "misc"
-        ],
+        "tags": ["misc"],
         "security": [
           {
             "CookiesSession": []
@@ -11042,9 +10062,7 @@
       "get": {
         "operationId": "listNotice",
         "summary": "获取未读通知",
-        "tags": [
-          "misc"
-        ],
+        "tags": ["misc"],
         "parameters": [
           {
             "schema": {
@@ -11079,10 +10097,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -11116,9 +10131,7 @@
       "post": {
         "operationId": "clearNotice",
         "summary": "标记通知为已读",
-        "tags": [
-          "misc"
-        ],
+        "tags": ["misc"],
         "description": "标记通知为已读\n\n不传id时会清空所有未读通知",
         "requestBody": {
           "required": true,
@@ -11141,10 +10154,7 @@
                 },
                 "ClearSome": {
                   "value": {
-                    "id": [
-                      1,
-                      2
-                    ]
+                    "id": [1, 2]
                   }
                 }
               }
@@ -11186,9 +10196,7 @@
       "post": {
         "operationId": "passkeyLoginOptions",
         "summary": "获取 Passkey 登录选项",
-        "tags": [
-          "misc"
-        ],
+        "tags": ["misc"],
         "description": "\n获取 WebAuthn authentication options。\n不传 credentials 时（usernameless 模式），浏览器将展示系统账户选择器。",
         "requestBody": {
           "required": true,
@@ -11201,9 +10209,7 @@
                     "type": "array",
                     "items": {
                       "type": "object",
-                      "required": [
-                        "credentialId"
-                      ],
+                      "required": ["credentialId"],
                       "properties": {
                         "credentialId": {
                           "type": "string"
@@ -11229,11 +10235,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "options",
-                    "challenge",
-                    "rpId"
-                  ],
+                  "required": ["options", "challenge", "rpId"],
                   "properties": {
                     "options": {},
                     "challenge": {
@@ -11264,19 +10266,14 @@
       "post": {
         "operationId": "passkeyLoginVerify",
         "summary": "验证 Passkey 登录并签发 session",
-        "tags": [
-          "misc"
-        ],
+        "tags": ["misc"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "challenge",
-                  "credential"
-                ],
+                "required": ["challenge", "credential"],
                 "properties": {
                   "challenge": {
                     "type": "string",
@@ -11284,13 +10281,7 @@
                   },
                   "credential": {
                     "type": "object",
-                    "required": [
-                      "id",
-                      "rawId",
-                      "type",
-                      "response",
-                      "clientExtensionResults"
-                    ],
+                    "required": ["id", "rawId", "type", "response", "clientExtensionResults"],
                     "properties": {
                       "id": {
                         "type": "string"
@@ -11300,17 +10291,11 @@
                       },
                       "type": {
                         "type": "string",
-                        "enum": [
-                          "public-key"
-                        ]
+                        "enum": ["public-key"]
                       },
                       "response": {
                         "type": "object",
-                        "required": [
-                          "clientDataJSON",
-                          "authenticatorData",
-                          "signature"
-                        ],
+                        "required": ["clientDataJSON", "authenticatorData", "signature"],
                         "properties": {
                           "clientDataJSON": {
                             "type": "string"
@@ -11365,9 +10350,7 @@
       "get": {
         "operationId": "getPerson",
         "summary": "获取人物",
-        "tags": [
-          "person"
-        ],
+        "tags": ["person"],
         "parameters": [
           {
             "schema": {
@@ -11422,9 +10405,7 @@
       "get": {
         "operationId": "getPersonRelations",
         "summary": "获取人物关联人物",
-        "tags": [
-          "person"
-        ],
+        "tags": ["person"],
         "parameters": [
           {
             "schema": {
@@ -11471,10 +10452,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -11518,9 +10496,7 @@
       "get": {
         "operationId": "getPersonWorks",
         "summary": "获取人物的参与作品",
-        "tags": [
-          "person"
-        ],
+        "tags": ["person"],
         "parameters": [
           {
             "schema": {
@@ -11584,10 +10560,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -11631,9 +10604,7 @@
       "get": {
         "operationId": "getPersonCasts",
         "summary": "获取人物的出演角色",
-        "tags": [
-          "person"
-        ],
+        "tags": ["person"],
         "parameters": [
           {
             "schema": {
@@ -11697,10 +10668,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -11744,9 +10712,7 @@
       "get": {
         "operationId": "getPersonCollects",
         "summary": "获取人物的收藏用户",
-        "tags": [
-          "person"
-        ],
+        "tags": ["person"],
         "parameters": [
           {
             "schema": {
@@ -11793,10 +10759,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -11840,9 +10803,7 @@
       "get": {
         "operationId": "getPersonComments",
         "summary": "获取人物的吐槽箱",
-        "tags": [
-          "person"
-        ],
+        "tags": ["person"],
         "parameters": [
           {
             "schema": {
@@ -11917,9 +10878,7 @@
                       },
                       {
                         "type": "object",
-                        "required": [
-                          "replies"
-                        ],
+                        "required": ["replies"],
                         "properties": {
                           "replies": {
                             "type": "array",
@@ -11960,9 +10919,7 @@
       "post": {
         "operationId": "createPersonComment",
         "summary": "创建人物的吐槽",
-        "tags": [
-          "person"
-        ],
+        "tags": ["person"],
         "requestBody": {
           "required": true,
           "content": {
@@ -12003,9 +10960,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "properties": {
                     "id": {
                       "type": "integer",
@@ -12043,9 +10998,7 @@
       "get": {
         "operationId": "getPersonPhotoPreview",
         "summary": "获取人物首页相册预览",
-        "tags": [
-          "person"
-        ],
+        "tags": ["person"],
         "parameters": [
           {
             "schema": {
@@ -12081,10 +11034,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -12128,9 +11078,7 @@
       "get": {
         "operationId": "getPersonPhotos",
         "summary": "获取人物相册列表",
-        "tags": [
-          "person"
-        ],
+        "tags": ["person"],
         "parameters": [
           {
             "schema": {
@@ -12177,10 +11125,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -12224,9 +11169,7 @@
       "get": {
         "operationId": "getPersonPhoto",
         "summary": "获取人物相册图片",
-        "tags": [
-          "person"
-        ],
+        "tags": ["person"],
         "parameters": [
           {
             "schema": {
@@ -12289,9 +11232,7 @@
       "get": {
         "operationId": "getPersonPhotoComments",
         "summary": "获取人物相册图片的评论",
-        "tags": [
-          "person"
-        ],
+        "tags": ["person"],
         "parameters": [
           {
             "schema": {
@@ -12374,9 +11315,7 @@
                       },
                       {
                         "type": "object",
-                        "required": [
-                          "replies"
-                        ],
+                        "required": ["replies"],
                         "properties": {
                           "replies": {
                             "type": "array",
@@ -12417,9 +11356,7 @@
       "post": {
         "operationId": "createPersonPhotoComment",
         "summary": "创建人物相册图片的评论",
-        "tags": [
-          "person"
-        ],
+        "tags": ["person"],
         "requestBody": {
           "required": true,
           "content": {
@@ -12468,9 +11405,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "properties": {
                     "id": {
                       "type": "integer",
@@ -12518,9 +11453,7 @@
       "get": {
         "operationId": "getPersonIndexes",
         "summary": "获取人物关联的目录",
-        "tags": [
-          "person"
-        ],
+        "tags": ["person"],
         "parameters": [
           {
             "schema": {
@@ -12567,10 +11500,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -12604,9 +11534,7 @@
       "put": {
         "operationId": "updatePersonComment",
         "summary": "编辑人物的吐槽",
-        "tags": [
-          "person"
-        ],
+        "tags": ["person"],
         "requestBody": {
           "required": true,
           "content": {
@@ -12660,9 +11588,7 @@
       "delete": {
         "operationId": "deletePersonComment",
         "summary": "删除人物的吐槽",
-        "tags": [
-          "person"
-        ],
+        "tags": ["person"],
         "parameters": [
           {
             "schema": {
@@ -12708,9 +11634,7 @@
       "get": {
         "operationId": "getPrivacy",
         "summary": "Get current user privacy settings",
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "security": [
           {
             "CookiesSession": [],
@@ -12724,10 +11648,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "settings",
-                    "preferences"
-                  ],
+                  "required": ["settings", "preferences"],
                   "properties": {
                     "settings": {
                       "type": "object",
@@ -12743,67 +11664,37 @@
                       "properties": {
                         "privateMessage": {
                           "type": "string",
-                          "enum": [
-                            "all",
-                            "friends",
-                            "none"
-                          ]
+                          "enum": ["all", "friends", "none"]
                         },
                         "timelineReply": {
                           "type": "string",
-                          "enum": [
-                            "all",
-                            "friends",
-                            "none"
-                          ]
+                          "enum": ["all", "friends", "none"]
                         },
                         "timelineCollectReply": {
                           "type": "string",
-                          "enum": [
-                            "all",
-                            "friends",
-                            "none"
-                          ]
+                          "enum": ["all", "friends", "none"]
                         },
                         "follow": {
                           "type": "string",
-                          "enum": [
-                            "all",
-                            "none"
-                          ]
+                          "enum": ["all", "none"]
                         },
                         "mentionNotification": {
                           "type": "string",
-                          "enum": [
-                            "all",
-                            "friends",
-                            "none"
-                          ]
+                          "enum": ["all", "friends", "none"]
                         },
                         "commentNotification": {
                           "type": "string",
-                          "enum": [
-                            "all",
-                            "friends",
-                            "none"
-                          ]
+                          "enum": ["all", "friends", "none"]
                         },
                         "friendNotification": {
                           "type": "string",
-                          "enum": [
-                            "all",
-                            "none"
-                          ]
+                          "enum": ["all", "none"]
                         }
                       }
                     },
                     "preferences": {
                       "type": "object",
-                      "required": [
-                        "showNsfwSubject",
-                        "canSetNsfwSubject",
-                        "allowNsfw"
-                      ],
+                      "required": ["showNsfwSubject", "canSetNsfwSubject", "allowNsfw"],
                       "properties": {
                         "showNsfwSubject": {
                           "type": "boolean"
@@ -12846,9 +11737,7 @@
       "patch": {
         "operationId": "patchPrivacy",
         "summary": "Update current user privacy settings",
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "requestBody": {
           "required": true,
           "content": {
@@ -12861,57 +11750,31 @@
                     "properties": {
                       "privateMessage": {
                         "type": "string",
-                        "enum": [
-                          "all",
-                          "friends",
-                          "none"
-                        ]
+                        "enum": ["all", "friends", "none"]
                       },
                       "timelineReply": {
                         "type": "string",
-                        "enum": [
-                          "all",
-                          "friends",
-                          "none"
-                        ]
+                        "enum": ["all", "friends", "none"]
                       },
                       "timelineCollectReply": {
                         "type": "string",
-                        "enum": [
-                          "all",
-                          "friends",
-                          "none"
-                        ]
+                        "enum": ["all", "friends", "none"]
                       },
                       "follow": {
                         "type": "string",
-                        "enum": [
-                          "all",
-                          "none"
-                        ]
+                        "enum": ["all", "none"]
                       },
                       "mentionNotification": {
                         "type": "string",
-                        "enum": [
-                          "all",
-                          "friends",
-                          "none"
-                        ]
+                        "enum": ["all", "friends", "none"]
                       },
                       "commentNotification": {
                         "type": "string",
-                        "enum": [
-                          "all",
-                          "friends",
-                          "none"
-                        ]
+                        "enum": ["all", "friends", "none"]
                       },
                       "friendNotification": {
                         "type": "string",
-                        "enum": [
-                          "all",
-                          "none"
-                        ]
+                        "enum": ["all", "none"]
                       }
                     },
                     "additionalProperties": false
@@ -12944,10 +11807,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "settings",
-                    "preferences"
-                  ],
+                  "required": ["settings", "preferences"],
                   "properties": {
                     "settings": {
                       "type": "object",
@@ -12963,67 +11823,37 @@
                       "properties": {
                         "privateMessage": {
                           "type": "string",
-                          "enum": [
-                            "all",
-                            "friends",
-                            "none"
-                          ]
+                          "enum": ["all", "friends", "none"]
                         },
                         "timelineReply": {
                           "type": "string",
-                          "enum": [
-                            "all",
-                            "friends",
-                            "none"
-                          ]
+                          "enum": ["all", "friends", "none"]
                         },
                         "timelineCollectReply": {
                           "type": "string",
-                          "enum": [
-                            "all",
-                            "friends",
-                            "none"
-                          ]
+                          "enum": ["all", "friends", "none"]
                         },
                         "follow": {
                           "type": "string",
-                          "enum": [
-                            "all",
-                            "none"
-                          ]
+                          "enum": ["all", "none"]
                         },
                         "mentionNotification": {
                           "type": "string",
-                          "enum": [
-                            "all",
-                            "friends",
-                            "none"
-                          ]
+                          "enum": ["all", "friends", "none"]
                         },
                         "commentNotification": {
                           "type": "string",
-                          "enum": [
-                            "all",
-                            "friends",
-                            "none"
-                          ]
+                          "enum": ["all", "friends", "none"]
                         },
                         "friendNotification": {
                           "type": "string",
-                          "enum": [
-                            "all",
-                            "none"
-                          ]
+                          "enum": ["all", "none"]
                         }
                       }
                     },
                     "preferences": {
                       "type": "object",
-                      "required": [
-                        "showNsfwSubject",
-                        "canSetNsfwSubject",
-                        "allowNsfw"
-                      ],
+                      "required": ["showNsfwSubject", "canSetNsfwSubject", "allowNsfw"],
                       "properties": {
                         "showNsfwSubject": {
                           "type": "boolean"
@@ -13088,9 +11918,7 @@
       "post": {
         "operationId": "createReport",
         "summary": "报告疑虑",
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "requestBody": {
           "required": true,
           "content": {
@@ -13114,9 +11942,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "properties": {
                     "message": {
                       "type": "string"
@@ -13153,9 +11979,7 @@
       "post": {
         "operationId": "searchSubjects",
         "summary": "搜索条目",
-        "tags": [
-          "search"
-        ],
+        "tags": ["search"],
         "requestBody": {
           "required": true,
           "content": {
@@ -13204,10 +12028,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -13241,9 +12062,7 @@
       "post": {
         "operationId": "searchCharacters",
         "summary": "搜索角色",
-        "tags": [
-          "search"
-        ],
+        "tags": ["search"],
         "requestBody": {
           "required": true,
           "content": {
@@ -13292,10 +12111,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -13329,9 +12145,7 @@
       "post": {
         "operationId": "searchPersons",
         "summary": "搜索人物",
-        "tags": [
-          "search"
-        ],
+        "tags": ["search"],
         "requestBody": {
           "required": true,
           "content": {
@@ -13380,10 +12194,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -13417,9 +12228,7 @@
       "get": {
         "operationId": "getSubject",
         "summary": "获取条目",
-        "tags": [
-          "subject"
-        ],
+        "tags": ["subject"],
         "parameters": [
           {
             "schema": {
@@ -13464,9 +12273,7 @@
       "get": {
         "operationId": "getSubjects",
         "summary": "获取条目列表",
-        "tags": [
-          "subject"
-        ],
+        "tags": ["subject"],
         "parameters": [
           {
             "schema": {
@@ -13548,15 +12355,11 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "meta"
-                  ]
+                  "enum": ["meta"]
                 },
                 {
                   "type": "string",
-                  "enum": [
-                    "subject"
-                  ]
+                  "enum": ["subject"]
                 }
               ]
             },
@@ -13579,10 +12382,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -13616,9 +12416,7 @@
       "get": {
         "operationId": "getSubjectEpisodes",
         "summary": "获取条目的章节",
-        "tags": [
-          "subject"
-        ],
+        "tags": ["subject"],
         "parameters": [
           {
             "schema": {
@@ -13673,10 +12471,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -13710,9 +12505,7 @@
       "get": {
         "operationId": "getSubjectRelations",
         "summary": "获取条目的关联条目",
-        "tags": [
-          "subject"
-        ],
+        "tags": ["subject"],
         "parameters": [
           {
             "schema": {
@@ -13777,10 +12570,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -13814,9 +12604,7 @@
       "get": {
         "operationId": "getSubjectCharacters",
         "summary": "获取条目的角色",
-        "tags": [
-          "subject"
-        ],
+        "tags": ["subject"],
         "parameters": [
           {
             "schema": {
@@ -13872,10 +12660,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -13909,9 +12694,7 @@
       "get": {
         "operationId": "getSubjectStaffPersons",
         "summary": "获取条目的制作人员",
-        "tags": [
-          "subject"
-        ],
+        "tags": ["subject"],
         "parameters": [
           {
             "schema": {
@@ -13967,10 +12750,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -14004,9 +12784,7 @@
       "get": {
         "operationId": "getSubjectStaffPositions",
         "summary": "获取条目的制作人员职位",
-        "tags": [
-          "subject"
-        ],
+        "tags": ["subject"],
         "parameters": [
           {
             "schema": {
@@ -14053,10 +12831,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -14090,9 +12865,7 @@
       "get": {
         "operationId": "getSubjectRecs",
         "summary": "获取条目的推荐",
-        "tags": [
-          "subject"
-        ],
+        "tags": ["subject"],
         "parameters": [
           {
             "schema": {
@@ -14139,10 +12912,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -14176,9 +12946,7 @@
       "get": {
         "operationId": "getSubjectComments",
         "summary": "获取条目的吐槽箱",
-        "tags": [
-          "subject"
-        ],
+        "tags": ["subject"],
         "parameters": [
           {
             "schema": {
@@ -14233,10 +13001,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -14270,9 +13035,7 @@
       "get": {
         "operationId": "getSubjectReviews",
         "summary": "获取条目的评论",
-        "tags": [
-          "subject"
-        ],
+        "tags": ["subject"],
         "parameters": [
           {
             "schema": {
@@ -14319,10 +13082,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -14356,9 +13116,7 @@
       "get": {
         "operationId": "getSubjectIndexes",
         "summary": "获取条目关联的目录",
-        "tags": [
-          "subject"
-        ],
+        "tags": ["subject"],
         "parameters": [
           {
             "schema": {
@@ -14405,10 +13163,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -14442,9 +13197,7 @@
       "get": {
         "operationId": "getSubjectCollects",
         "summary": "获取条目的收藏用户",
-        "tags": [
-          "subject"
-        ],
+        "tags": ["subject"],
         "parameters": [
           {
             "schema": {
@@ -14508,10 +13261,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -14545,18 +13295,14 @@
       "put": {
         "operationId": "likeSubjectCollect",
         "summary": "给条目收藏点赞",
-        "tags": [
-          "subject"
-        ],
+        "tags": ["subject"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "value"
-                ],
+                "required": ["value"],
                 "properties": {
                   "value": {
                     "type": "integer"
@@ -14619,9 +13365,7 @@
       "delete": {
         "operationId": "unlikeSubjectCollect",
         "summary": "取消条目收藏点赞",
-        "tags": [
-          "subject"
-        ],
+        "tags": ["subject"],
         "parameters": [
           {
             "schema": {
@@ -14667,9 +13411,7 @@
       "get": {
         "operationId": "getSubjectTopics",
         "summary": "获取条目讨论版",
-        "tags": [
-          "subject"
-        ],
+        "tags": ["subject"],
         "parameters": [
           {
             "schema": {
@@ -14716,10 +13458,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -14751,9 +13490,7 @@
       "post": {
         "operationId": "createSubjectTopic",
         "summary": "创建条目讨论",
-        "tags": [
-          "subject"
-        ],
+        "tags": ["subject"],
         "requestBody": {
           "required": true,
           "content": {
@@ -14795,9 +13532,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "properties": {
                     "id": {
                       "type": "integer",
@@ -14835,9 +13570,7 @@
       "get": {
         "operationId": "getRecentSubjectTopics",
         "summary": "获取最新的条目讨论",
-        "tags": [
-          "subject"
-        ],
+        "tags": ["subject"],
         "parameters": [
           {
             "schema": {
@@ -14876,10 +13609,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -14913,9 +13643,7 @@
       "get": {
         "operationId": "getSubjectTopic",
         "summary": "获取条目讨论详情",
-        "tags": [
-          "topic"
-        ],
+        "tags": ["topic"],
         "parameters": [
           {
             "schema": {
@@ -14958,19 +13686,14 @@
       "put": {
         "operationId": "updateSubjectTopic",
         "summary": "编辑自己创建的条目讨论",
-        "tags": [
-          "topic"
-        ],
+        "tags": ["topic"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "title",
-                  "content"
-                ],
+                "required": ["title", "content"],
                 "properties": {
                   "title": {
                     "type": "string",
@@ -15032,9 +13755,7 @@
       "get": {
         "operationId": "getSubjectPost",
         "summary": "获取条目讨论回复详情",
-        "tags": [
-          "topic"
-        ],
+        "tags": ["topic"],
         "parameters": [
           {
             "schema": {
@@ -15071,9 +13792,7 @@
       "put": {
         "operationId": "editSubjectPost",
         "summary": "编辑条目讨论回复",
-        "tags": [
-          "topic"
-        ],
+        "tags": ["topic"],
         "requestBody": {
           "required": true,
           "content": {
@@ -15127,9 +13846,7 @@
       "delete": {
         "operationId": "deleteSubjectPost",
         "summary": "删除条目讨论回复",
-        "tags": [
-          "topic"
-        ],
+        "tags": ["topic"],
         "parameters": [
           {
             "schema": {
@@ -15175,18 +13892,14 @@
       "put": {
         "operationId": "likeSubjectPost",
         "summary": "给条目讨论回复点赞",
-        "tags": [
-          "topic"
-        ],
+        "tags": ["topic"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "value"
-                ],
+                "required": ["value"],
                 "properties": {
                   "value": {
                     "type": "integer"
@@ -15249,9 +13962,7 @@
       "delete": {
         "operationId": "unlikeSubjectPost",
         "summary": "取消条目讨论回复点赞",
-        "tags": [
-          "topic"
-        ],
+        "tags": ["topic"],
         "parameters": [
           {
             "schema": {
@@ -15297,9 +14008,7 @@
       "post": {
         "operationId": "createSubjectReply",
         "summary": "创建条目讨论回复",
-        "tags": [
-          "topic"
-        ],
+        "tags": ["topic"],
         "requestBody": {
           "required": true,
           "content": {
@@ -15340,9 +14049,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "properties": {
                     "id": {
                       "type": "integer"
@@ -15375,13 +14082,57 @@
         }
       }
     },
+    "/p1/subjects/{subjectID}/home": {
+      "get": {
+        "operationId": "getSubjectHome",
+        "summary": "获取条目首页数据",
+        "tags": ["subject"],
+        "description": "聚合条目详情页所需的全部数据：条目信息、章节、角色、制作人员、相关条目、推荐、吐槽、相关日志、收录与讨论。已登录时返回个人收藏状态与章节观看状态。各个区块独立计算，单个区块失败时返回空数据，不影响其他区块。",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "path",
+            "name": "subjectID",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubjectHomeResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/p1/timeline": {
       "get": {
         "operationId": "getTimeline",
         "summary": "获取时间线",
-        "tags": [
-          "timeline"
-        ],
+        "tags": ["timeline"],
         "parameters": [
           {
             "schema": {
@@ -15448,9 +14199,7 @@
       "post": {
         "operationId": "createTimelineSay",
         "summary": "发送时间线吐槽",
-        "tags": [
-          "timeline"
-        ],
+        "tags": ["timeline"],
         "requestBody": {
           "required": true,
           "content": {
@@ -15481,9 +14230,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "properties": {
                     "id": {
                       "type": "integer"
@@ -15520,9 +14267,7 @@
       "delete": {
         "operationId": "deleteTimeline",
         "summary": "删除时间线",
-        "tags": [
-          "timeline"
-        ],
+        "tags": ["timeline"],
         "parameters": [
           {
             "schema": {
@@ -15568,9 +14313,7 @@
       "get": {
         "operationId": "getTimelineReplies",
         "summary": "获取时间线回复",
-        "tags": [
-          "timeline"
-        ],
+        "tags": ["timeline"],
         "parameters": [
           {
             "schema": {
@@ -15645,9 +14388,7 @@
                       },
                       {
                         "type": "object",
-                        "required": [
-                          "replies"
-                        ],
+                        "required": ["replies"],
                         "properties": {
                           "replies": {
                             "type": "array",
@@ -15688,9 +14429,7 @@
       "post": {
         "operationId": "createTimelineReply",
         "summary": "创建时间线回复",
-        "tags": [
-          "timeline"
-        ],
+        "tags": ["timeline"],
         "requestBody": {
           "required": true,
           "content": {
@@ -15731,9 +14470,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "properties": {
                     "id": {
                       "type": "integer"
@@ -15770,18 +14507,14 @@
       "put": {
         "operationId": "likeTimeline",
         "summary": "给时间线吐槽点赞",
-        "tags": [
-          "timeline"
-        ],
+        "tags": ["timeline"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "value"
-                ],
+                "required": ["value"],
                 "properties": {
                   "value": {
                     "type": "integer"
@@ -15844,9 +14577,7 @@
       "delete": {
         "operationId": "unlikeTimeline",
         "summary": "取消时间线吐槽点赞",
-        "tags": [
-          "timeline"
-        ],
+        "tags": ["timeline"],
         "parameters": [
           {
             "schema": {
@@ -15892,9 +14623,7 @@
       "get": {
         "operationId": "getTimelineEvents",
         "summary": "时间线事件流 (SSE)",
-        "tags": [
-          "timeline"
-        ],
+        "tags": ["timeline"],
         "description": "这是一个 SSE (Server-Sent Events) 流，不是普通的 JSON 响应。客户端需要使用 EventSource 或类似的 SSE 客户端来订阅此接口。每个事件以 `data: {...}\\n\\n` 格式发送。",
         "parameters": [
           {
@@ -15927,9 +14656,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "event"
-                  ],
+                  "required": ["event"],
                   "properties": {
                     "event": {
                       "type": "string",
@@ -15961,9 +14688,7 @@
       "get": {
         "operationId": "getTrendingSubjects",
         "summary": "获取热门条目",
-        "tags": [
-          "trending"
-        ],
+        "tags": ["trending"],
         "parameters": [
           {
             "schema": {
@@ -16010,10 +14735,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -16047,9 +14769,7 @@
       "get": {
         "operationId": "getTrendingSubjectTopics",
         "summary": "获取热门条目讨论",
-        "tags": [
-          "trending"
-        ],
+        "tags": ["trending"],
         "parameters": [
           {
             "schema": {
@@ -16088,10 +14808,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -16125,9 +14842,7 @@
       "get": {
         "operationId": "getUser",
         "summary": "获取用户信息",
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "parameters": [
           {
             "schema": {
@@ -16172,9 +14887,7 @@
       "get": {
         "operationId": "getUserFriends",
         "summary": "获取用户的好友列表",
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "parameters": [
           {
             "schema": {
@@ -16221,10 +14934,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -16258,9 +14968,7 @@
       "get": {
         "operationId": "getUserFollowers",
         "summary": "获取用户的关注者列表",
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "parameters": [
           {
             "schema": {
@@ -16307,10 +15015,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -16344,9 +15049,7 @@
       "get": {
         "operationId": "getUserSubjectCollections",
         "summary": "获取用户条目收藏",
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "parameters": [
           {
             "schema": {
@@ -16410,10 +15113,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -16447,9 +15147,7 @@
       "get": {
         "operationId": "getUserCharacterCollections",
         "summary": "获取用户角色收藏",
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "parameters": [
           {
             "schema": {
@@ -16497,10 +15195,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -16534,9 +15229,7 @@
       "get": {
         "operationId": "getUserPersonCollections",
         "summary": "获取用户人物收藏",
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "parameters": [
           {
             "schema": {
@@ -16584,10 +15277,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -16621,9 +15311,7 @@
       "get": {
         "operationId": "getUserIndexCollections",
         "summary": "获取用户目录收藏",
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "parameters": [
           {
             "schema": {
@@ -16671,10 +15359,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -16708,9 +15393,7 @@
       "get": {
         "operationId": "getUserGroups",
         "summary": "获取用户加入的小组",
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "parameters": [
           {
             "schema": {
@@ -16758,10 +15441,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -16795,9 +15475,7 @@
       "get": {
         "operationId": "getUserIndexes",
         "summary": "获取用户创建的目录",
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "parameters": [
           {
             "schema": {
@@ -16845,10 +15523,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -16882,9 +15557,7 @@
       "get": {
         "operationId": "getUserBlogs",
         "summary": "获取用户创建的日志",
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "parameters": [
           {
             "schema": {
@@ -16932,10 +15605,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -16969,9 +15639,7 @@
       "get": {
         "operationId": "getUserTimeline",
         "summary": "获取用户时间胶囊",
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "parameters": [
           {
             "schema": {
@@ -17040,9 +15708,7 @@
     "/p1/wiki/subjects/{subjectID}/covers": {
       "get": {
         "operationId": "listSubjectCovers",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -17061,17 +15727,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "covers"
-                  ],
+                  "required": ["covers"],
                   "properties": {
                     "current": {
                       "type": "object",
-                      "required": [
-                        "thumbnail",
-                        "raw",
-                        "id"
-                      ],
+                      "required": ["thumbnail", "raw", "id"],
                       "properties": {
                         "thumbnail": {
                           "type": "string"
@@ -17088,13 +15748,7 @@
                       "type": "array",
                       "items": {
                         "type": "object",
-                        "required": [
-                          "id",
-                          "thumbnail",
-                          "raw",
-                          "creator",
-                          "voted"
-                        ],
+                        "required": ["id", "thumbnail", "raw", "creator", "voted"],
                         "properties": {
                           "id": {
                             "type": "integer"
@@ -17169,9 +15823,7 @@
       },
       "post": {
         "operationId": "uploadSubjectCover",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "description": "需要 `subjectWikiEdit` 权限",
         "requestBody": {
           "required": true,
@@ -17179,9 +15831,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "content"
-                ],
+                "required": ["content"],
                 "properties": {
                   "content": {
                     "type": "string",
@@ -17268,9 +15918,7 @@
       "post": {
         "operationId": "voteSubjectCover",
         "summary": "为条目封面投票",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "description": "需要 `subjectWikiEdit` 权限",
         "parameters": [
           {
@@ -17345,9 +15993,7 @@
       "delete": {
         "operationId": "unvoteSubjectCover",
         "summary": "撤消条目封面投票",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "description": "需要 `subjectWikiEdit` 权限",
         "parameters": [
           {
@@ -17423,19 +16069,14 @@
     "/p1/wiki/lock/subjects": {
       "post": {
         "operationId": "lockSubject",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "subjectID",
-                  "reason"
-                ],
+                "required": ["subjectID", "reason"],
                 "properties": {
                   "subjectID": {
                     "type": "integer",
@@ -17503,19 +16144,14 @@
     "/p1/wiki/unlock/subjects": {
       "post": {
         "operationId": "unlockSubject",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "subjectID",
-                  "reason"
-                ],
+                "required": ["subjectID", "reason"],
                 "properties": {
                   "subjectID": {
                     "type": "integer",
@@ -17584,9 +16220,7 @@
       "get": {
         "operationId": "subjectInfo",
         "summary": "获取条目当前的 wiki 信息",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -17649,9 +16283,7 @@
       },
       "put": {
         "operationId": "putSubjectInfo",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "description": "需要 `subjectWikiEdit` 权限",
         "requestBody": {
           "required": true,
@@ -17659,10 +16291,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "commitMessage",
-                  "subject"
-                ],
+                "required": ["commitMessage", "subject"],
                 "properties": {
                   "commitMessage": {
                     "type": "string",
@@ -17792,19 +16421,14 @@
       },
       "patch": {
         "operationId": "patchSubjectInfo",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "commitMessage",
-                  "subject"
-                ],
+                "required": ["commitMessage", "subject"],
                 "properties": {
                   "commitMessage": {
                     "type": "string",
@@ -17971,24 +16595,14 @@
       "post": {
         "operationId": "createNewSubject",
         "summary": "创建新条目",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "name",
-                  "type",
-                  "platform",
-                  "infobox",
-                  "nsfw",
-                  "metaTags",
-                  "summary"
-                ],
+                "required": ["name", "type", "platform", "infobox", "nsfw", "metaTags", "summary"],
                 "properties": {
                   "name": {
                     "type": "string",
@@ -18042,9 +16656,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "subjectID"
-                  ],
+                  "required": ["subjectID"],
                   "properties": {
                     "subjectID": {
                       "type": "number"
@@ -18091,9 +16703,7 @@
       "get": {
         "operationId": "getSubjectRevisionInfo",
         "summary": "获取条目历史版本 wiki 信息",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -18149,9 +16759,7 @@
       "get": {
         "operationId": "subjectEditHistorySummary",
         "summary": "获取条目 wiki 历史编辑摘要",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -18199,10 +16807,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -18246,9 +16851,7 @@
       "post": {
         "operationId": "createEpisodes",
         "summary": "为条目添加新章节",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "description": "需要 `epEdit` 权限，一次最多可以添加 40 个章节",
         "requestBody": {
           "required": true,
@@ -18256,17 +16859,13 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "episodes"
-                ],
+                "required": ["episodes"],
                 "properties": {
                   "episodes": {
                     "type": "array",
                     "items": {
                       "type": "object",
-                      "required": [
-                        "ep"
-                      ],
+                      "required": ["ep"],
                       "properties": {
                         "name": {
                           "type": "string"
@@ -18328,9 +16927,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "episodeIDs"
-                  ],
+                  "required": ["episodeIDs"],
                   "properties": {
                     "episodeIDs": {
                       "type": "array",
@@ -18368,9 +16965,7 @@
       "patch": {
         "operationId": "patchEpisodes",
         "summary": "批量编辑条目章节",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "description": "需要 `epEdit` 权限，一次最多可以编辑 20 个章节",
         "requestBody": {
           "required": true,
@@ -18378,10 +16973,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "commitMessage",
-                  "episodes"
-                ],
+                "required": ["commitMessage", "episodes"],
                 "properties": {
                   "commitMessage": {
                     "type": "string"
@@ -18390,9 +16982,7 @@
                     "type": "array",
                     "items": {
                       "type": "object",
-                      "required": [
-                        "id"
-                      ],
+                      "required": ["id"],
                       "properties": {
                         "name": {
                           "type": "string"
@@ -18505,9 +17095,7 @@
       "get": {
         "operationId": "subjectRelationHistorySummary",
         "summary": "获取条目关联 wiki 历史编辑摘要",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -18555,10 +17143,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -18592,9 +17177,7 @@
       "get": {
         "operationId": "getSubjectRelationRevisionInfo",
         "summary": "获取条目关联历史版本 wiki 信息",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -18650,9 +17233,7 @@
       "get": {
         "operationId": "subjectCharacterHistorySummary",
         "summary": "获取条目-角色关联 wiki 历史编辑摘要",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -18700,10 +17281,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -18737,9 +17315,7 @@
       "get": {
         "operationId": "getSubjectCharacterRevisionInfo",
         "summary": "获取条目-角色关联历史版本 wiki 信息",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -18795,9 +17371,7 @@
       "get": {
         "operationId": "subjectPersonHistorySummary",
         "summary": "获取条目-人物关联 wiki 历史编辑摘要",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -18845,10 +17419,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -18882,9 +17453,7 @@
       "get": {
         "operationId": "getSubjectPersonRevisionInfo",
         "summary": "获取条目-人物关联历史版本 wiki 信息",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -18940,9 +17509,7 @@
       "get": {
         "operationId": "getUserContributedSubjects",
         "summary": "获取用户 wiki 条目编辑记录",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -18989,10 +17556,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -19036,9 +17600,7 @@
       "get": {
         "operationId": "getCharacterWikiInfo",
         "summary": "获取角色当前的 wiki 信息",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -19102,20 +17664,14 @@
       "patch": {
         "operationId": "patchCharacterInfo",
         "summary": "编辑角色",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "commitMessage",
-                  "expectedRevision",
-                  "character"
-                ],
+                "required": ["commitMessage", "expectedRevision", "character"],
                 "properties": {
                   "commitMessage": {
                     "type": "string",
@@ -19243,27 +17799,18 @@
       "post": {
         "operationId": "postCharacterInfo",
         "summary": "创建角色",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "character"
-                ],
+                "required": ["character"],
                 "properties": {
                   "character": {
                     "type": "object",
-                    "required": [
-                      "name",
-                      "infobox",
-                      "summary",
-                      "type"
-                    ],
+                    "required": ["name", "infobox", "summary", "type"],
                     "properties": {
                       "name": {
                         "type": "string",
@@ -19310,9 +17857,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "characterID"
-                  ],
+                  "required": ["characterID"],
                   "properties": {
                     "characterID": {
                       "type": "integer"
@@ -19359,18 +17904,14 @@
       "post": {
         "operationId": "uploadCharacterPortrait",
         "summary": "上传角色肖像",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "img"
-                ],
+                "required": ["img"],
                 "properties": {
                   "img": {
                     "type": "string",
@@ -19412,9 +17953,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "img"
-                  ],
+                  "required": ["img"],
                   "properties": {
                     "img": {
                       "type": "string",
@@ -19462,9 +18001,7 @@
       "get": {
         "operationId": "characterEditHistorySummary",
         "summary": "获取角色 wiki 历史编辑摘要",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -19512,10 +18049,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -19549,9 +18083,7 @@
       "get": {
         "operationId": "getCharacterRevisionInfo",
         "summary": "获取角色历史版本 wiki 信息",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -19607,9 +18139,7 @@
       "get": {
         "operationId": "characterSubjectHistorySummary",
         "summary": "获取角色-条目关联 wiki 历史编辑摘要",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -19657,10 +18187,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -19694,9 +18221,7 @@
       "get": {
         "operationId": "getCharacterSubjectRevisionInfo",
         "summary": "获取角色-条目关联历史版本 wiki 信息",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -19752,9 +18277,7 @@
       "get": {
         "operationId": "characterCastHistorySummary",
         "summary": "获取角色-人物关联 wiki 历史编辑摘要",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -19802,10 +18325,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -19839,9 +18359,7 @@
       "get": {
         "operationId": "getCharacterCastRevisionInfo",
         "summary": "获取角色-人物关联历史版本 wiki 信息",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -19897,9 +18415,7 @@
       "get": {
         "operationId": "getUserContributedCharacters",
         "summary": "获取用户 wiki 角色编辑记录",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -19946,10 +18462,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -19993,9 +18506,7 @@
       "get": {
         "operationId": "getPersonWikiInfo",
         "summary": "获取人物当前的 wiki 信息",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -20059,20 +18570,14 @@
       "patch": {
         "operationId": "patchPersonInfo",
         "summary": "编辑人物",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "commitMessage",
-                  "expectedRevision",
-                  "person"
-                ],
+                "required": ["commitMessage", "expectedRevision", "person"],
                 "properties": {
                   "commitMessage": {
                     "type": "string",
@@ -20226,27 +18731,18 @@
       "post": {
         "operationId": "postPersonInfo",
         "summary": "创建人物",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "person"
-                ],
+                "required": ["person"],
                 "properties": {
                   "person": {
                     "type": "object",
-                    "required": [
-                      "name",
-                      "infobox",
-                      "summary",
-                      "type"
-                    ],
+                    "required": ["name", "infobox", "summary", "type"],
                     "properties": {
                       "name": {
                         "type": "string",
@@ -20319,9 +18815,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "personID"
-                  ],
+                  "required": ["personID"],
                   "properties": {
                     "personID": {
                       "type": "integer"
@@ -20368,18 +18862,14 @@
       "post": {
         "operationId": "uploadPersonPortrait",
         "summary": "上传人物肖像",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "img"
-                ],
+                "required": ["img"],
                 "properties": {
                   "img": {
                     "type": "string",
@@ -20421,9 +18911,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "img"
-                  ],
+                  "required": ["img"],
                   "properties": {
                     "img": {
                       "type": "string",
@@ -20471,9 +18959,7 @@
       "get": {
         "operationId": "personEditHistorySummary",
         "summary": "获取人物 wiki 历史编辑摘要",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -20521,10 +19007,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -20558,9 +19041,7 @@
       "get": {
         "operationId": "getPersonRevisionInfo",
         "summary": "获取人物历史版本 wiki 信息",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -20616,9 +19097,7 @@
       "get": {
         "operationId": "personSubjectHistorySummary",
         "summary": "获取人物-条目关联 wiki 历史编辑摘要",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -20666,10 +19145,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -20703,9 +19179,7 @@
       "get": {
         "operationId": "getPersonSubjectRevisionInfo",
         "summary": "获取人物-条目关联历史版本 wiki 信息",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -20761,9 +19235,7 @@
       "get": {
         "operationId": "personCastHistorySummary",
         "summary": "获取人物-角色关联 wiki 历史编辑摘要",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -20811,10 +19283,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -20848,9 +19317,7 @@
       "get": {
         "operationId": "getPersonCastRevisionInfo",
         "summary": "获取人物-角色关联历史版本 wiki 信息",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -20906,9 +19373,7 @@
       "get": {
         "operationId": "getUserContributedPersons",
         "summary": "获取用户 wiki 人物编辑记录",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -20955,10 +19420,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "data",
-                    "total"
-                  ],
+                  "required": ["data", "total"],
                   "properties": {
                     "data": {
                       "type": "array",
@@ -21001,9 +19463,7 @@
     "/p1/wiki/ep/{episodeID}": {
       "get": {
         "operationId": "getEpisodeWikiInfo",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "parameters": [
           {
             "schema": {
@@ -21056,19 +19516,14 @@
       },
       "patch": {
         "operationId": "patchEpisodeWikiInfo",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "commitMessage",
-                  "episode"
-                ],
+                "required": ["commitMessage", "episode"],
                 "properties": {
                   "commitMessage": {
                     "type": "string"
@@ -21220,9 +19675,7 @@
     "/p1/wiki/recent/subjects": {
       "get": {
         "operationId": "getRecentSubjectWiki",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "description": "获取最近两天的wiki更新",
         "parameters": [
           {
@@ -21273,9 +19726,7 @@
     "/p1/wiki/recent/persons": {
       "get": {
         "operationId": "getRecentPersonWiki",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "description": "获取最近两天的人物wiki更新",
         "parameters": [
           {
@@ -21298,10 +19749,7 @@
                   "type": "array",
                   "items": {
                     "type": "object",
-                    "required": [
-                      "id",
-                      "createdAt"
-                    ],
+                    "required": ["id", "createdAt"],
                     "properties": {
                       "id": {
                         "type": "integer"
@@ -21341,9 +19789,7 @@
     "/p1/wiki/recent/characters": {
       "get": {
         "operationId": "getRecentCharacterWiki",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "description": "获取最近两天的角色wiki更新",
         "parameters": [
           {
@@ -21366,10 +19812,7 @@
                   "type": "array",
                   "items": {
                     "type": "object",
-                    "required": [
-                      "id",
-                      "createdAt"
-                    ],
+                    "required": ["id", "createdAt"],
                     "properties": {
                       "id": {
                         "type": "integer"
@@ -21409,9 +19852,7 @@
     "/p1/wiki/recent/episodes": {
       "get": {
         "operationId": "getRecentEpisodeWiki",
-        "tags": [
-          "wiki"
-        ],
+        "tags": ["wiki"],
         "description": "获取最近两天的章节wiki更新",
         "parameters": [
           {
@@ -21434,10 +19875,7 @@
                   "type": "array",
                   "items": {
                     "type": "object",
-                    "required": [
-                      "id",
-                      "createdAt"
-                    ],
+                    "required": ["id", "createdAt"],
                     "properties": {
                       "id": {
                         "type": "integer"
