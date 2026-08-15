@@ -1268,43 +1268,7 @@
       "Comment": {
         "allOf": [
           {
-            "type": "object",
-            "required": ["id", "mainID", "creatorID", "relatedID", "createdAt", "content", "state"],
-            "properties": {
-              "id": {
-                "type": "integer"
-              },
-              "mainID": {
-                "type": "integer"
-              },
-              "creatorID": {
-                "type": "integer"
-              },
-              "relatedID": {
-                "type": "integer"
-              },
-              "relatedPhotoID": {
-                "type": "integer"
-              },
-              "createdAt": {
-                "type": "integer"
-              },
-              "content": {
-                "type": "string"
-              },
-              "state": {
-                "type": "integer"
-              },
-              "user": {
-                "$ref": "#/components/schemas/SlimUser"
-              },
-              "reactions": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Reaction"
-                }
-              }
-            }
+            "$ref": "#/components/schemas/CommentBase"
           },
           {
             "type": "object",
@@ -5615,67 +5579,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "allOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "id",
-                          "mainID",
-                          "creatorID",
-                          "relatedID",
-                          "createdAt",
-                          "content",
-                          "state"
-                        ],
-                        "properties": {
-                          "id": {
-                            "type": "integer"
-                          },
-                          "mainID": {
-                            "type": "integer"
-                          },
-                          "creatorID": {
-                            "type": "integer"
-                          },
-                          "relatedID": {
-                            "type": "integer"
-                          },
-                          "relatedPhotoID": {
-                            "type": "integer"
-                          },
-                          "createdAt": {
-                            "type": "integer"
-                          },
-                          "content": {
-                            "type": "string"
-                          },
-                          "state": {
-                            "type": "integer"
-                          },
-                          "user": {
-                            "$ref": "#/components/schemas/SlimUser"
-                          },
-                          "reactions": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/Reaction"
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "type": "object",
-                        "required": ["replies"],
-                        "properties": {
-                          "replies": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/CommentBase"
-                            }
-                          }
-                        }
-                      }
-                    ]
+                    "$ref": "#/components/schemas/Comment"
                   }
                 }
               }
@@ -6452,67 +6356,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "allOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "id",
-                          "mainID",
-                          "creatorID",
-                          "relatedID",
-                          "createdAt",
-                          "content",
-                          "state"
-                        ],
-                        "properties": {
-                          "id": {
-                            "type": "integer"
-                          },
-                          "mainID": {
-                            "type": "integer"
-                          },
-                          "creatorID": {
-                            "type": "integer"
-                          },
-                          "relatedID": {
-                            "type": "integer"
-                          },
-                          "relatedPhotoID": {
-                            "type": "integer"
-                          },
-                          "createdAt": {
-                            "type": "integer"
-                          },
-                          "content": {
-                            "type": "string"
-                          },
-                          "state": {
-                            "type": "integer"
-                          },
-                          "user": {
-                            "$ref": "#/components/schemas/SlimUser"
-                          },
-                          "reactions": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/Reaction"
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "type": "object",
-                        "required": ["replies"],
-                        "properties": {
-                          "replies": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/CommentBase"
-                            }
-                          }
-                        }
-                      }
-                    ]
+                    "$ref": "#/components/schemas/Comment"
                   }
                 }
               }
@@ -6889,67 +6733,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "allOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "id",
-                          "mainID",
-                          "creatorID",
-                          "relatedID",
-                          "createdAt",
-                          "content",
-                          "state"
-                        ],
-                        "properties": {
-                          "id": {
-                            "type": "integer"
-                          },
-                          "mainID": {
-                            "type": "integer"
-                          },
-                          "creatorID": {
-                            "type": "integer"
-                          },
-                          "relatedID": {
-                            "type": "integer"
-                          },
-                          "relatedPhotoID": {
-                            "type": "integer"
-                          },
-                          "createdAt": {
-                            "type": "integer"
-                          },
-                          "content": {
-                            "type": "string"
-                          },
-                          "state": {
-                            "type": "integer"
-                          },
-                          "user": {
-                            "$ref": "#/components/schemas/SlimUser"
-                          },
-                          "reactions": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/Reaction"
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "type": "object",
-                        "required": ["replies"],
-                        "properties": {
-                          "replies": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/CommentBase"
-                            }
-                          }
-                        }
-                      }
-                    ]
+                    "$ref": "#/components/schemas/Comment"
                   }
                 }
               }
@@ -8255,67 +8039,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "allOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "id",
-                          "mainID",
-                          "creatorID",
-                          "relatedID",
-                          "createdAt",
-                          "content",
-                          "state"
-                        ],
-                        "properties": {
-                          "id": {
-                            "type": "integer"
-                          },
-                          "mainID": {
-                            "type": "integer"
-                          },
-                          "creatorID": {
-                            "type": "integer"
-                          },
-                          "relatedID": {
-                            "type": "integer"
-                          },
-                          "relatedPhotoID": {
-                            "type": "integer"
-                          },
-                          "createdAt": {
-                            "type": "integer"
-                          },
-                          "content": {
-                            "type": "string"
-                          },
-                          "state": {
-                            "type": "integer"
-                          },
-                          "user": {
-                            "$ref": "#/components/schemas/SlimUser"
-                          },
-                          "reactions": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/Reaction"
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "type": "object",
-                        "required": ["replies"],
-                        "properties": {
-                          "replies": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/CommentBase"
-                            }
-                          }
-                        }
-                      }
-                    ]
+                    "$ref": "#/components/schemas/Comment"
                   }
                 }
               }
@@ -10607,67 +10331,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "allOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "id",
-                          "mainID",
-                          "creatorID",
-                          "relatedID",
-                          "createdAt",
-                          "content",
-                          "state"
-                        ],
-                        "properties": {
-                          "id": {
-                            "type": "integer"
-                          },
-                          "mainID": {
-                            "type": "integer"
-                          },
-                          "creatorID": {
-                            "type": "integer"
-                          },
-                          "relatedID": {
-                            "type": "integer"
-                          },
-                          "relatedPhotoID": {
-                            "type": "integer"
-                          },
-                          "createdAt": {
-                            "type": "integer"
-                          },
-                          "content": {
-                            "type": "string"
-                          },
-                          "state": {
-                            "type": "integer"
-                          },
-                          "user": {
-                            "$ref": "#/components/schemas/SlimUser"
-                          },
-                          "reactions": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/Reaction"
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "type": "object",
-                        "required": ["replies"],
-                        "properties": {
-                          "replies": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/CommentBase"
-                            }
-                          }
-                        }
-                      }
-                    ]
+                    "$ref": "#/components/schemas/Comment"
                   }
                 }
               }
@@ -11687,67 +11351,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "allOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "id",
-                          "mainID",
-                          "creatorID",
-                          "relatedID",
-                          "createdAt",
-                          "content",
-                          "state"
-                        ],
-                        "properties": {
-                          "id": {
-                            "type": "integer"
-                          },
-                          "mainID": {
-                            "type": "integer"
-                          },
-                          "creatorID": {
-                            "type": "integer"
-                          },
-                          "relatedID": {
-                            "type": "integer"
-                          },
-                          "relatedPhotoID": {
-                            "type": "integer"
-                          },
-                          "createdAt": {
-                            "type": "integer"
-                          },
-                          "content": {
-                            "type": "string"
-                          },
-                          "state": {
-                            "type": "integer"
-                          },
-                          "user": {
-                            "$ref": "#/components/schemas/SlimUser"
-                          },
-                          "reactions": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/Reaction"
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "type": "object",
-                        "required": ["replies"],
-                        "properties": {
-                          "replies": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/CommentBase"
-                            }
-                          }
-                        }
-                      }
-                    ]
+                    "$ref": "#/components/schemas/Comment"
                   }
                 }
               }
@@ -12124,67 +11728,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "allOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "id",
-                          "mainID",
-                          "creatorID",
-                          "relatedID",
-                          "createdAt",
-                          "content",
-                          "state"
-                        ],
-                        "properties": {
-                          "id": {
-                            "type": "integer"
-                          },
-                          "mainID": {
-                            "type": "integer"
-                          },
-                          "creatorID": {
-                            "type": "integer"
-                          },
-                          "relatedID": {
-                            "type": "integer"
-                          },
-                          "relatedPhotoID": {
-                            "type": "integer"
-                          },
-                          "createdAt": {
-                            "type": "integer"
-                          },
-                          "content": {
-                            "type": "string"
-                          },
-                          "state": {
-                            "type": "integer"
-                          },
-                          "user": {
-                            "$ref": "#/components/schemas/SlimUser"
-                          },
-                          "reactions": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/Reaction"
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "type": "object",
-                        "required": ["replies"],
-                        "properties": {
-                          "replies": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/CommentBase"
-                            }
-                          }
-                        }
-                      }
-                    ]
+                    "$ref": "#/components/schemas/Comment"
                   }
                 }
               }
@@ -15571,67 +15115,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "allOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "id",
-                          "mainID",
-                          "creatorID",
-                          "relatedID",
-                          "createdAt",
-                          "content",
-                          "state"
-                        ],
-                        "properties": {
-                          "id": {
-                            "type": "integer"
-                          },
-                          "mainID": {
-                            "type": "integer"
-                          },
-                          "creatorID": {
-                            "type": "integer"
-                          },
-                          "relatedID": {
-                            "type": "integer"
-                          },
-                          "relatedPhotoID": {
-                            "type": "integer"
-                          },
-                          "createdAt": {
-                            "type": "integer"
-                          },
-                          "content": {
-                            "type": "string"
-                          },
-                          "state": {
-                            "type": "integer"
-                          },
-                          "user": {
-                            "$ref": "#/components/schemas/SlimUser"
-                          },
-                          "reactions": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/Reaction"
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "type": "object",
-                        "required": ["replies"],
-                        "properties": {
-                          "replies": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/CommentBase"
-                            }
-                          }
-                        }
-                      }
-                    ]
+                    "$ref": "#/components/schemas/Comment"
                   }
                 }
               }
