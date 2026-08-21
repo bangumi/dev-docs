@@ -4951,42 +4951,6 @@
             }
           }
         }
-      },
-      "RecentWikiChange": {
-        "type": "object",
-        "required": ["subject", "persons"],
-        "properties": {
-          "subject": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "required": ["id", "createdAt"],
-              "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "createdAt": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "persons": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "required": ["id", "createdAt"],
-              "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "createdAt": {
-                  "type": "integer"
-                }
-              }
-            }
-          }
-        }
       }
     }
   },
@@ -20498,7 +20462,19 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RecentWikiChange"
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["id", "createdAt"],
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "createdAt": {
+                        "type": "integer"
+                      }
+                    }
+                  }
                 }
               }
             }
