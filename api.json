@@ -2752,6 +2752,7 @@
           "name",
           "nameCN",
           "type",
+          "series",
           "info",
           "metaTags",
           "rating",
@@ -2770,6 +2771,12 @@
           },
           "type": {
             "$ref": "#/components/schemas/SubjectType"
+          },
+          "platform": {
+            "$ref": "#/components/schemas/SubjectPlatform"
+          },
+          "series": {
+            "type": "boolean"
           },
           "images": {
             "$ref": "#/components/schemas/SubjectImages"
