@@ -16,6 +16,31 @@
         "type": "http",
         "scheme": "Bearer",
         "description": "使用 [demo](/demo/login) 登录后创建个人令牌"
+      },
+      "OAuth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "/oauth/authorize",
+            "tokenUrl": "/oauth/access_token",
+            "scopes": {
+              "read:collection": "获取用户收藏",
+              "write:collection": "修改用户收藏",
+              "read:indices": "读取目录",
+              "write:indices": "修改目录",
+              "read:topic": "获取讨论",
+              "write:topic": "发帖/回帖",
+              "read:wiki": "获取维基数据",
+              "write:wiki": "进行维基编辑",
+              "read:relationship": "获取黑名单",
+              "write:relationship": "关注/取关、拉黑/移出黑名单",
+              "read:notify": "获取通知",
+              "write:notify": "标记通知为已读",
+              "read:user": "获取账号设置",
+              "write:user": "修改账号设置"
+            }
+          }
+        }
       }
     },
     "schemas": {
@@ -5213,6 +5238,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -5339,6 +5367,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -5607,6 +5638,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -5679,6 +5713,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -5723,6 +5760,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -6465,6 +6505,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -6850,6 +6893,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -7013,6 +7059,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -7057,6 +7106,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -7126,6 +7178,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["read:collection"]
           }
         ],
         "responses": {
@@ -7225,6 +7280,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["read:collection"]
           }
         ],
         "responses": {
@@ -7293,6 +7351,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:collection"]
           }
         ],
         "responses": {
@@ -7357,6 +7418,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:collection"]
           }
         ],
         "responses": {
@@ -7423,6 +7487,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:collection"]
           }
         ],
         "responses": {
@@ -7494,6 +7561,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["read:collection"]
           }
         ],
         "responses": {
@@ -7552,6 +7622,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:collection"]
           }
         ],
         "responses": {
@@ -7606,6 +7679,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:collection"]
           }
         ],
         "responses": {
@@ -7677,6 +7753,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["read:collection"]
           }
         ],
         "responses": {
@@ -7735,6 +7814,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:collection"]
           }
         ],
         "responses": {
@@ -7789,6 +7871,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:collection"]
           }
         ],
         "responses": {
@@ -7860,6 +7945,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["read:collection"]
           }
         ],
         "responses": {
@@ -7918,6 +8006,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:collection"]
           }
         ],
         "responses": {
@@ -7972,6 +8063,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:collection"]
           }
         ],
         "responses": {
@@ -8139,6 +8233,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -8217,6 +8314,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -8271,6 +8371,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -8328,6 +8431,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -8373,6 +8479,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -8492,6 +8601,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:relationship"]
           }
         ],
         "responses": {
@@ -8546,6 +8658,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:relationship"]
           }
         ],
         "responses": {
@@ -8709,6 +8824,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["read:relationship"]
           }
         ],
         "responses": {
@@ -8763,6 +8881,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:relationship"]
           }
         ],
         "responses": {
@@ -8825,6 +8946,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:relationship"]
           }
         ],
         "responses": {
@@ -9200,6 +9324,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -9392,6 +9519,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -9491,6 +9621,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -9535,6 +9668,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -9597,6 +9733,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -9651,6 +9790,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -9714,6 +9856,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -9811,6 +9956,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:indices"]
           }
         ],
         "responses": {
@@ -10005,6 +10153,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:indices"]
           }
         ],
         "responses": {
@@ -10049,6 +10200,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:indices"]
           }
         ],
         "responses": {
@@ -10200,6 +10354,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:indices"]
           }
         ],
         "responses": {
@@ -10269,6 +10426,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:indices"]
           }
         ],
         "responses": {
@@ -10321,6 +10481,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:indices"]
           }
         ],
         "responses": {
@@ -10440,6 +10603,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -10512,6 +10678,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -10556,6 +10725,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -10657,6 +10829,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["read:notify"]
           }
         ],
         "responses": {
@@ -10734,6 +10909,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:notify"]
           }
         ],
         "responses": {
@@ -11460,6 +11638,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -11845,6 +12026,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -12008,6 +12192,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -12052,6 +12239,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -12088,6 +12278,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["read:user"]
           }
         ],
         "responses": {
@@ -12247,6 +12440,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:user"]
           }
         ],
         "responses": {
@@ -13586,6 +13782,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -13659,6 +13858,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -13705,6 +13907,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -13767,6 +13972,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -13821,6 +14029,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -14143,6 +14354,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:collection"]
           }
         ],
         "responses": {
@@ -14197,6 +14411,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:collection"]
           }
         ],
         "responses": {
@@ -14340,6 +14557,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -14541,6 +14761,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -14640,6 +14863,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -14684,6 +14910,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -14746,6 +14975,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -14800,6 +15032,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -14863,6 +15098,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -15044,6 +15282,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -15105,6 +15346,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -15224,6 +15468,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -15301,6 +15548,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -15355,6 +15605,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:topic"]
           }
         ],
         "responses": {
@@ -16483,6 +16736,15 @@
             "required": true
           }
         ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["read:wiki"]
+          }
+        ],
         "responses": {
           "200": {
             "description": "Default Response",
@@ -16625,6 +16887,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:wiki"]
           }
         ],
         "responses": {
@@ -16712,6 +16977,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:wiki"]
           }
         ],
         "responses": {
@@ -16787,6 +17055,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:wiki"]
           }
         ],
         "responses": {
@@ -16862,6 +17133,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:wiki"]
           }
         ],
         "responses": {
@@ -16937,6 +17211,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:wiki"]
           }
         ],
         "responses": {
@@ -17129,6 +17406,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:wiki"]
           }
         ],
         "responses": {
@@ -17270,6 +17550,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:wiki"]
           }
         ],
         "responses": {
@@ -17355,6 +17638,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:wiki"]
           }
         ],
         "responses": {
@@ -17626,6 +17912,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:wiki"]
           }
         ],
         "responses": {
@@ -17770,6 +18059,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:wiki"]
           }
         ],
         "responses": {
@@ -18446,6 +18738,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:wiki"]
           }
         ],
         "responses": {
@@ -18556,6 +18851,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:wiki"]
           }
         ],
         "responses": {
@@ -18652,6 +18950,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:wiki"]
           }
         ],
         "responses": {
@@ -19378,6 +19679,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:wiki"]
           }
         ],
         "responses": {
@@ -19514,6 +19818,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:wiki"]
           }
         ],
         "responses": {
@@ -19610,6 +19917,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:wiki"]
           }
         ],
         "responses": {
@@ -20333,6 +20643,9 @@
           {
             "CookiesSession": [],
             "HTTPBearer": []
+          },
+          {
+            "OAuth2": ["write:wiki"]
           }
         ],
         "responses": {
